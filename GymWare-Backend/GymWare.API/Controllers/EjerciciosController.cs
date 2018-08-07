@@ -9,16 +9,16 @@ using System.Web.Http.Description;
 
 namespace GymWare.API.Controllers
 {
-    public class EjercicioController : ApiController
+    public class EjerciciosController : ApiController
     {
         private Logic.EjercicioLogic _ej = new Logic.EjercicioLogic();
-        // GET: api/Ejercicio
+        // GET: api/Ejercicios
         public List<Ejercicio> GetEjercicios()
         {
             return _ej.GetAll();
         }
 
-        // GET: api/Ejercicio/5
+        // GET: api/Ejercicios/5
         [ResponseType(typeof(Ejercicio))]
         public IHttpActionResult GetEjercicio(int id)
         {
@@ -31,7 +31,7 @@ namespace GymWare.API.Controllers
             return Ok(ejercicio);
         }
 
-        // PUT: api/Ejercicio/5
+        // PUT: api/Ejercicios/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutEjercicio(int id, Ejercicio ejercicio)
         {
@@ -40,22 +40,18 @@ namespace GymWare.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != ejercicio.EjercicioId)
-            {
-                return BadRequest();
-            }
 
             if(_ej.Update(id, ejercicio))
             {
-                return StatusCode(HttpStatusCode.NoContent);
+                return Ok("Modificado correctamente");
             }
             else
             {
-                return NotFound();
+                return Ok("Error al modificar");
             }
         }
 
-        // POST: api/Ejercicio
+        // POST: api/Ejercicios
         [ResponseType(typeof(Ejercicio))]
         public IHttpActionResult PostEjercicio(Ejercicio ejercicio)
         {
@@ -73,17 +69,17 @@ namespace GymWare.API.Controllers
             }
         }
 
-        // DELETE: api/Ejercicio/5
+        // DELETE: api/Ejercicios/5
         [ResponseType(typeof(Ejercicio))]
         public IHttpActionResult DeleteEjercicio(int id)
         {
             if(_ej.Delete(id))
             {
-                return Ok();
+                return Ok("Eliminado correctamente");
             }
             else
             {
-                return NotFound();
+                return Ok("Error al eliminar");
             }
             
         }

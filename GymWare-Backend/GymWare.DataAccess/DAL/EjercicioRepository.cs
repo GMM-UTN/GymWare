@@ -25,8 +25,9 @@ namespace GymWare.DataAccess.DAL
 
         public bool Update(int id, Ejercicio ejercicio)
         {
-            _db.Entry(ejercicio).State = EntityState.Modified;
-
+            //_db.Entry(ejercicio).State = EntityState.Modified;
+            Ejercicio ej = _db.Ejercicios.Find(id);
+            ej.Descripcion = ejercicio.Descripcion;
             try
             {
                 _db.SaveChanges();
@@ -54,18 +55,17 @@ namespace GymWare.DataAccess.DAL
 
         public bool Delete(int id)
         {
-            Ejercicio ejercicio = _db.Ejercicios.Find(id);
-
-            if (ejercicio == null)
+            //Ejercicio ejercicio = _db.Ejercicios.Find(id);
+            if(_db.Ejercicios.Find(id) == null)
             {
                 return false;
             }
             else
             {
-                _db.Ejercicios.Remove(ejercicio);
+                _db.Ejercicios.Remove(_db.Ejercicios.Find(id));
                 _db.SaveChanges();
                 return true;
-            }            
+            }       
         }
 
         private bool EjercicioExists(int id)

@@ -8,7 +8,7 @@ namespace GymWare.DataAccess.DAL
     {
         public GymWareContext() : base("name=GymWare")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<GymWareContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<GymWareContext>());
         }
 
         public DbSet<Rutina> Rutinas { get; set; }
