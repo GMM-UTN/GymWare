@@ -6,7 +6,7 @@ namespace GymWare.DataAccess.DAL
 {
     public class GymWareContext : DbContext
     {
-        public GymWareContext() : base("name=GymWare")
+        public GymWareContext() : base("name=GymWareBauti")
         {
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<GymWareContext>());
         }
