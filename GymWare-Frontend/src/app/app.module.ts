@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button'
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formulario-alta-rutina.component';
@@ -25,9 +26,7 @@ import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formular
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
