@@ -1,5 +1,6 @@
 ﻿using GymWare.Entities;
 using GymWare.Logic;
+using GymWare.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +11,32 @@ using System.Web.Http.Description;
 
 namespace GymWare.API.Controllers
 {
-    public class EjerciciosController : ApiController
+    public class RutinasController : ApiController
     {
-        private EjercicioLogic _ej = new Logic.EjercicioLogic();
-        // GET: api/Ejercicios
-        public List<Ejercicio> GetEjercicios()
+        private RutinaEjercicioLogic _re = new RutinaEjercicioLogic();
+
+        // GET: api/Rutinas
+        public List<RutinaEjercicio> GetAllRutinasConEjercicios()
         {
-            return _ej.GetAll();
+            return _re.GetAllRutinasConEjercicios();
         }
 
-        // GET: api/Ejercicios/5
-        [ResponseType(typeof(Ejercicio))]
-        public IHttpActionResult GetEjercicio(int id)
+        // GET: api/Rutinas/5
+        [ResponseType(typeof(RutinaEjercicio))]
+        public IHttpActionResult GetRutinaConEjercicio(int id)
         {
-            Ejercicio ejercicio = _ej.GetOne(id);
-            if (ejercicio == null)
+            RutinaEjercicio rutinaEjercicio = _re.GetRutinaConEjercicio(id);
+            if (rutinaEjercicio == null)
             {
                 return NotFound();
             }
 
-            return Ok(ejercicio);
+            return Ok(rutinaEjercicio);
         }
 
-        // PUT: api/Ejercicios/5
+        // PUT: api/Rutinas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEjercicio(int id, Ejercicio ejercicio)
+        public IHttpActionResult PutRutinaConEjercicios(int idRutina, RutinaEjerciciosDTO rutinaEjerciciosDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +44,7 @@ namespace GymWare.API.Controllers
             }
 
 
-            if(_ej.Update(id, ejercicio))
+            if (_re.Update(idRutina, rutinaEjerciciosDTO))
             {
                 return Ok("Modificado correctamente");
             }
@@ -59,8 +61,8 @@ namespace GymWare.API.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }            
-            if(_ej.Insert(ejercicio))
+            }
+            if (_ej.Insert(ejercicio))
             {
                 return CreatedAtRoute("DefaultApi", new { id = ejercicio.EjercicioId }, ejercicio);
             }
@@ -74,7 +76,7 @@ namespace GymWare.API.Controllers
         [ResponseType(typeof(Ejercicio))]
         public IHttpActionResult DeleteEjercicio(int id)
         {
-            if(_ej.Delete(id))
+            if (_ej.Delete(id))
             {
                 return Ok("Eliminado correctamente");
             }
@@ -82,7 +84,7 @@ namespace GymWare.API.Controllers
             {
                 return Ok("Error al eliminar");
             }
-            
+
         }
     }
 }

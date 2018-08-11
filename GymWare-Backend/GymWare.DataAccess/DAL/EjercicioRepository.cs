@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace GymWare.DataAccess.DAL
 {
-    public class EjercicioRepository
-    {
-        private GymWareContext _db = new GymWareContext();
-
+    public class EjercicioRepository : BaseRepository
+    {     
         public List<Ejercicio> GetAll()
         {
             return _db.Ejercicios.ToList();
@@ -25,9 +23,9 @@ namespace GymWare.DataAccess.DAL
 
         public bool Update(int id, Ejercicio ejercicio)
         {
-            //_db.Entry(ejercicio).State = EntityState.Modified;
             Ejercicio ej = _db.Ejercicios.Find(id);
-            ej.Descripcion = ejercicio.Descripcion;
+            //this.approved_by = IsNullOrEmpty(planRec.approved_by) ? "" : planRec.approved_by.toString();
+            ej.Descripcion = ejercicio.Descripcion == null ? ej.Descripcion : ejercicio.Descripcion;
             try
             {
                 _db.SaveChanges();
