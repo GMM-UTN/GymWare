@@ -12,12 +12,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formulario-alta-rutina.component';
+import { DatatableEjerciciosComponent } from './datatable-ejercicios/datatable-ejercicios.component';
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FormularioAltaRutinaComponent
+    FormularioAltaRutinaComponent,
+    DatatableEjerciciosComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formular
     MatInputModule,
     MatToolbarModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
