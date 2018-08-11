@@ -1,14 +1,22 @@
-<mat-card class="example-card">
-  <mat-card-content>
-    <mat-form-field class="form-login">
-      <input matInput placeholder="Usuario">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="form-login">
-      <input matInput placeholder="Contraseña" type='password'>
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button class="button-login">Entrar</button>
-  </mat-card-actions>
-</mat-card>
+<div class="title-login-container">
+  <mat-card class="card-login">
+    <mat-toolbar class="toolbar-login">
+      <i class="material-icons">assignment_ind</i>
+      <h1 class="title-login">Login</h1>
+    </mat-toolbar>
+    <mat-card-content>
+      <mat-form-field class="form-login">
+          <i matPrefix class="material-icons icon-login">perm_identity</i>
+        <input matInput placeholder="Usuario" required>
+      </mat-form-field>
+      <mat-form-field class="form-login">
+        <i matPrefix class="material-icons icon-login">lock</i>
+        <input required matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions class="button-login-container">
+      <button mat-raised-button mat-button class="button-login">Ingresar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

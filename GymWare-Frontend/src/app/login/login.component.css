@@ -1,14 +1,48 @@
-.button-login{
-    margin-left: 50%
+.button-login {
+    background-color: slateblue;
+    color: white;
+    width: 60%;
 }
-.example-card {
-    width: 300px;
+.button-login-container {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+}
+
+.card-login {
+    width: 410px;
+    height: 100%;
     background-color: white;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15%;
+    margin-top: 1%;
+    box-shadow: 0 8px 4px -5px rgba(0,0,0,.2), 0 6px 6px 0 rgba(0,0,0,.14), 0 3px 7px 0 rgba(0,0,0,.12);
+    padding: 0 0 2% 0;
   }
+
   .form-login {
-      width: 100%;
+      width: 80%;
+      margin: 0 2% 5% 2%;
   }
-  
+
+  .icon-login {
+      padding-right: 6px;
+  }
+
+  .title-login {
+      color: white;
+      margin-left: 2%;
+  }
+  .title-login-container {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .toolbar-login {
+    background-color: slateblue;
+    margin-bottom: 3%;
+    color: white;
+  }
