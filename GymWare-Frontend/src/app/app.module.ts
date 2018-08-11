@@ -5,15 +5,19 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formulario-alta-rutina.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    FormularioAltaRutinaComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +26,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule,
-    MatToolbarModule
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
