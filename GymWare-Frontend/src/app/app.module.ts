@@ -26,7 +26,10 @@ import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formular
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
