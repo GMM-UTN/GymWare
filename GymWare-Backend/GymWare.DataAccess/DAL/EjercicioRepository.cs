@@ -24,7 +24,6 @@ namespace GymWare.DataAccess.DAL
         public bool Update(int id, Ejercicio ejercicio)
         {
             Ejercicio ej = _db.Ejercicios.Find(id);
-            //this.approved_by = IsNullOrEmpty(planRec.approved_by) ? "" : planRec.approved_by.toString();
             ej.Descripcion = ejercicio.Descripcion == null ? ej.Descripcion : ejercicio.Descripcion;
             try
             {
@@ -53,7 +52,6 @@ namespace GymWare.DataAccess.DAL
 
         public bool Delete(int id)
         {
-            //Ejercicio ejercicio = _db.Ejercicios.Find(id);
             if(_db.Ejercicios.Find(id) == null)
             {
                 return false;

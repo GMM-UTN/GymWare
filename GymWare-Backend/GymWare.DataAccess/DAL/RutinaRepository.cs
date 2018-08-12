@@ -11,7 +11,7 @@ namespace GymWare.DataAccess.DAL
 {
     public class RutinaRepository : BaseRepository
     {
-        public bool Update(int id, Rutina rutina)
+        public Rutina Update(int id, Rutina rutina)
         {
             //ej.Descripcion = ejercicio.Descripcion == null ? ej.Descripcion : ejercicio.Descripcion;
             Rutina ru = _db.Rutinas.Find(id);
@@ -24,46 +24,38 @@ namespace GymWare.DataAccess.DAL
             try
             {
                 _db.SaveChanges();
-                return true;
+                return ru;
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RutinaExists(id))
-                {
-                    return false;
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
         }
 
-        //public bool Insert(Rutina rutina)
-        //{
-        //    _db.Rutinas.Add(rutina);
-        //    _db.SaveChanges();
-        //    return true;
-        //}
+        public Rutina Insert(Rutina rutina)
+        {
+            _db.Rutinas.Add(rutina);
+            _db.SaveChanges();
+            return rutina;
+        }
 
-        //public bool Delete(int id)
-        //{
-        //    //Ejercicio ejercicio = _db.Ejercicios.Find(id);
-        //    if (_db.Rutinas.Find(id) == null)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        _db.Rutinas.Remove(_db.Rutinas.Find(id));
-        //        _db.SaveChanges();
-        //        return true;
-        //    }
-        //}
+        public bool Delete(int id)
+        {
+            if (_db.Rutinas.Find(id) == null)
+            {
+                return false;
+            }
+            else
+            {
+                _db.Rutinas.Remove(_db.Rutinas.Find(id));
+                _db.SaveChanges();
+                return true;
+            }
+        }
 
-        //private bool RutinaExists(int id)
-        //{
-        //    return _db.Rutinas.Count(e => e.RutinaId == id) > 0;
-        //}
+        private bool RutinaExists(int id)
+        {
+            return _db.Rutinas.Count(e => e.RutinaId == id) > 0;
+        }
     }
 }

@@ -16,10 +16,14 @@ namespace GymWare.API.Controllers
         private RutinaEjercicioLogic _re = new RutinaEjercicioLogic();
 
         // GET: api/Rutinas
-        public List<RutinaEjercicio> GetAllRutinasConEjercicios()
+        public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
         {
             return _re.GetAllRutinasConEjercicios();
         }
+        //public List<RutinaEjercicio> GetAllRutinasConEjercicios()
+        //{
+        //    return _re.GetAllRutinasConEjercicios();
+        //}
 
         // GET: api/Rutinas/5
         [ResponseType(typeof(RutinaEjercicio))]
@@ -34,9 +38,9 @@ namespace GymWare.API.Controllers
             return Ok(rutinaEjercicio);
         }
 
-        // PUT: api/Rutinas/5
+        //PUT: api/Rutinas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutRutinaConEjercicios(int idRutina, RutinaEjerciciosDTO rutinaEjerciciosDTO)
+        public IHttpActionResult PutRutinaConEjercicios(int id, RutinaEjerciciosDTO rutinaEjerciciosDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -44,7 +48,7 @@ namespace GymWare.API.Controllers
             }
 
 
-            if (_re.Update(idRutina, rutinaEjerciciosDTO))
+            if (_re.Update(id, rutinaEjerciciosDTO))
             {
                 return Ok("Modificado correctamente");
             }
@@ -54,17 +58,17 @@ namespace GymWare.API.Controllers
             }
         }
 
-        // POST: api/Ejercicios
-        [ResponseType(typeof(Ejercicio))]
-        public IHttpActionResult PostEjercicio(Ejercicio ejercicio)
+        //POST: api/Rutinas
+        [ResponseType(typeof(RutinaEjercicio))]
+        public IHttpActionResult PostRutinaConEjercicios(RutinaEjerciciosDTO rutinaEjerciciosDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (_ej.Insert(ejercicio))
+            if (_re.Insert(rutinaEjerciciosDTO))
             {
-                return CreatedAtRoute("DefaultApi", new { id = ejercicio.EjercicioId }, ejercicio);
+                return CreatedAtRoute("DefaultApi", new { }, rutinaEjerciciosDTO);
             }
             else
             {
@@ -72,11 +76,11 @@ namespace GymWare.API.Controllers
             }
         }
 
-        // DELETE: api/Ejercicios/5
+        // DELETE: api/Rutinas/5
         [ResponseType(typeof(Ejercicio))]
-        public IHttpActionResult DeleteEjercicio(int id)
+        public IHttpActionResult DeleteRutinaConEjercicios(int id)
         {
-            if (_ej.Delete(id))
+            if (_re.Delete(id))
             {
                 return Ok("Eliminado correctamente");
             }

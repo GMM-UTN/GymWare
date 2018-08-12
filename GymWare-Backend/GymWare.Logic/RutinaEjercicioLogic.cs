@@ -13,9 +13,12 @@ namespace GymWare.Logic
     {
         private RutinaEjercicioRepository _re = new RutinaEjercicioRepository();
         private RutinaRepository _ru = new RutinaRepository();
-        public List<RutinaEjercicio> GetAllRutinasConEjercicios()
+        public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
         {
-            return _re.GetAll();
+            RutinaEjerciciosDTO reDTO = new RutinaEjerciciosDTO();
+            reDTO.RutinaEjercicios = _re.GetAll();
+            reDTO.Rutina = reDTO.RutinaEjercicios.Count > 0 ? reDTO.RutinaEjercicios[0].Rutina : null;
+            return reDTO;
         }
 
         public RutinaEjercicio GetRutinaConEjercicio(int id)
@@ -25,7 +28,19 @@ namespace GymWare.Logic
 
         public bool Update(int idRutina, RutinaEjerciciosDTO rutinaEjercicio)
         {
-            return _ru.Update(idRutina, rutinaEjercicio.Rutina) == _re.Update(idRutina, rutinaEjercicio.RutinaEjercicios);
+            Rutina rutina = _ru.Update(idRutina, rutinaEjercicio.Rutina);
+            return _re.Update(rutina, rutinaEjercicio.RutinaEjercicios);
+        }
+
+        public bool Insert(RutinaEjerciciosDTO rutinaEjercicio)
+        {
+            Rutina rutina = _ru.Insert(rutinaEjercicio.Rutina);
+            return _re.Insert(rutina, rutinaEjercicio.RutinaEjercicios);
+        }
+
+        public bool Delete(int idRutina)
+        {
+            return _re.Delete(idRutina) == _ru.Delete(idRutina);
         }
     }
 }
