@@ -1,4 +1,5 @@
 ﻿using GymWare.Entities;
+using GymWare.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace GymWare.API.Controllers
 {
     public class EjerciciosController : ApiController
     {
-        private Logic.EjercicioLogic _ej = new Logic.EjercicioLogic();
+        private EjercicioLogic _ej = new Logic.EjercicioLogic();
         // GET: api/Ejercicios
         public List<Ejercicio> GetEjercicios()
         {
