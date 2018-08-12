@@ -47,8 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\BaseRepository.cs" />
     <Compile Include="DAL\EjercicioRepository.cs" />
     <Compile Include="DAL\GymWareContext.cs" />
+    <Compile Include="DAL\RutinaEjercicioRepository.cs" />
+    <Compile Include="DAL\RutinaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
