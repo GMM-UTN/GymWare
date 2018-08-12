@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-title>
+    <label>Alta Rutina</label>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="form-container">
+      <mat-form-field>
+        <input matInput placeholder="Nombre">
+      </mat-form-field>
+          
+      <mat-form-field>
+        <mat-select placeholder="Tipo">
+            <mat-option value="1">Tipo1</mat-option>
+            <mat-option value="2">Tipo2</mat-option>
+        </mat-select>
+      </mat-form-field>
+          
+      <mat-form-field>
+        <input matInput type="number" placeholder="Edad mínima" min="0" max="100">
+      </mat-form-field>
+          
+      <mat-form-field>
+        <input matInput type="number" placeholder="Edad máxima" min="0" max="100">
+      </mat-form-field>
+          
+      <mat-radio-group> 
+        <mat-radio-button value="Masculino">Masculino</mat-radio-button>
+        <mat-radio-button value="Femenino">Femenino</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </mat-card-content>
+  
+</mat-card>
