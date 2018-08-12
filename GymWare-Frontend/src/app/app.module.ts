@@ -34,8 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     MatRadioModule,
     MatSelectModule,
-    MatTableModule
-    HttpClientModule,
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
