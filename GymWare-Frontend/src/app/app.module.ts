@@ -15,13 +15,15 @@ import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formular
 import { DatatableEjerciciosComponent } from './datatable-ejercicios/datatable-ejercicios.component';
 import { MatTableModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FormularioAltaRutinaComponent,
-    DatatableEjerciciosComponent
+    DatatableEjerciciosComponent,
+    AltaEjercicioComponent
   ],
   imports: [
     BrowserModule,

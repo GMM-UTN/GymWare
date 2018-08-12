@@ -1,4 +1,5 @@
 import { Observable } from "../../../node_modules/rxjs";
+import { HttpHeaders } from "../../../node_modules/@angular/common/http";
 
 export interface CRUDHttpService {
 
@@ -14,3 +15,7 @@ export interface CRUDHttpService {
 }
 
 export const baseURL: String = "http://localhost:59538/api/";
+
+export const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };

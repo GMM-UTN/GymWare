@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from '../../../node_modules/rxjs';
 import { Ejercicio } from '../classes/ejercicio';
-import { CRUDHttpService, baseURL } from '../interfaces/CRUDHttpService';
+import { CRUDHttpService, baseURL, httpOptions } from '../interfaces/CRUDHttpService';
 
 const url = baseURL + 'ejercicios';
 
@@ -13,8 +13,8 @@ export class EjercicioService implements CRUDHttpService {
 
   constructor(private http: HttpClient) { }
 
-  public save(object: Object): void {
-    throw new Error("Method not implemented.");
+  public save(ejercicio: Ejercicio): void {
+    this.http.post<Ejercicio>(url, ejercicio, httpOptions);
   }
 
   public update(object: Object): void {
