@@ -10,31 +10,31 @@ using System.Web.Http.Description;
 
 namespace GymWare.API.Controllers
 {
-    public class EjerciciosController : ApiController
+    public class ComidasController : ApiController
     {
-        private EjercicioLogic _ej = new EjercicioLogic();
-        // GET: api/Ejercicios
-        public List<Ejercicio> GetEjercicios()
+        private ComidaLogic _co = new ComidaLogic();
+        // GET: api/Comidas
+        public List<Comida> GetComidas()
         {
-            return _ej.GetAll();
+            return _co.GetAll();
         }
 
-        // GET: api/Ejercicios/5
-        [ResponseType(typeof(Ejercicio))]
-        public IHttpActionResult GetEjercicio(int id)
+        // GET: api/Comidas/5
+        [ResponseType(typeof(Comida))]
+        public IHttpActionResult GetComida(int id)
         {
-            Ejercicio ejercicio = _ej.GetOne(id);
-            if (ejercicio == null)
+            Comida comida = _co.GetOne(id);
+            if (comida == null)
             {
                 return NotFound();
             }
 
-            return Ok(ejercicio);
+            return Ok(comida);
         }
 
-        // PUT: api/Ejercicios/5
+        // PUT: api/Comidas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEjercicio(int id, Ejercicio ejercicio)
+        public IHttpActionResult PutComida(int id, Comida comida)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +42,7 @@ namespace GymWare.API.Controllers
             }
 
 
-            if(_ej.Update(id, ejercicio))
+            if (_co.Update(id, comida))
             {
                 return Ok("Modificado correctamente");
             }
@@ -52,17 +52,17 @@ namespace GymWare.API.Controllers
             }
         }
 
-        // POST: api/Ejercicios
-        [ResponseType(typeof(Ejercicio))]
-        public IHttpActionResult PostEjercicio(Ejercicio ejercicio)
+        // POST: api/Comidas
+        [ResponseType(typeof(Comida))]
+        public IHttpActionResult PostComida(Comida comida)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }            
-            if(_ej.Insert(ejercicio))
+            }
+            if (_co.Insert(comida))
             {
-                return CreatedAtRoute("DefaultApi", new { id = ejercicio.EjercicioId }, ejercicio);
+                return CreatedAtRoute("DefaultApi", new { id = comida.ComidaId }, comida);
             }
             else
             {
@@ -70,11 +70,11 @@ namespace GymWare.API.Controllers
             }
         }
 
-        // DELETE: api/Ejercicios/5
-        [ResponseType(typeof(Ejercicio))]
-        public IHttpActionResult DeleteEjercicio(int id)
+        // DELETE: api/Comidas/5
+        [ResponseType(typeof(Comida))]
+        public IHttpActionResult DeleteComida(int id)
         {
-            if(_ej.Delete(id))
+            if (_co.Delete(id))
             {
                 return Ok("Eliminado correctamente");
             }
@@ -82,7 +82,8 @@ namespace GymWare.API.Controllers
             {
                 return Ok("Error al eliminar");
             }
-            
+
         }
     }
 }
+

@@ -11,6 +11,6 @@ namespace GymWare.Entities
         public int ComidaId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public int Calorias { get; set; }
+        public int? Calorias { get; set; }
     }
 }
