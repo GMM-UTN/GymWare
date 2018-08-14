@@ -1,5 +1,5 @@
 .button-login {
-    background-color: slateblue;
+    background-color: #343a40;
     color: white;
     width: 60%;
 }
@@ -42,7 +42,7 @@
   }
 
   .toolbar-login {
-    background-color: slateblue;
+    background-color: #343a40;
     margin-bottom: 3%;
     color: white;
   }

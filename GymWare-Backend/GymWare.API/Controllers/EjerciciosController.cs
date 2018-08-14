@@ -13,7 +13,7 @@ namespace GymWare.API.Controllers
 {
     public class EjerciciosController : ApiController
     {
-        private EjercicioLogic _ej = new Logic.EjercicioLogic();
+        private EjercicioLogic _ej = new EjercicioLogic();
         // GET: api/Ejercicios
         public List<Ejercicio> GetEjercicios()
         {

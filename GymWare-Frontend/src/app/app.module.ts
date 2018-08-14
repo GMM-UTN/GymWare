@@ -15,7 +15,25 @@ import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formular
 import { DatatableEjerciciosComponent } from './datatable-ejercicios/datatable-ejercicios.component';
 import { MatTableModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { RouterModule, Routes } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
+import { CenterComponent } from './center/center.component';
+import { PrincipalComponent } from './principal/principal.component';
+import { DefaultComponent } from './default/default.component';
 import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
+
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'default',
+    component: DefaultComponent
+  }
+];
 
 @NgModule({
   declarations: [
@@ -23,6 +41,11 @@ import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.componen
     LoginComponent,
     FormularioAltaRutinaComponent,
     DatatableEjerciciosComponent,
+    HeaderComponent,
+    FooterComponent,
+    CenterComponent,
+    PrincipalComponent,
+    DefaultComponent
     AltaEjercicioComponent
   ],
   imports: [
@@ -37,7 +60,9 @@ import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.componen
     MatRadioModule,
     MatSelectModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

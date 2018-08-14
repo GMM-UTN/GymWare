@@ -1,0 +1,26 @@
+.dropdown .dropdown-menu {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    max-height: 200px;
+    opacity: 1;
+}
+.header-icon {
+    color: white;
+    width: 10px;
+    height: 10px;
+    margin-right: 17px;
+}
+.header-item {
+    margin-right: 25px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
