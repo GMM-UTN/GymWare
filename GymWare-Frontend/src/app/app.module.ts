@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formulario-alta-rutina.component';
 import { DatatableEjerciciosComponent } from './datatable-ejercicios/datatable-ejercicios.component';
 import { MatTableModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatTableModule } from '@angular/material';
     MatToolbarModule,
     MatRadioModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
