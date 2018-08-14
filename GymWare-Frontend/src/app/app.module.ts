@@ -23,6 +23,8 @@ import { CenterComponent } from './center/center.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { DefaultComponent } from './default/default.component';
 import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
+import { FormsModule } from '@angular/forms'; 
+import { EjercicioService } from './services/ejercicio.service'; 
 
 const routes: Routes = [
   {
@@ -45,7 +47,7 @@ const routes: Routes = [
     FooterComponent,
     CenterComponent,
     PrincipalComponent,
-    DefaultComponent
+    DefaultComponent,
     AltaEjercicioComponent
   ],
   imports: [
@@ -62,9 +64,12 @@ const routes: Routes = [
     MatTableModule,
     HttpClientModule,
     MatMenuModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    EjercicioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

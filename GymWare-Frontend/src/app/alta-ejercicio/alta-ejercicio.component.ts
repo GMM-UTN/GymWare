@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EjercicioService } from '../services/ejercicio.service';
 import { Ejercicio } from '../classes/ejercicio';
+import {NgForm} from '@angular/forms'; 
 
 @Component({
   selector: 'app-alta-ejercicio',
@@ -17,11 +18,16 @@ export class AltaEjercicioComponent implements OnInit {
     this.ejercicio = new Ejercicio();
   }
 
-  public save(): void {
-    this.ejercicioService.save(this.ejercicio);
-  }
-
-  onSubmit(){
-    this.ejercicioService.save(this.ejercicio);
-  }
+  onSubmit(f: NgForm){ 
+    var ejercicio = new Ejercicio(); 
+    ejercicio.setId(0); 
+    ejercicio.setDescripcion(f.value.Descripcion); 
+    console.log(ejercicio); 
+    this.ejercicioService.save(ejercicio).subscribe( 
+      data => { 
+         
+      }, 
+      error => alert(error) 
+    ); 
+  } 
 }
