@@ -47,6 +47,7 @@
     <Compile Include="Dieta.cs" />
     <Compile Include="DietaCliente.cs" />
     <Compile Include="DietaComida.cs" />
+    <Compile Include="DTO\DietaComidaDTO.cs" />
     <Compile Include="DTO\RutinaEjerciciosDTO.cs" />
     <Compile Include="Ejercicio.cs" />
     <Compile Include="Empleado.cs" />

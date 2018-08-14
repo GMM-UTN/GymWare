@@ -13,7 +13,6 @@ namespace GymWare.DataAccess.DAL
     {
         public Rutina Update(int id, Rutina rutina)
         {
-            //ej.Descripcion = ejercicio.Descripcion == null ? ej.Descripcion : ejercicio.Descripcion;
             Rutina ru = _db.Rutinas.Find(id);
             ru.Nombre = rutina.Nombre == null ? ru.Nombre : rutina.Nombre;
             ru.Tipo = rutina.Tipo == null ? ru.Tipo : rutina.Tipo;
@@ -51,11 +50,6 @@ namespace GymWare.DataAccess.DAL
                 _db.SaveChanges();
                 return true;
             }
-        }
-
-        private bool RutinaExists(int id)
-        {
-            return _db.Rutinas.Count(e => e.RutinaId == id) > 0;
         }
     }
 }

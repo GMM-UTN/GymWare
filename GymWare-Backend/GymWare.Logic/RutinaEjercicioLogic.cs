@@ -21,7 +21,7 @@ namespace GymWare.Logic
             return reDTO;
         }
 
-        public RutinaEjercicio GetRutinaConEjercicio(int id)
+        public RutinaEjercicio GetRutinaConEjercicios(int id)
         {
             return _re.GetOne(id);
         }

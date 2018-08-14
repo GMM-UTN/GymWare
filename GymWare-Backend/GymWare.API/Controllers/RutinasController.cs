@@ -20,16 +20,12 @@ namespace GymWare.API.Controllers
         {
             return _re.GetAllRutinasConEjercicios();
         }
-        //public List<RutinaEjercicio> GetAllRutinasConEjercicios()
-        //{
-        //    return _re.GetAllRutinasConEjercicios();
-        //}
 
         // GET: api/Rutinas/5
         [ResponseType(typeof(RutinaEjercicio))]
-        public IHttpActionResult GetRutinaConEjercicio(int id)
+        public IHttpActionResult GetRutinaConEjercicios(int id)
         {
-            RutinaEjercicio rutinaEjercicio = _re.GetRutinaConEjercicio(id);
+            RutinaEjercicio rutinaEjercicio = _re.GetRutinaConEjercicios(id);
             if (rutinaEjercicio == null)
             {
                 return NotFound();
@@ -77,7 +73,7 @@ namespace GymWare.API.Controllers
         }
 
         // DELETE: api/Rutinas/5
-        [ResponseType(typeof(Ejercicio))]
+        [ResponseType(typeof(RutinaEjercicio))]
         public IHttpActionResult DeleteRutinaConEjercicios(int id)
         {
             if (_re.Delete(id))
