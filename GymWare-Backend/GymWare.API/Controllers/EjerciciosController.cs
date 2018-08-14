@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 
 namespace GymWare.API.Controllers
@@ -54,6 +55,7 @@ namespace GymWare.API.Controllers
 
         // POST: api/Ejercicios
         [ResponseType(typeof(Ejercicio))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
         public IHttpActionResult PostEjercicio(Ejercicio ejercicio)
         {
             if (!ModelState.IsValid)
