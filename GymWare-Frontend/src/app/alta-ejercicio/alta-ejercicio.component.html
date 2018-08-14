@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-title>
+      <label>Alta Ejercicio</label>
+    </mat-card-title>
+    <mat-card-content>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 
+        <div class="form-container">
+          <mat-form-field>
+              <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea> 
+          </mat-form-field>
+          <div class="button-row">
+            <button mat-raised-button color="primary" type="submit">Guardar</button>
+            <button mat-raised-button color="warn">Cancelar</button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+</mat-card>
