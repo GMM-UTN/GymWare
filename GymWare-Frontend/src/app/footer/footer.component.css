@@ -16,16 +16,18 @@ section .section-title {
 }
 #footer h5{
 	padding-left: 10px;
-    border-left: 3px solid #eeeeee;
     padding-bottom: 6px;
     margin-bottom: 20px;
     color:#ffffff;
+    font-size: 18px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #footer a {
     color: #ffffff;
     text-decoration: none !important;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #footer ul.social li{
 	padding: 3px 0;
@@ -73,4 +75,8 @@ section .section-title {
     padding-bottom: 0px;
     margin-bottom: 10px;
 }
+}
+
+.footer-item {
+    text-align: center
 }

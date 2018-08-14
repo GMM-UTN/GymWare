@@ -4,7 +4,6 @@
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
-
     max-height: 0;
     display: block;
     overflow: hidden;
@@ -22,5 +21,6 @@
     margin-right: 17px;
 }
 .header-item {
-    margin-right: 7px;
+    margin-right: 25px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
