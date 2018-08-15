@@ -15,6 +15,7 @@ namespace GymWare.API.Controllers
     {
         private EjercicioLogic _ej = new EjercicioLogic();
         // GET: api/Ejercicios
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
         public List<Ejercicio> GetEjercicios()
         {
             return _ej.GetAll();

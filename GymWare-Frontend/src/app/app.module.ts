@@ -24,7 +24,11 @@ import { PrincipalComponent } from './principal/principal.component';
 import { DefaultComponent } from './default/default.component';
 import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
 import { FormsModule } from '@angular/forms'; 
-import { EjercicioService } from './services/ejercicio.service'; 
+import { EjercicioService } from './services/ejercicio.service';
+import { AbmEjercicioComponent } from './abm-ejercicio/abm-ejercicio.component'; 
+import { MatPaginatorModule } from '@angular/material';
+import { MatSortModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material'; 
 
 const routes: Routes = [
   {
@@ -48,7 +52,8 @@ const routes: Routes = [
     CenterComponent,
     PrincipalComponent,
     DefaultComponent,
-    AltaEjercicioComponent
+    AltaEjercicioComponent,
+    AbmEjercicioComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,10 @@ const routes: Routes = [
     HttpClientModule,
     MatMenuModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule
   ],
   providers: [
     EjercicioService

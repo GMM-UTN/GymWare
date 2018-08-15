@@ -39,6 +39,8 @@ export class EjercicioService extends CRUDHttpService {
   }
 
   public getAll(): Observable<Ejercicio[]>{
-    return this.http.get<any>(url);
+    return this.http.get<Ejercicio[]>(url).pipe( 
+      catchError(this.handleError('addProvider')) 
+    );
   }
 }
