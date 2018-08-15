@@ -1,0 +1,15 @@
+table{
+    width: 100%;
+}
+
+.mat-column-select {
+    overflow: initial;
+  }
+
+.expanded{
+    width: 50%;
+}
+
+.color-green{
+    background-color: #FFAB40;
+}

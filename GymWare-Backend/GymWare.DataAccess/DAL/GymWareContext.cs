@@ -6,8 +6,9 @@ namespace GymWare.DataAccess.DAL
 {
     public class GymWareContext : DbContext
     {
-        public GymWareContext() : base("name=GymWareBauti")
+        public GymWareContext() : base("name=GymWareAndy")
         {
+            var instancia = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<GymWareContext>());
         }
 
