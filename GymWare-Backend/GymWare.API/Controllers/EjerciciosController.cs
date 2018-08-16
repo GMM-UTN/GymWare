@@ -75,6 +75,7 @@ namespace GymWare.API.Controllers
 
         // DELETE: api/Ejercicios/5
         [ResponseType(typeof(Ejercicio))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "DELETE")]
         public IHttpActionResult DeleteEjercicio(int id)
         {
             if(_ej.Delete(id))

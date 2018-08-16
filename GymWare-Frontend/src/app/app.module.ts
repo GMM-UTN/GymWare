@@ -28,6 +28,8 @@ import { AbmEjercicioComponent } from './abm-ejercicio/abm-ejercicio.component';
 import { MatPaginatorModule } from '@angular/material';
 import { MatSortModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
 
 const routes: Routes = [
   {
@@ -55,7 +57,8 @@ const routes: Routes = [
     CenterComponent,
     PrincipalComponent,
     AltaEjercicioComponent,
-    AbmEjercicioComponent
+    AbmEjercicioComponent,
+    DeleteDialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -75,10 +78,14 @@ const routes: Routes = [
     FormsModule,
     MatPaginatorModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule
   ],
   providers: [
     EjercicioService
+  ],entryComponents: [
+    AltaEjercicioComponent,
+    DeleteDialogBoxComponent
   ],
   bootstrap: [AppComponent]
 })

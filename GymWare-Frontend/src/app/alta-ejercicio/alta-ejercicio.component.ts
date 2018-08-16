@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { EjercicioService } from '../services/ejercicio.service';
 import { Ejercicio } from '../classes/ejercicio';
 import {NgForm} from '@angular/forms'; 
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-alta-ejercicio',
@@ -10,24 +11,32 @@ import {NgForm} from '@angular/forms';
 })
 export class AltaEjercicioComponent implements OnInit {
 
-  ejercicio: Ejercicio;
+  editedObject: Ejercicio;
 
-  constructor(private ejercicioService: EjercicioService) { }
+  constructor(private ejercicioService: EjercicioService,
+              public dialogRef: MatDialogRef<AltaEjercicioComponent>) { }
 
   ngOnInit() {
-    this.ejercicio = new Ejercicio();
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 
   onSubmit(f: NgForm){ 
-    var ejercicio = new Ejercicio(); 
-    ejercicio.setId(0); 
-    ejercicio.setDescripcion(f.value.Descripcion); 
-    console.log(ejercicio); 
-    this.ejercicioService.save(ejercicio).subscribe( 
+    var editedObject = new Ejercicio(); 
+    editedObject.setId(0); 
+    editedObject.setDescripcion(f.value.Descripcion); 
+    this.ejercicioService.save(editedObject).subscribe( 
       data => { 
-         
+         this.editedObject = data
       }, 
       error => alert(error) 
     ); 
+    this.closeDialog();
   } 
 }

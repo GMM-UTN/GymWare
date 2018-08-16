@@ -34,8 +34,15 @@ export class EjercicioService extends CRUDHttpService {
     throw new Error("Method not implemented.");
   }
   
-  public delete(ejercicio: Ejercicio): void {
-    throw new Error("Method not implemented.");
+  public delete(ejercicio: Ejercicio | number): Observable<any> {
+    const id = typeof ejercicio === 'number' ? ejercicio : ejercicio.getId;
+    const path = `${url}/${id}`;
+    console.log(id);
+    console.log(path);
+
+    return this.http.delete<any>(path, httpOptions).pipe(
+      catchError(this.handleError('deleteCustomer'))
+    );
   }
 
   public getAll(): Observable<Ejercicio[]>{
