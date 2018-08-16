@@ -1,17 +1,17 @@
 /* Footer */
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 section {
-    padding: 30px 0;
+    padding: 15px 0;
 }
 
 section .section-title {
     text-align: center;
-    color: #007b5e;
+    color: #f2b632;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
 #footer {
-    background: #007b5e !important;
+    background: #f2b632 !important;
     border-radius: 3px;
 }
 #footer h5{
@@ -19,15 +19,16 @@ section .section-title {
     padding-bottom: 6px;
     margin-bottom: 20px;
     color:#ffffff;
-    font-size: 18px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 20px;
+    font-family: 'Do Hyeon', sans-serif !important;
 }
 #footer a {
     color: #ffffff;
     text-decoration: none !important;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    font-family: 'Do Hyeon', sans-serif !important;
 }
 #footer ul.social li{
 	padding: 3px 0;
@@ -74,7 +75,7 @@ section .section-title {
     border-left: transparent;
     padding-bottom: 0px;
     margin-bottom: 10px;
-}
+    }
 }
 
 .footer-item {

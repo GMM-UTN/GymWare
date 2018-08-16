@@ -21,10 +21,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { CenterComponent } from './center/center.component';
 import { PrincipalComponent } from './principal/principal.component';
-import { DefaultComponent } from './default/default.component';
 import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
 import { FormsModule } from '@angular/forms'; 
-import { EjercicioService } from './services/ejercicio.service'; 
+import { EjercicioService } from './services/ejercicio.service';
+import { AbmEjercicioComponent } from './abm-ejercicio/abm-ejercicio.component'; 
+import { MatPaginatorModule } from '@angular/material';
+import { MatSortModule } from '@angular/material';
+import { MatCheckboxModule } from '@angular/material'; 
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
 
 const routes: Routes = [
   {
@@ -33,7 +38,11 @@ const routes: Routes = [
   },
   {
     path: 'default',
-    component: DefaultComponent
+    component: CenterComponent
+  },
+  {
+    path: 'ejercicios',
+    component: AbmEjercicioComponent
   }
 ];
 
@@ -47,8 +56,9 @@ const routes: Routes = [
     FooterComponent,
     CenterComponent,
     PrincipalComponent,
-    DefaultComponent,
-    AltaEjercicioComponent
+    AltaEjercicioComponent,
+    AbmEjercicioComponent,
+    DeleteDialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -65,10 +75,17 @@ const routes: Routes = [
     HttpClientModule,
     MatMenuModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatDialogModule
   ],
   providers: [
     EjercicioService
+  ],entryComponents: [
+    AltaEjercicioComponent,
+    DeleteDialogBoxComponent
   ],
   bootstrap: [AppComponent]
 })
