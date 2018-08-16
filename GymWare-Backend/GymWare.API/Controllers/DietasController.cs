@@ -55,7 +55,7 @@ namespace GymWare.API.Controllers
         }
 
         //POST: api/Dietas
-        [ResponseType(typeof(DietaComida))]
+        [ResponseType(typeof(DietaComidaDTO))]
         public IHttpActionResult PostDietaConComidas(DietaComidaDTO dietaComidasDTO)
         {
             if (!ModelState.IsValid)
@@ -65,6 +65,23 @@ namespace GymWare.API.Controllers
             if (_dc.Insert(dietaComidasDTO))
             {
                 return CreatedAtRoute("DefaultApi", new { }, dietaComidasDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [ResponseType(typeof(DietaCliente))]
+        public IHttpActionResult PostDietaCliente(DietaCliente dietaCliente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_dc.InsertDietaCliente(dietaCliente))
+            {
+                return CreatedAtRoute("DefaultApi", new { }, dietaCliente);
             }
             else
             {
