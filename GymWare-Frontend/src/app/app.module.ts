@@ -21,7 +21,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { CenterComponent } from './center/center.component';
 import { PrincipalComponent } from './principal/principal.component';
-import { DefaultComponent } from './default/default.component';
 import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
 import { FormsModule } from '@angular/forms'; 
 import { EjercicioService } from './services/ejercicio.service';
@@ -39,7 +38,11 @@ const routes: Routes = [
   },
   {
     path: 'default',
-    component: DefaultComponent
+    component: CenterComponent
+  },
+  {
+    path: 'ejercicios',
+    component: AbmEjercicioComponent
   }
 ];
 
@@ -53,7 +56,6 @@ const routes: Routes = [
     FooterComponent,
     CenterComponent,
     PrincipalComponent,
-    DefaultComponent,
     AltaEjercicioComponent,
     AbmEjercicioComponent,
     DeleteDialogBoxComponent

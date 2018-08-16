@@ -8,19 +8,30 @@
     display: block;
     overflow: hidden;
     opacity: 0;
+    border-radius: 1px;
 }
 
 .dropdown:hover .dropdown-menu {
     max-height: 200px;
-    opacity: 1;
+    opacity: 5;
 }
 .header-icon {
     color: white;
     width: 10px;
     height: 10px;
-    margin-right: 17px;
+    margin-right: 18px;
+    font-size: 18px;
 }
 .header-item {
     margin-right: 25px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 17px;
+    font-family: 'Montserrat', sans-serif;
+}
+.header-title {
+    font-size: 20px;
+}
+.custom-header {
+    background-color: #252839 !important;
+    border-radius: 1px !important;
+    font-family: 'Do Hyeon', sans-serif !important;
 }
