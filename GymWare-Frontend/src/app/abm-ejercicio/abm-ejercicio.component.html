@@ -2,7 +2,7 @@
   <mat-form-field class="expanded">
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
-  <button mat-fab class="color-green"><i class="material-icons">add</i></button>
+  <button mat-fab class="color-green" (click)="openDialogAlta()"><i class="material-icons">add</i></button>
   
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
   
@@ -36,7 +36,7 @@
       <td mat-cell *matCellDef="let element"> 
           <button mat-mini-fab color="primary" class="mr-3"><i class="material-icons">visibility</i></button>
           <button mat-mini-fab color="primary" class="mr-3"><i class="material-icons">edit</i></button>
-          <button mat-mini-fab color="warn"><i class="material-icons">delete</i></button>
+          <button mat-mini-fab color="warn"><i class="material-icons" (click)="openDialogBaja(element.EjercicioId)">delete</i></button>
       </td>
         
     </ng-container>
