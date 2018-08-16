@@ -11,12 +11,12 @@ using System.Web.Http.Description;
 
 namespace GymWare.API.Controllers
 {
-    [RoutePrefix("api/Rutinas")]
     public class RutinasController : ApiController
     {
         private RutinaEjercicioLogic _re = new RutinaEjercicioLogic();
 
         // GET: api/Rutinas
+        [HttpGet]
         public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
         {
             return _re.GetAllRutinasConEjercicios();
@@ -73,7 +73,7 @@ namespace GymWare.API.Controllers
             }
         }
 
-        [ResponseType(typeof(RutinaEjercicio))]
+        [ResponseType(typeof(EmpleadoClienteRutina))]
         public IHttpActionResult PostEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
         {
             if (!ModelState.IsValid)
