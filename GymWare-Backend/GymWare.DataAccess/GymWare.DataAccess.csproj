@@ -55,6 +55,7 @@
     <Compile Include="DAL\GymWareContext.cs" />
     <Compile Include="DAL\RutinaEjercicioRepository.cs" />
     <Compile Include="DAL\RutinaRepository.cs" />
+    <Compile Include="DAL\UsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -194,6 +194,7 @@
     <Compile Include="Controllers\EjerciciosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RutinasController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
