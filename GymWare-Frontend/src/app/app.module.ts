@@ -30,6 +30,7 @@ import { MatSortModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material'; 
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
+import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
 
 const routes: Routes = [
   {
@@ -58,7 +59,8 @@ const routes: Routes = [
     PrincipalComponent,
     AltaEjercicioComponent,
     AbmEjercicioComponent,
-    DeleteDialogBoxComponent
+    DeleteDialogBoxComponent,
+    EditEjercicioComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ const routes: Routes = [
     EjercicioService
   ],entryComponents: [
     AltaEjercicioComponent,
-    DeleteDialogBoxComponent
+    DeleteDialogBoxComponent,
+    EditEjercicioComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,20 @@
+<ng-container *ngIf="enableEdit;else viewLabel">
+  <label>Editar Ejercicio</label>
+</ng-container>
+<ng-template #viewLabel>
+  <label>Ver Ejercicio</label>
+</ng-template>
+
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 
+  <div class="form-container">
+    <mat-form-field>
+        <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" name="Descripcion" [(ngModel)]="data.editedObject.Descripcion"></textarea> 
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit" [hidden]="!enableEdit">Guardar</button>
+      <button mat-raised-button mat-dialog-close color="warn" [hidden]="!enableEdit">Cancelar</button>
+      <button mat-raised-button mat-dialog-close color="primary" [hidden]="enableEdit">Cerrar</button>
+    </div>
+  </div>
+</form>

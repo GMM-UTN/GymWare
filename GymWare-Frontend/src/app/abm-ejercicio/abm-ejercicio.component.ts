@@ -5,6 +5,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/ma
 import { SelectionModel } from '@angular/cdk/collections';
 import { AltaEjercicioComponent } from '../alta-ejercicio/alta-ejercicio.component';
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
+import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.component';
 
   const initialSelection = [];
   const allowMultiSelect = true;
@@ -74,6 +75,22 @@ export class AbmEjercicioComponent implements OnInit {
         this.getAll();
         this.dataSource.connect();
       }
+    });
+  }
+
+  openDialogModification(editedObject: any, edit: Boolean) {
+    const dialogRef = this.dialog.open(EditEjercicioComponent, 
+      {data :
+        { editedObject: editedObject, 
+          edit: edit
+        }
+      }
+      
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAll();
+      this.dataSource.connect();
     });
   }
 
