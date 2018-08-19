@@ -21,13 +21,16 @@ export class EjercicioService extends CRUDHttpService {
     console.log(ejercicio); 
     console.log("entra"); 
     console.log(url); 
-    return this.http.post<Ejercicio>(url, ejercicio, httpOptions).pipe( 
+    return this.http.post<Ejercicio>(`${url}/PostEjercicio`, ejercicio, httpOptions).pipe( 
       catchError(this.handleError('addProvider')) 
     ); 
   }
 
-  public update(object: Object): void {
-    throw new Error("Method not implemented.");
+  public update(ejercicio: Ejercicio): Observable<Ejercicio> {
+    var id = ejercicio.Id;
+    return this.http.put<Ejercicio>(`${url}/PutEjercicio/${id}`, ejercicio, httpOptions).pipe(
+      catchError(this.handleError('UpdateEjercicio'))
+    );
   }
 
   public get(object: Object): Observable<any> {
@@ -36,7 +39,7 @@ export class EjercicioService extends CRUDHttpService {
   
   public delete(ejercicio: Ejercicio | number): Observable<any> {
     const id = typeof ejercicio === 'number' ? ejercicio : ejercicio.getId;
-    const path = `${url}/${id}`;
+    const path = `${url}/DeleteEjercicio/${id}`;
     console.log(id);
     console.log(path);
 
@@ -46,7 +49,7 @@ export class EjercicioService extends CRUDHttpService {
   }
 
   public getAll(): Observable<Ejercicio[]>{
-    return this.http.get<Ejercicio[]>(url).pipe( 
+    return this.http.get<Ejercicio[]>(`${url}/GetEjercicios`).pipe( 
       catchError(this.handleError('addProvider')) 
     );
   }

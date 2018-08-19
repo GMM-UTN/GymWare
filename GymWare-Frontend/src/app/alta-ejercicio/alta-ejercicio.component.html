@@ -1,15 +1,14 @@
+<label>Alta Ejercicio</label>
 
-      <label>Alta Ejercicio</label>
-   
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 
-        <div class="form-container">
-          <mat-form-field>
-              <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea> 
-          </mat-form-field>
-          <div class="button-row">
-            <button mat-raised-button color="primary" type="submit">Guardar</button>
-            <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-          </div>
-        </div>
-      </form>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 
+  <div class="form-container">
+    <mat-form-field>
+        <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea> 
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    </div>
+  </div>
+</form>
 

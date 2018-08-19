@@ -23,6 +23,7 @@ namespace GymWare.API.Controllers
 
         // GET: api/Ejercicios/5
         [ResponseType(typeof(Ejercicio))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
         public IHttpActionResult GetEjercicio(int id)
         {
             Ejercicio ejercicio = _ej.GetOne(id);
@@ -36,6 +37,7 @@ namespace GymWare.API.Controllers
 
         // PUT: api/Ejercicios/5
         [ResponseType(typeof(void))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "PUT")]
         public IHttpActionResult PutEjercicio(int id, Ejercicio ejercicio)
         {
             if (!ModelState.IsValid)
