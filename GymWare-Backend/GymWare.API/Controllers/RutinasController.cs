@@ -16,6 +16,7 @@ namespace GymWare.API.Controllers
         private RutinaEjercicioLogic _re = new RutinaEjercicioLogic();
 
         // GET: api/Rutinas
+        [HttpGet]
         public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
         {
             return _re.GetAllRutinasConEjercicios();
@@ -65,6 +66,23 @@ namespace GymWare.API.Controllers
             if (_re.Insert(rutinaEjerciciosDTO))
             {
                 return CreatedAtRoute("DefaultApi", new { }, rutinaEjerciciosDTO);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [ResponseType(typeof(EmpleadoClienteRutina))]
+        public IHttpActionResult PostEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_re.InsertEmpleadoClienteRutina(empleadoClienteRutina))
+            {
+                return CreatedAtRoute("DefaultApi", new { }, empleadoClienteRutina);
             }
             else
             {

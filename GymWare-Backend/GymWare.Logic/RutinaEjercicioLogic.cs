@@ -38,6 +38,18 @@ namespace GymWare.Logic
             return _re.Insert(rutina, rutinaEjercicio.RutinaEjercicios);
         }
 
+        public bool InsertEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
+        {
+            if (_ru.InsertEmpleadoClienteRutina(empleadoClienteRutina) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Delete(int idRutina)
         {
             return _re.Delete(idRutina) == _ru.Delete(idRutina);

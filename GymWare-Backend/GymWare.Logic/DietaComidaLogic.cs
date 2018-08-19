@@ -38,6 +38,18 @@ namespace GymWare.Logic
             return _dc.Insert(dieta, dietaComida.DietaComidas);
         }
 
+        public bool InsertDietaCliente(DietaCliente dietaCliente)
+        {
+            if (_di.InsertDietaCliente(dietaCliente) != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool Delete(int idDieta)
         {
             return _dc.Delete(idDieta) == _di.Delete(idDieta);

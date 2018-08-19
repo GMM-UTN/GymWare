@@ -20,7 +20,7 @@ import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box
 export class AbmEjercicioComponent implements OnInit {
 
   selection = new SelectionModel<Ejercicio>(allowMultiSelect, initialSelection);
-  displayedColumns: string[] = ['select','EjercicioId','Descripcion', 'actions'];
+  displayedColumns: string[] = ['select','EjercicioId','Descripcion', 'actions', 'add'];
   dataSource: MatTableDataSource<Ejercicio>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

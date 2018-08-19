@@ -10,6 +10,19 @@ table{
     width: 50%;
 }
 
-.color-green{
-    background-color: #FFAB40;
+.btn-add{
+    background-color: #f2b632;
+}
+.table-custom { 
+    font-family: 'Montserrat', sans-serif;
+}
+.filter-custom {
+    font-family: 'Montserrat', sans-serif;
+}
+.column-title {
+    font-size: 15px;
+}
+.paginator-custom {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
 }
