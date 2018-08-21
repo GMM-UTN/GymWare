@@ -21,5 +21,14 @@ namespace GymWare.DataAccess.DAL
         {
             return _db.Empleados.FirstOrDefault(x => x.NombreUsuario == usuarioLoginDTO.Usuario && x.Contrasenia == usuarioLoginDTO.Contrasenia);
         }
+
+        public bool Insert(Cliente cliente)
+        {
+            cliente.AlturaActual = cliente.AlturaInicial;
+            cliente.PesoActual = cliente.PesoInicial;
+            _db.Clientes.Add(cliente);
+            _db.SaveChanges();
+            return true;
+        }
     }
 }
