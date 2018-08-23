@@ -9,13 +9,13 @@ using GymWare.Entities.DTO;
 
 namespace GymWare.Logic
 {
-    public class MembresiaLogic
+    public class AsistenciaLogic
     {
-        private MembresiaRepository _me = new MembresiaRepository();
+        private AsistenciaRepository _as = new AsistenciaRepository();
 
-        public Membresia CreateRenovateMembresia(MembresiaCuotaDTO membresiaCuotaDTO)
+        public Asistencia CreateAsistencia(string dni)
         {
-            return _me.InsertUpdateMembresia(membresiaCuotaDTO);
+            return _as.InsertAsistencia(dni);
         }
     }
 }

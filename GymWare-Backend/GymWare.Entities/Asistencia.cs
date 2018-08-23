@@ -12,8 +12,6 @@ namespace GymWare.Entities
         public int AsistenciaId { get; set; }
         public virtual Cliente Cliente { get; set; }
         [Column(TypeName = "date")]
-        public DateTime FechaHoraIngreso { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime FechaHoraEgreso { get; set; }
+        public DateTime Fecha { get; set; }
     }
 }

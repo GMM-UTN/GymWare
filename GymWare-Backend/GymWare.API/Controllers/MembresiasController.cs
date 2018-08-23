@@ -15,41 +15,22 @@ namespace GymWare.API.Controllers
     {
         private MembresiaLogic _me = new MembresiaLogic();
 
-        ////POST: api/Membresias/CheckUsuario
-        //[ResponseType(typeof(Usuario))]
-        //public IHttpActionResult CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    Usuario usuario = _us.CheckUsuario(usuarioLoginDTO);
-        //    if (usuario != null)
-        //    {
-        //        return Json(usuario);
-        //    }
-        //    else
-        //    {
-        //        return Json("Usuario o Contraseña incorrectos!");
-        //    }
-        //}
-
-        // POST: api/Membresias/CreateMembresia
+        // POST: api/Membresias/CreateRenovateMembresia
         [ResponseType(typeof(Membresia))]
-        public IHttpActionResult CreateMembresia(MembresiaCuotaDTO membresiaCuotaDTO)
+        public IHttpActionResult CreateRenovateMembresia(MembresiaCuotaDTO membresiaCuotaDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            Membresia membresia = _me.CreateMembresia(membresiaCuotaDTO);
+            Membresia membresia = _me.CreateRenovateMembresia(membresiaCuotaDTO);
             if (membresia != null)
             {
                 return Json(membresia);
             }
             else
             {
-                return Json("Error al intentar dar de alta la Membresia!");
+                return Json("Error al intentar crear/renovar la Membresia!");
             }
         }
 
