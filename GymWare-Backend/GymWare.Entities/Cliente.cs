@@ -14,6 +14,5 @@ namespace GymWare.Entities
         public int PesoActual { get; set; }
         public int AlturaActual { get; set; }
         public virtual ICollection<Asistencia> Asistencias { get; set; }
-        public virtual ICollection<Membresia> Membresias { get; set; }
     }
 }
