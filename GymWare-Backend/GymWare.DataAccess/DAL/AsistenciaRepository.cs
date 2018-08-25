@@ -12,21 +12,36 @@ namespace GymWare.DataAccess.DAL
 {
     public class AsistenciaRepository : BaseRepository
     {
-        public Asistencia InsertAsistencia(string dni)
+        public string InsertAsistencia(string dni)
         {
             Cliente cliente = _db.Clientes.Where(x => x.Dni == dni).FirstOrDefault();
             if (cliente != null)
             {
-                Asistencia asistencia = new Asistencia();
-                asistencia.Cliente = cliente;
-                asistencia.Fecha = DateTime.Today.Date;
-                _db.Asistencias.Add(asistencia);
-                _db.SaveChanges();
-                return asistencia;
+                Membresia membresia = _db.Membresias.Where(x => x.Cliente.ClienteId == cliente.ClienteId).FirstOrDefault();
+                if(membresia != null)
+                {
+                    if(membresia.FechaFin >= DateTime.Today)
+                    {
+                        Asistencia asistencia = new Asistencia();
+                        asistencia.Cliente = cliente;
+                        asistencia.Fecha = DateTime.Today.Date;
+                        _db.Asistencias.Add(asistencia);
+                        _db.SaveChanges();
+                        return "Asistencia registrada correctamente!";
+                    }
+                    else
+                    {
+                        return "Su membresía se ha vencido. Cuando pague una nueva cuota se autorenovará y podrá registrar la asistencia";
+                    }
+                }
+                else
+                {
+                    return "El cliente no cuenta con ninguna membresía. Cuando pague su primer cuota se autogenerará y podrá registrar la Asistencia";
+                }
             }
             else
             {
-                return null;
+                return "El dni ingresado no corresponde a ningún Cliente";
             }
         }
     }

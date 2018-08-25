@@ -23,15 +23,8 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            Asistencia asistencia = _as.CreateAsistencia(cliente.Dni);
-            if (asistencia != null)
-            {
-                return Json(asistencia);
-            }
-            else
-            {
-                return Json("Error al intentar registrar la Asistencia!");
-            }
+
+            return Json(_as.CreateAsistencia(cliente.Dni));
         }
 
     }

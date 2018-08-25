@@ -13,7 +13,7 @@ namespace GymWare.Logic
     {
         private AsistenciaRepository _as = new AsistenciaRepository();
 
-        public Asistencia CreateAsistencia(string dni)
+        public string CreateAsistencia(string dni)
         {
             return _as.InsertAsistencia(dni);
         }
