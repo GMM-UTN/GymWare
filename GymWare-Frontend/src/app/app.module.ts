@@ -22,7 +22,7 @@ import { FooterComponent } from './footer/footer.component';
 import { CenterComponent } from './center/center.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { AltaEjercicioComponent } from './alta-ejercicio/alta-ejercicio.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { EjercicioService } from './services/ejercicio.service';
 import { AbmEjercicioComponent } from './abm-ejercicio/abm-ejercicio.component'; 
 import { MatPaginatorModule } from '@angular/material';
@@ -31,6 +31,8 @@ import { MatCheckboxModule } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AlertService } from './services/alert.service';
 
 const routes: Routes = [
   {
@@ -78,13 +80,16 @@ const routes: Routes = [
     MatMenuModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    ReactiveFormsModule,
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
     MatDialogModule
   ],
   providers: [
-    EjercicioService
+    EjercicioService,
+    AuthenticationService,
+    AlertService
   ],entryComponents: [
     AltaEjercicioComponent,
     DeleteDialogBoxComponent,
