@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,7 +49,9 @@
     <Compile Include="DietaCliente.cs" />
     <Compile Include="DietaComida.cs" />
     <Compile Include="DTO\DietaComidaDTO.cs" />
+    <Compile Include="DTO\MembresiaCuotaDTO.cs" />
     <Compile Include="DTO\RutinaEjerciciosDTO.cs" />
+    <Compile Include="DTO\UsuarioLoginDTO.cs" />
     <Compile Include="Ejercicio.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="EmpleadoClienteRutina.cs" />

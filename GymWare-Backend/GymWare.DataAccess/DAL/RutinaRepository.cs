@@ -38,6 +38,26 @@ namespace GymWare.DataAccess.DAL
             return rutina;
         }
 
+        public EmpleadoClienteRutina InsertEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
+        {
+            Empleado empleado = _db.Empleados.Find(empleadoClienteRutina.Empleado.EmpleadoId);
+            Cliente cliente = _db.Clientes.Find(empleadoClienteRutina.Cliente.ClienteId);
+            Rutina rutina = _db.Rutinas.Find(empleadoClienteRutina.Rutina.RutinaId);
+            empleadoClienteRutina.Empleado = empleado;
+            empleadoClienteRutina.Cliente = cliente;
+            empleadoClienteRutina.Rutina = rutina;
+            _db.EmpleadoClienteRutina.Add(empleadoClienteRutina);
+            try
+            {
+                _db.SaveChanges();
+                return empleadoClienteRutina;
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
+        }
+
         public bool Delete(int id)
         {
             if (_db.Rutinas.Find(id) == null)

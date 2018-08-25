@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace GymWare.Entities
 {
-    public class Asistencia
+    public class MembresiaCuotaDTO
     {
-        public int AsistenciaId { get; set; }
-        public virtual Cliente Cliente { get; set; }
-        [Column(TypeName = "date")]
-        public DateTime Fecha { get; set; }
+        public int ClienteId { get; set; }
+        public Cuota Cuota { get; set; }
     }
 }
