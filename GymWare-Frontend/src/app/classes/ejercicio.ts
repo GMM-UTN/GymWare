@@ -1,5 +1,5 @@
 export class Ejercicio {
-    Id: number; 
+    EjercicioId: number; 
     Descripcion: String; 
  
     constructor(){} 
@@ -13,10 +13,10 @@ export class Ejercicio {
     } 
  
     getId(): number { 
-        return this.Id; 
+        return this.EjercicioId; 
     } 
  
     setId(id: number): void { 
-        this.Id = id; 
+        this.EjercicioId = id; 
     } 
 }

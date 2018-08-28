@@ -34,10 +34,10 @@ export class EditEjercicioComponent implements OnInit {
 
   onSubmit(f: NgForm): void{
     var ejercicio = new Ejercicio();
-    ejercicio.Id = this.data.editedObject.EjercicioId;
+    ejercicio.EjercicioId = this.data.editedObject.EjercicioId;
     ejercicio.Descripcion = f.value.Descripcion;
     console.log(ejercicio.Descripcion);
-    console.log(ejercicio.Id);
+    console.log(ejercicio.EjercicioId);
     console.log(JSON.stringify(ejercicio));
     this.ejercicioService.update(ejercicio as Ejercicio).subscribe( 
       data => { 
