@@ -39,9 +39,9 @@ export class AmbRutinaComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.getAll();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    //this.getAll();
   }
 
   applyFilter(filterValue: string) {

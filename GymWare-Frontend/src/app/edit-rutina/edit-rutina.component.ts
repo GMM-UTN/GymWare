@@ -42,17 +42,17 @@ export class EditRutinaComponent implements OnInit {
     } else {
       this.displayedColumns = this.displayedColumns.splice(0,3);
       console.log(this.data + 'get all' );
-      console.log(this.data.RutinaEjercicios + 'rutina ejercicios')
-      this.data.editedObject.RutinaEjercicios.forEach(item => {
-        var ejercicioHelper = new EjercicioHelper();
-        ejercicioHelper.ejercicio = item.Ejercicio;
-        ejercicioHelper.series = item.Series;
-        ejercicioHelper.repeticiones = item.Repeticiones;
-        this.selectedEjercicios.push(ejercicioHelper);
-      });
-      this.dataSource.data = this.selectedEjercicios;
-      this.dataSource.connect();
+      console.log(this.data.RutinaEjercicios + 'rutina ejercicios');
     }
+    this.data.editedObject.RutinaEjercicios.forEach(item => {
+      var ejercicioHelper = new EjercicioHelper();
+      ejercicioHelper.ejercicio = item.Ejercicio;
+      ejercicioHelper.series = item.Series;
+      ejercicioHelper.repeticiones = item.Repeticiones;
+      this.selectedEjercicios.push(ejercicioHelper);
+    });
+    this.dataSource.data = this.selectedEjercicios;
+    this.dataSource.connect();
     console.log(this.selectedEjercicios);
   }
 
@@ -123,11 +123,22 @@ export class EditRutinaComponent implements OnInit {
     var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
     rutinaEjerciciosDTO.Rutina = rutina;
     rutinaEjerciciosDTO.RutinaEjercicios = rutinaEjercicioList;
-    this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
-      
-    },
-    error => alert(error)
-    );
+
+    if(this.enableEdit){
+      rutinaEjerciciosDTO.Rutina.RutinaId = this.data.editedObject.Rutina.RutinaID;
+      this.rutinaService.update(rutinaEjerciciosDTO as RutinaEjerciciosDTO).subscribe( 
+        data => { 
+          this.dialogRef.close(data);
+        }, 
+        error => alert(error) 
+      ); 
+    } else {
+      this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
+      },
+      error => alert(error)
+      );
+    }
+    
   }
 
   onSubmitEjercicio(f: NgForm) {
