@@ -39,6 +39,7 @@ namespace GymWare.API.Controllers
 
         //PUT: api/Rutinas/5
         [ResponseType(typeof(void))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "PUT")]
         public IHttpActionResult PutRutinaConEjercicios(int id, RutinaEjerciciosDTO rutinaEjerciciosDTO)
         {
             if (!ModelState.IsValid)

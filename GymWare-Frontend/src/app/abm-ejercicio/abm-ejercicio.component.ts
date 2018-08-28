@@ -80,7 +80,7 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   openDialogModification(editedObject: any, edit: Boolean) {
-    const dialogRef = this.dialog.open(EditRutinaComponent, 
+    const dialogRef = this.dialog.open(EditEjercicioComponent, 
       {data :
         { editedObject: editedObject, 
           edit: edit

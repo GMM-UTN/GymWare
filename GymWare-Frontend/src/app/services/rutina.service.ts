@@ -23,8 +23,12 @@ export class RutinaService extends CRUDHttpService {
       catchError(this.handleError('postRutinas')));
   }
 
-  update(object: Object): void {
-    throw new Error("Method not implemented.");
+  update(rutinaEjerciciosDTO: RutinaEjerciciosDTO): Observable<RutinaEjerciciosDTO> {
+    var id = rutinaEjerciciosDTO.Rutina.RutinaId;
+    debugger;
+    return this.http.put<RutinaEjerciciosDTO>(`${url}/PutRutinaConEjercicios/${id}`, rutinaEjerciciosDTO, httpOptions).pipe(
+      catchError(this.handleError('UpdateRutinaEjercicios'))
+    );
   }
 
   public delete(idRutina: number): Observable<any> {
