@@ -33,6 +33,8 @@ import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.
 import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { DefaultComponent } from './default/default.component';
+import { PresentacionComponent } from './presentacion/presentacion.component';
 
 const routes: Routes = [
   {
@@ -40,12 +42,22 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'default',
-    component: CenterComponent
+    path: 'app',
+    component: AppComponent
   },
   {
-    path: 'ejercicios',
-    component: AbmEjercicioComponent
+    path: 'principal',
+    component: PresentacionComponent
+  },
+  {
+    path: 'default',
+    component: DefaultComponent,
+    children: [
+      {path: 'home',
+      component: CenterComponent},
+      {path: 'ejercicios',
+      component: AbmEjercicioComponent}
+    ] 
   }
 ];
 
@@ -62,7 +74,9 @@ const routes: Routes = [
     AltaEjercicioComponent,
     AbmEjercicioComponent,
     DeleteDialogBoxComponent,
-    EditEjercicioComponent
+    EditEjercicioComponent,
+    DefaultComponent,
+    PresentacionComponent
   ],
   imports: [
     BrowserModule,
