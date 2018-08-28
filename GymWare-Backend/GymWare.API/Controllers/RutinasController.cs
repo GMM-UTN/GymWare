@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Cors;
 
 namespace GymWare.API.Controllers
 {
@@ -17,6 +18,7 @@ namespace GymWare.API.Controllers
 
         // GET: api/Rutinas
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
         public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
         {
             return _re.GetAllRutinasConEjercicios();
@@ -57,6 +59,7 @@ namespace GymWare.API.Controllers
 
         //POST: api/Rutinas
         [ResponseType(typeof(RutinaEjercicio))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
         public IHttpActionResult PostRutinaConEjercicios(RutinaEjerciciosDTO rutinaEjerciciosDTO)
         {
             if (!ModelState.IsValid)
@@ -92,6 +95,7 @@ namespace GymWare.API.Controllers
 
         // DELETE: api/Rutinas/5
         [ResponseType(typeof(RutinaEjercicio))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "DELETE")]
         public IHttpActionResult DeleteRutinaConEjercicios(int id)
         {
             if (_re.Delete(id))
