@@ -15,7 +15,7 @@ namespace GymWare.API.Controllers
     {
         private UsuarioLogic _us = new UsuarioLogic();
 
-        //POST: api/Dietas
+        //POST: api/Usuarios/CheckUsuario
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
         {
@@ -23,7 +23,7 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            object usuario = _us.CheckUsuario(usuarioLoginDTO);
+            Usuario usuario = _us.CheckUsuario(usuarioLoginDTO);
             if (usuario != null)
             {
                 return Json(usuario);
@@ -33,5 +33,24 @@ namespace GymWare.API.Controllers
                 return Json("Usuario o Contraseña incorrectos!");
             }
         }
+
+        // POST: api/Usuarios/CreateCliente
+        [ResponseType(typeof(Cliente))]
+        public IHttpActionResult CreateCliente(Cliente cliente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_us.Insert(cliente))
+            {
+                return CreatedAtRoute("DefaultApi", new { id = cliente.ClienteId }, cliente);
+            }
+            else
+            {
+                return Json("Error al intentar dar de alta el Cliente!");
+            }
+        }
+
     }
 }

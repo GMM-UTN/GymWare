@@ -13,16 +13,16 @@ namespace GymWare.Logic
     {
         private UsuarioRepository _us = new UsuarioRepository();
         
-        public object CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
+        public Usuario CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
         {
-            Cliente cliente = _us.CheckCliente(usuarioLoginDTO);
+            Usuario cliente = _us.CheckCliente(usuarioLoginDTO);
             if (cliente != null)
             {
                 return cliente;
             }
             else
             {
-                Empleado empleado = _us.CheckEmpleado(usuarioLoginDTO);
+                Usuario empleado = _us.CheckEmpleado(usuarioLoginDTO);
                 if (empleado != null)
                 {
                     return empleado;
@@ -32,6 +32,10 @@ namespace GymWare.Logic
                     return null;
                 }
             }
+        }
+        public bool Insert(Cliente cliente)
+        {
+            return _us.Insert(cliente);
         }
     }
 }

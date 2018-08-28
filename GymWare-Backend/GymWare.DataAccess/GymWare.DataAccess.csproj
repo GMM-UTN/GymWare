@@ -47,12 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\AsistenciaRepository.cs" />
     <Compile Include="DAL\BaseRepository.cs" />
     <Compile Include="DAL\ComidaRepository.cs" />
     <Compile Include="DAL\DietaComidaRepository.cs" />
     <Compile Include="DAL\DietaRepository.cs" />
     <Compile Include="DAL\EjercicioRepository.cs" />
     <Compile Include="DAL\GymWareContext.cs" />
+    <Compile Include="DAL\MembresiaRepository.cs" />
     <Compile Include="DAL\RutinaEjercicioRepository.cs" />
     <Compile Include="DAL\RutinaRepository.cs" />
     <Compile Include="DAL\UsuarioRepository.cs" />
