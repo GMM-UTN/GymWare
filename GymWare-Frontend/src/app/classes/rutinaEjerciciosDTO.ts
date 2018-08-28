@@ -4,7 +4,7 @@ import { RutinaEjercicio } from "./rutinaEjercicio";
 export class RutinaEjerciciosDTO {
 
     Rutina: Rutina;
-    RutinaEjercicios: RutinaEjercicio[];
+    RutinaEjercicios: RutinaEjercicio[] = [];
 
     constructor() {}
 }

@@ -18,8 +18,8 @@ export class RutinaService extends CRUDHttpService {
     super();
   }
 
-  save(rutinaEjerciciosDTO: RutinaEjerciciosDTO): Observable<any> {
-    return this.http.post<any>(`${url}/PostRutinaConEjercicios`, rutinaEjerciciosDTO, httpOptions).pipe(
+  save(rutinaEjerciciosDTO: RutinaEjerciciosDTO): Observable<RutinaEjerciciosDTO> {
+    return this.http.post<RutinaEjerciciosDTO>(`${url}/PostRutinaConEjercicios`, rutinaEjerciciosDTO, httpOptions).pipe(
       catchError(this.handleError('postRutinas')));
   }
 

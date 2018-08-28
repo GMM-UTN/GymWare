@@ -5,6 +5,7 @@ import { RutinaService } from '../services/rutina.service';
 import { AltaRutinaComponent } from 'src/app/alta-rutina/alta-rutina.component';
 import { DeleteDialogBoxComponent } from 'src/app/delete-dialog-box/delete-dialog-box.component';
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
+import { EditRutinaComponent } from 'src/app/edit-rutina/edit-rutina.component';
 
 const initialSelection = [];
 const allowMultiSelect = true;
@@ -79,6 +80,22 @@ export class AmbRutinaComponent implements OnInit {
         this.getAll();
         this.dataSource.connect();
       }
+    });
+  }
+
+  openDialogModification(editedObject: any, edit: Boolean) {
+    const dialogRef = this.dialog.open(EditRutinaComponent, 
+      {data :
+        { editedObject: editedObject, 
+          edit: edit
+        }
+      }
+      
+    );
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAll();
+      this.dataSource.connect();
     });
   }
 

@@ -57,7 +57,7 @@ export class AltaRutinaComponent implements OnInit {
   }
 
   addEjercicio(ejercicioHelper: EjercicioHelper) {
-    if (this.contains(ejercicioHelper.ejercicio.Id) == null) {
+    if (this.contains(ejercicioHelper.ejercicio.EjercicioId) == null) {
       this.selectedEjercicios.push(ejercicioHelper);
       this.dataSource.data = this.selectedEjercicios;
       this.dataSource.connect();
@@ -66,6 +66,7 @@ export class AltaRutinaComponent implements OnInit {
 
   removeEjercicio(EjercicioId: number) {
     var index = this.contains(EjercicioId);
+    console.log(index);
     if (index != null) {
       this.selectedEjercicios.splice(index, 1);
       this.dataSource.data = this.selectedEjercicios;
@@ -76,7 +77,7 @@ export class AltaRutinaComponent implements OnInit {
   contains(EjercicioId: number): number {
     var index = null;
     for (let item of this.selectedEjercicios) {
-      if (item.ejercicio.Id == EjercicioId) {
+      if (item.ejercicio.EjercicioId == EjercicioId) {
         index = this.selectedEjercicios.indexOf(item);
         break;
       }
@@ -95,18 +96,25 @@ export class AltaRutinaComponent implements OnInit {
 
     var rutinaEjercicioList: RutinaEjercicio[] = [];
     this.selectedEjercicios.forEach(item => {
+      debugger;
       var rutinaEjercicio = new RutinaEjercicio();
       rutinaEjercicio.Ejercicio = item.ejercicio;
       rutinaEjercicio.Series = item.series;
       rutinaEjercicio.Repeticiones = item.repeticiones;
       rutinaEjercicioList.push(rutinaEjercicio);
+      console.log(rutinaEjercicio);
     });
+
+    console.log(rutinaEjercicioList + 'rutinaEjercicioList');
 
     var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
     rutinaEjerciciosDTO.Rutina = rutina;
-    rutinaEjerciciosDTO.RutinaEjercicios = rutinaEjercicioList;
+    rutinaEjercicioList.forEach(e => {
+      rutinaEjerciciosDTO.RutinaEjercicios.push(e);
+    })
+    
     this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
-      
+      console.log(data);
     },
     error => alert(error)
     );
@@ -114,7 +122,7 @@ export class AltaRutinaComponent implements OnInit {
 
   onSubmitEjercicio(f: NgForm) {
     var ejercicio = new Ejercicio();
-    ejercicio.Id = f.value.ejercicioSelect.EjercicioId;
+    ejercicio.EjercicioId = f.value.ejercicioSelect.EjercicioId;
     ejercicio.Descripcion = f.value.ejercicioSelect.Descripcion;
     var ejercicioHelper = new EjercicioHelper();
     ejercicioHelper.ejercicio = ejercicio;

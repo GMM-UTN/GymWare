@@ -21,8 +21,9 @@ export class EditRutinaComponent implements OnInit {
   rutina: any;
   displayedColumns: string[] = ['EjercicioId', 'Descripcion', 'Series', 'Repeticiones', 'actions'];
   dataSource: MatTableDataSource<EjercicioHelper>;
+  editedObject: Ejercicio;
+  enableEdit: Boolean;
 
-  @Input() enableEdit: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
@@ -39,14 +40,20 @@ export class EditRutinaComponent implements OnInit {
     if(this.enableEdit){
       this.getAllEjercicios();
     } else {
-      this.data.RutinaEjerciciosDTO.RutinaEjercicios.forEach(item => {
-        this.selectedEjercicios.push(item.ejercicio);
+      this.displayedColumns = this.displayedColumns.splice(0,3);
+      console.log(this.data + 'get all' );
+      console.log(this.data.RutinaEjercicios + 'rutina ejercicios')
+      this.data.editedObject.RutinaEjercicios.forEach(item => {
+        var ejercicioHelper = new EjercicioHelper();
+        ejercicioHelper.ejercicio = item.Ejercicio;
+        ejercicioHelper.series = item.Series;
+        ejercicioHelper.repeticiones = item.Repeticiones;
+        this.selectedEjercicios.push(ejercicioHelper);
       });
       this.dataSource.data = this.selectedEjercicios;
       this.dataSource.connect();
     }
-    
-    console.log(this.ejercicios);
+    console.log(this.selectedEjercicios);
   }
 
   ngAfterViewInit() {
@@ -68,7 +75,7 @@ export class EditRutinaComponent implements OnInit {
   }
 
   addEjercicio(ejercicioHelper: EjercicioHelper) {
-    if (this.contains(ejercicioHelper.ejercicio.Id) == null) {
+    if (this.contains(ejercicioHelper.ejercicio.EjercicioId) == null) {
       this.selectedEjercicios.push(ejercicioHelper);
       this.dataSource.data = this.selectedEjercicios;
       this.dataSource.connect();
@@ -87,7 +94,7 @@ export class EditRutinaComponent implements OnInit {
   contains(EjercicioId: number): number {
     var index = null;
     for (let item of this.selectedEjercicios) {
-      if (item.ejercicio.Id == EjercicioId) {
+      if (item.ejercicio.EjercicioId == EjercicioId) {
         index = this.selectedEjercicios.indexOf(item);
         break;
       }
@@ -125,7 +132,7 @@ export class EditRutinaComponent implements OnInit {
 
   onSubmitEjercicio(f: NgForm) {
     var ejercicio = new Ejercicio();
-    ejercicio.Id = f.value.ejercicioSelect.EjercicioId;
+    ejercicio.EjercicioId = f.value.ejercicioSelect.EjercicioId;
     ejercicio.Descripcion = f.value.ejercicioSelect.Descripcion;
     var ejercicioHelper = new EjercicioHelper();
     ejercicioHelper.ejercicio = ejercicio;

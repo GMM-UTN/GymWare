@@ -19,7 +19,7 @@ namespace GymWare.API.Controllers
         // GET: api/Rutinas
         [HttpGet]
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
-        public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
+        public List<RutinaEjerciciosDTO> GetAllRutinasConEjercicios()
         {
             return _re.GetAllRutinasConEjercicios();
         }

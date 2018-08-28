@@ -5,4 +5,6 @@ export class EjercicioHelper {
     ejercicio: Ejercicio;
     series: number;
     repeticiones: number;
+
+    constructor(){}
 }
