@@ -31,8 +31,11 @@ import { MatCheckboxModule } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
+import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
+import { AltaRutinaComponent } from './alta-rutina/alta-rutina.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { EditRutinaComponent } from './edit-rutina/edit-rutina.component';
 
 const routes: Routes = [
   {
@@ -46,6 +49,10 @@ const routes: Routes = [
   {
     path: 'ejercicios',
     component: AbmEjercicioComponent
+  },
+  {
+    path: 'rutinas',
+    component: AmbRutinaComponent
   }
 ];
 
@@ -62,7 +69,10 @@ const routes: Routes = [
     AltaEjercicioComponent,
     AbmEjercicioComponent,
     DeleteDialogBoxComponent,
-    EditEjercicioComponent
+    EditEjercicioComponent,
+    AmbRutinaComponent,
+    AltaRutinaComponent,
+    EditRutinaComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +103,9 @@ const routes: Routes = [
   ],entryComponents: [
     AltaEjercicioComponent,
     DeleteDialogBoxComponent,
-    EditEjercicioComponent
+    EditEjercicioComponent,
+    AltaRutinaComponent,
+    EditRutinaComponent
   ],
   bootstrap: [AppComponent]
 })

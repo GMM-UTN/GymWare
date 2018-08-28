@@ -14,14 +14,19 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="EjercicioId">
+  <ng-container matColumnDef="RutinaId">
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.EjercicioId}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.Rutina.RutinaId}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="Descripcion">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
-    <td mat-cell *matCellDef="let element"> {{element.Descripcion}} </td>
+  <ng-container matColumnDef="Nombre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.Rutina.Nombre}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Tipo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Tipo </th>
+    <td mat-cell *matCellDef="let element"> {{element.Rutina.Tipo}} </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
@@ -34,15 +39,15 @@
         <i class="material-icons" (click)="openDialogModification(element,true)">edit</i>
       </button>
       <button mat-mini-fab color="warn">
-        <i class="material-icons" (click)="openDialogBaja(element.EjercicioId)">delete</i>
+        <i class="material-icons" (click)="openDialogBaja(element.Rutina.RutinaId)">delete</i>
       </button>
     </td>
   </ng-container>
- 
+
   <ng-container matColumnDef="add">
     <th mat-header-cell *matHeaderCellDef class="column-add">
-      <button mat-mini-fab color="primary">
-        <i class="material-icons" (click)="openDialogAlta()">add</i>
+      <button mat-mini-fab color="primary" (click)="openDialogAlta()">
+        <i class="material-icons">add</i>
       </button>
     </th>
     <td mat-cell *matCellDef="let element">
