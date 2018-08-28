@@ -42,10 +42,10 @@ export class RutinaService extends CRUDHttpService {
     throw new Error("Method not implemented.");
   }
 
-  getAll(): Observable<any[]> {
+  getAll(): Observable<RutinaEjerciciosDTO[]> {
     console.log(`${url}/GetAllRutinasConEjercicios`);
 
-    return this.http.get<any[]>(`${url}/GetAllRutinasConEjercicios`, httpOptions).pipe(
+    return this.http.get<RutinaEjerciciosDTO[]>(`${url}/GetAllRutinasConEjercicios`, httpOptions).pipe(
       catchError(this.handleError('getRutinas'))
     );
   }

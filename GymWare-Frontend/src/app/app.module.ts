@@ -35,6 +35,7 @@ import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 import { AltaRutinaComponent } from './alta-rutina/alta-rutina.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
+import { EditRutinaComponent } from './edit-rutina/edit-rutina.component';
 
 const routes: Routes = [
   {
@@ -70,7 +71,8 @@ const routes: Routes = [
     DeleteDialogBoxComponent,
     EditEjercicioComponent,
     AmbRutinaComponent,
-    AltaRutinaComponent
+    AltaRutinaComponent,
+    EditRutinaComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,8 @@ const routes: Routes = [
     AltaEjercicioComponent,
     DeleteDialogBoxComponent,
     EditEjercicioComponent,
-    AltaRutinaComponent
+    AltaRutinaComponent,
+    EditRutinaComponent
   ],
   bootstrap: [AppComponent]
 })

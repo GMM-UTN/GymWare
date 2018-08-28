@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Rutina } from '../classes/rutina';
 import { RutinaService } from '../services/rutina.service';
-import { MatDialogRef, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatDialogRef, MatTableDataSource, MatPaginator, MAT_DIALOG_DATA } from '@angular/material';
 import { EjercicioService } from 'src/app/services/ejercicio.service';
 import { Ejercicio } from 'src/app/classes/ejercicio';
 import { EjercicioHelper } from '../classes/ejercicioHelper';
@@ -10,11 +10,11 @@ import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { RutinaEjercicio } from '../classes/rutinaEjercicio';
 
 @Component({
-  selector: 'app-alta-rutina',
-  templateUrl: './alta-rutina.component.html',
-  styleUrls: ['./alta-rutina.component.css']
+  selector: 'app-edit-rutina',
+  templateUrl: './edit-rutina.component.html',
+  styleUrls: ['./edit-rutina.component.css']
 })
-export class AltaRutinaComponent implements OnInit {
+export class EditRutinaComponent implements OnInit {
 
   ejercicios: Ejercicio[];
   selectedEjercicios: EjercicioHelper[] = [];
@@ -22,24 +22,35 @@ export class AltaRutinaComponent implements OnInit {
   displayedColumns: string[] = ['EjercicioId', 'Descripcion', 'Series', 'Repeticiones', 'actions'];
   dataSource: MatTableDataSource<EjercicioHelper>;
 
+  @Input() enableEdit: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     rutinaservice: RutinaService,
     private ejercicioService: EjercicioService,
     private rutinaService: RutinaService,
-    public dialogRef: MatDialogRef<AltaRutinaComponent>) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<EditRutinaComponent>) {
+    this.enableEdit = data.edit;
     this.dataSource = new MatTableDataSource([]);
   }
 
   ngOnInit() {
-    this.getAllEjercicios();
+    if(this.enableEdit){
+      this.getAllEjercicios();
+    } else {
+      this.data.RutinaEjerciciosDTO.RutinaEjercicios.forEach(item => {
+        this.selectedEjercicios.push(item.ejercicio);
+      });
+      this.dataSource.data = this.selectedEjercicios;
+      this.dataSource.connect();
+    }
+    
     console.log(this.ejercicios);
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.getAllEjercicios();
   }
 
   onNoClick(): void {

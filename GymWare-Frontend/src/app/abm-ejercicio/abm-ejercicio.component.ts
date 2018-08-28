@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AltaEjercicioComponent } from '../alta-ejercicio/alta-ejercicio.component';
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.component';
+import { EditRutinaComponent } from '../edit-rutina/edit-rutina.component';
 
   const initialSelection = [];
   const allowMultiSelect = true;
@@ -79,7 +80,7 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   openDialogModification(editedObject: any, edit: Boolean) {
-    const dialogRef = this.dialog.open(EditEjercicioComponent, 
+    const dialogRef = this.dialog.open(EditRutinaComponent, 
       {data :
         { editedObject: editedObject, 
           edit: edit

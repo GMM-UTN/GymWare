@@ -68,5 +68,15 @@ namespace GymWare.DataAccess.DAL
         {
             return _db.Ejercicios.Count(e => e.EjercicioId == id) > 0;
         }
+
+        public List<Ejercicio> findByRutina(Rutina rutina)
+        {
+            var query = from rutinaEjercicio in _db.RutinaEjercicio
+                        join ejercicio in _db.Ejercicios
+                            on rutinaEjercicio.Ejercicio.EjercicioId equals ejercicio.EjercicioId
+                        where rutinaEjercicio.Rutina.RutinaId == rutina.RutinaId
+                        select ejercicio;
+            return query.ToList();
+        }
     }
 }

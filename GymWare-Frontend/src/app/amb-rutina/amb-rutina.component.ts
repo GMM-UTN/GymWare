@@ -4,6 +4,7 @@ import { MatTableDataSource, MatDialog, MatPaginator, MatSort } from '@angular/m
 import { RutinaService } from '../services/rutina.service';
 import { AltaRutinaComponent } from 'src/app/alta-rutina/alta-rutina.component';
 import { DeleteDialogBoxComponent } from 'src/app/delete-dialog-box/delete-dialog-box.component';
+import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 
 const initialSelection = [];
 const allowMultiSelect = true;
@@ -20,9 +21,7 @@ export class AmbRutinaComponent implements OnInit {
 
   selection = new SelectionModel<any>(allowMultiSelect, initialSelection);
   displayedColumns: string[] = ['select','RutinaId', 'Nombre', 'Tipo', 'actions', 'add'];
-  dataSource: MatTableDataSource<any>;
-  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
-  expandedElement: any;
+  dataSource: MatTableDataSource<RutinaEjerciciosDTO>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -35,9 +34,11 @@ export class AmbRutinaComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
+    console.log(this.dataSource.data);
   }
 
   ngAfterViewInit() {
+    this.getAll();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -91,8 +92,8 @@ export class AmbRutinaComponent implements OnInit {
 
   getAll():void {
     this.rutinaService.getAll().subscribe(data => {
-      console.log(data);
-      this.dataSource = new MatTableDataSource(data.RutinaEjercicios);
+      this.dataSource = new MatTableDataSource(data);
+      console.log(data + ' get all');
     });
   }
 
