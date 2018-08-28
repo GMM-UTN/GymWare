@@ -17,7 +17,7 @@ namespace GymWare.API.Controllers
 
         // GET: api/Rutinas
         [HttpGet]
-        public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
+        public List<RutinaEjerciciosDTO> GetAllRutinasConEjercicios()
         {
             return _re.GetAllRutinasConEjercicios();
         }
