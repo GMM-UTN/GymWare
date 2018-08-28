@@ -13,12 +13,24 @@ namespace GymWare.Logic
     {
         private RutinaEjercicioRepository _re = new RutinaEjercicioRepository();
         private RutinaRepository _ru = new RutinaRepository();
-        public RutinaEjerciciosDTO GetAllRutinasConEjercicios()
+        public List<RutinaEjerciciosDTO> GetAllRutinasConEjercicios()
         {
-            RutinaEjerciciosDTO reDTO = new RutinaEjerciciosDTO();
-            reDTO.RutinaEjercicios = _re.GetAll();
-            reDTO.Rutina = reDTO.RutinaEjercicios.Count > 0 ? reDTO.RutinaEjercicios[0].Rutina : null;
-            return reDTO;
+            var grouped = _re.GetAll().GroupBy(x => x.Rutina).Select(g => new {
+                RutinaEjercicios = g.ToList(),
+                Rutina = g.Select(site => new {
+                    site.Rutina,
+                }).FirstOrDefault()
+            }).ToList();
+
+            List<RutinaEjerciciosDTO> r = new List<RutinaEjerciciosDTO>();
+            foreach (var g in grouped)
+            {
+                RutinaEjerciciosDTO rutinaEjercicioDTO = new RutinaEjerciciosDTO();
+                rutinaEjercicioDTO.Rutina = g.Rutina.Rutina;
+                rutinaEjercicioDTO.RutinaEjercicios = g.RutinaEjercicios;
+                r.Add(rutinaEjercicioDTO);
+            }
+            return r;
         }
 
         public RutinaEjercicio GetRutinaConEjercicios(int id)
