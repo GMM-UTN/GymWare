@@ -16,7 +16,7 @@ namespace GymWare.API.Controllers
         private DietaComidaLogic _dc = new DietaComidaLogic();
 
         // GET: api/Dietas
-        public DietaComidaDTO GetAllDietasConComidas()
+        public List<DietaComidaDTO> GetAllDietasConComidas()
         {
             return _dc.GetAllDietasConComidas();
         }
