@@ -44,9 +44,16 @@ namespace GymWare.DataAccess.DAL
             _db.SaveChanges();
             foreach (var e in dieta.Empleados)
             {
-                Empleado empleado = _db.Empleados.Find(e.EmpleadoId);
-                empleado.Dietas.Add(dieta);
-                _db.SaveChanges();
+                if(e != null)
+                {
+                    Empleado em = _db.Empleados.Find(e.EmpleadoId);
+                    if (em != null)
+                    {
+                        Empleado empleado = em;
+                        empleado.Dietas.Add(dieta);
+                        _db.SaveChanges();
+                    }
+                }
             }
             return dieta;
         }

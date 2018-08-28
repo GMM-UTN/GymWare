@@ -13,12 +13,24 @@ namespace GymWare.Logic
     {
         private DietaComidaRepository _dc = new DietaComidaRepository();
         private DietaRepository _di = new DietaRepository();
-        public DietaComidaDTO GetAllDietasConComidas()
+        public List<DietaComidaDTO> GetAllDietasConComidas()
         {
-            DietaComidaDTO dcDTO = new DietaComidaDTO();
-            dcDTO.DietaComidas = _dc.GetAll();
-            dcDTO.Dieta = dcDTO.DietaComidas.Count > 0 ? dcDTO.DietaComidas[0].Dieta : null;
-            return dcDTO;
+            var grouped = _dc.GetAll().GroupBy(x => x.Dieta).Select(g => new {
+                DietaComida = g.ToList(),
+                Dieta = g.Select(site => new {
+                    site.Dieta,
+                }).FirstOrDefault()
+            }).ToList();
+
+            List<DietaComidaDTO> r = new List<DietaComidaDTO>();
+            foreach (var g in grouped)
+            {
+                DietaComidaDTO dietaComidaDTO = new DietaComidaDTO();
+                dietaComidaDTO.Dieta = g.Dieta.Dieta;
+                dietaComidaDTO.DietaComidas = g.DietaComida;
+                r.Add(dietaComidaDTO);
+            }
+            return r;
         }
 
         public DietaComida GetDietaConComidas(int id)
