@@ -8,19 +8,19 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
   <div class="form-container">
     <mat-form-field>
-      <input matInput placeholder="Nombre" [disabled]="!enableEdit" ngModel name="Nombre" [(ngModel)]="data.editedObject.Rutina.Nombre"/>
+      <input matInput placeholder="Nombre" [disabled]="!enableEdit" ngModel name="Nombre" [(ngModel)]="editedObject.Rutina.Nombre"/>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Tipo" [disabled]="!enableEdit" ngModel name="Tipo" [(ngModel)]="data.editedObject.Rutina.Tipo"/>
+      <input matInput placeholder="Tipo" [disabled]="!enableEdit" ngModel name="Tipo" [(ngModel)]="editedObject.Rutina.Tipo"/>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Sexo" [disabled]="!enableEdit" ngModel name="Sexo" [(ngModel)]="data.editedObject.Rutina.Sexo"/>
+      <input matInput placeholder="Sexo" [disabled]="!enableEdit" ngModel name="Sexo" [(ngModel)]="editedObject.Rutina.Sexo"/>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="EdadMin" [disabled]="!enableEdit" type=number min="1" ngModel name="EdadMinima" [(ngModel)]="data.editedObject.Rutina.EdadMinima"/>
+      <input matInput placeholder="EdadMin" [disabled]="!enableEdit" type=number min="1" ngModel name="EdadMinima" [(ngModel)]="editedObject.Rutina.EdadMinima"/>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="EdadMax" [disabled]="!enableEdit" type=number min="1" max="1" ngModel name="EdadMaxima" [(ngModel)]="data.editedObject.Rutina.EdadMaxima"/>
+      <input matInput placeholder="EdadMax" [disabled]="!enableEdit" type=number min="1" max="1" ngModel name="EdadMaxima" [(ngModel)]="editedObject.Rutina.EdadMaxima"/>
     </mat-form-field>
     <!-- <mat-form-control>
       <mat-radio-group ngModel name="Sexo">
@@ -37,8 +37,8 @@
 
 <form #formEjercicio="ngForm" (ngSubmit)="onSubmitEjercicio(formEjercicio)" [hidden]="!enableEdit" novalidate>
   <div class="form-container">
-    <mat-select placeholder="Ejercicios" ngModel name="ejercicioSelect">
-      <mat-option *ngFor="let ejercicio of ejercicios" [value]="ejercicio">
+    <mat-select placeholder="Ejercicios" ngModel name="cboxEjercicios">
+      <mat-option *ngFor="let ejercicio of cboxEjercicios" [value]="ejercicio">
         {{ejercicio.Descripcion}}
       </mat-option>
     </mat-select>
@@ -55,11 +55,6 @@
 </form>
 
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
-
-  <ng-container matColumnDef="EjercicioId">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> ID </th>
-    <td mat-cell *matCellDef="let element"> {{element.ejercicio.EjercicioId}} </td>
-  </ng-container>
 
   <ng-container matColumnDef="Descripcion">
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>

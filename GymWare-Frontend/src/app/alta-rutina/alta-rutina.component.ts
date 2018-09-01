@@ -96,7 +96,6 @@ export class AltaRutinaComponent implements OnInit {
 
     var rutinaEjercicioList: RutinaEjercicio[] = [];
     this.selectedEjercicios.forEach(item => {
-      debugger;
       var rutinaEjercicio = new RutinaEjercicio();
       rutinaEjercicio.Ejercicio = item.ejercicio;
       rutinaEjercicio.Series = item.series;
@@ -105,7 +104,7 @@ export class AltaRutinaComponent implements OnInit {
       console.log(rutinaEjercicio);
     });
 
-    console.log(rutinaEjercicioList + 'rutinaEjercicioList');
+    console.log(rutinaEjercicioList);
 
     var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
     rutinaEjerciciosDTO.Rutina = rutina;

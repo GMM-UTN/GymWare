@@ -7,8 +7,6 @@ import { DeleteDialogBoxComponent } from 'src/app/delete-dialog-box/delete-dialo
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { EditRutinaComponent } from 'src/app/edit-rutina/edit-rutina.component';
 
-const initialSelection = [];
-const allowMultiSelect = true;
 
 @Component({
   selector: 'app-amb-rutina',
@@ -20,8 +18,7 @@ const allowMultiSelect = true;
 })
 export class AmbRutinaComponent implements OnInit {
 
-  selection = new SelectionModel<any>(allowMultiSelect, initialSelection);
-  displayedColumns: string[] = ['select','RutinaId', 'Nombre', 'Tipo', 'actions', 'add'];
+  displayedColumns: string[] = ['Nombre', 'Tipo', 'actions', 'add'];
   dataSource: MatTableDataSource<RutinaEjerciciosDTO>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,23 +38,10 @@ export class AmbRutinaComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    //this.getAll();
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
-  }
-  
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   openDialogAlta() {
