@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Rutina } from '../classes/rutina';
 import { RutinaService } from '../services/rutina.service';
@@ -16,16 +16,15 @@ import { RutinaEjercicio } from '../classes/rutinaEjercicio';
 })
 export class AltaRutinaComponent implements OnInit {
 
-  ejercicios: Ejercicio[];
-  selectedEjercicios: EjercicioHelper[] = [];
-  rutina: any;
+  cboxEjercicios: Ejercicio[];
+  private selectedEjercicios: EjercicioHelper[] = [];
+  
   displayedColumns: string[] = ['EjercicioId', 'Descripcion', 'Series', 'Repeticiones', 'actions'];
   dataSource: MatTableDataSource<EjercicioHelper>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    rutinaservice: RutinaService,
     private ejercicioService: EjercicioService,
     private rutinaService: RutinaService,
     public dialogRef: MatDialogRef<AltaRutinaComponent>) {
@@ -34,7 +33,6 @@ export class AltaRutinaComponent implements OnInit {
 
   ngOnInit() {
     this.getAllEjercicios();
-    console.log(this.ejercicios);
   }
 
   ngAfterViewInit() {
@@ -52,40 +50,55 @@ export class AltaRutinaComponent implements OnInit {
 
   getAllEjercicios() {
     this.ejercicioService.getAll().subscribe(data => {
-      this.ejercicios = data;
+      this.cboxEjercicios = data;
     });
   }
 
   addEjercicio(ejercicioHelper: EjercicioHelper) {
-    if (this.contains(ejercicioHelper.ejercicio.EjercicioId) == null) {
+    if (this.contains(ejercicioHelper.ejercicio.EjercicioId) == -1) {
       this.selectedEjercicios.push(ejercicioHelper);
-      this.dataSource.data = this.selectedEjercicios;
-      this.dataSource.connect();
+      this.reloadTable();
     }
   }
 
-  removeEjercicio(EjercicioId: number) {
-    var index = this.contains(EjercicioId);
-    console.log(index);
-    if (index != null) {
+  removeEjercicio(ejercicioId: number) {
+    var index = this.contains(ejercicioId);
+    if (index != -1) {
       this.selectedEjercicios.splice(index, 1);
-      this.dataSource.data = this.selectedEjercicios;
-      this.dataSource.connect();
+      this.reloadTable();
     }
   }
 
-  contains(EjercicioId: number): number {
-    var index = null;
-    for (let item of this.selectedEjercicios) {
-      if (item.ejercicio.EjercicioId == EjercicioId) {
-        index = this.selectedEjercicios.indexOf(item);
-        break;
-      }
-    }
-    return index;
+  /**
+   * Recibe un ID de ejercicio, recorre el array de los ejercicios que 
+   * posee la rutina y retorna el indice de la primer ocurrencia del 
+   * mismo o -1 si el ID no esta en la lista.
+   * @param ejercicioId 
+   */
+  contains(ejercicioId: number): number {
+    var ejercicioHelperList = [];
+    ejercicioHelperList = this.selectedEjercicios.filter(item => item.ejercicio.EjercicioId == ejercicioId);
+    return this.selectedEjercicios.indexOf(ejercicioHelperList[0]);
+  }
+
+  reloadTable(): void {
+    this.dataSource.data = this.selectedEjercicios;
+    this.dataSource.connect();
   }
 
   onSubmit(f: NgForm) {
+    var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
+    rutinaEjerciciosDTO.Rutina = this.setRutinaAtributes(f);
+    rutinaEjerciciosDTO.RutinaEjercicios = this.setRutinaEjerciciosList(f);
+    
+    this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
+      this.dialogRef.close(data);
+    },
+    error => alert(error)
+    );
+  }
+
+  setRutinaAtributes(f: NgForm): Rutina {
     var rutina = new Rutina();
     rutina.Nombre = f.value.Nombre;
     rutina.Tipo = f.value.Tipo;
@@ -93,7 +106,10 @@ export class AltaRutinaComponent implements OnInit {
     rutina.Sexo = f.value.Sexo;
     rutina.EdadMinima = f.value.EdadMinima;
     rutina.EdadMaxima = f.value.EdadMaxima;
+    return rutina;
+  }
 
+  setRutinaEjerciciosList(f: NgForm): RutinaEjercicio[] {
     var rutinaEjercicioList: RutinaEjercicio[] = [];
     this.selectedEjercicios.forEach(item => {
       var rutinaEjercicio = new RutinaEjercicio();
@@ -101,33 +117,18 @@ export class AltaRutinaComponent implements OnInit {
       rutinaEjercicio.Series = item.series;
       rutinaEjercicio.Repeticiones = item.repeticiones;
       rutinaEjercicioList.push(rutinaEjercicio);
-      console.log(rutinaEjercicio);
     });
-
-    console.log(rutinaEjercicioList);
-
-    var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
-    rutinaEjerciciosDTO.Rutina = rutina;
-    rutinaEjercicioList.forEach(e => {
-      rutinaEjerciciosDTO.RutinaEjercicios.push(e);
-    })
-    
-    this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
-      console.log(data);
-    },
-    error => alert(error)
-    );
+    return rutinaEjercicioList;
   }
 
   onSubmitEjercicio(f: NgForm) {
     var ejercicio = new Ejercicio();
-    ejercicio.EjercicioId = f.value.ejercicioSelect.EjercicioId;
-    ejercicio.Descripcion = f.value.ejercicioSelect.Descripcion;
+    ejercicio.EjercicioId = f.value.cboxEjercicios.EjercicioId;
+    ejercicio.Descripcion = f.value.cboxEjercicios.Descripcion;
     var ejercicioHelper = new EjercicioHelper();
     ejercicioHelper.ejercicio = ejercicio;
     ejercicioHelper.series = f.value.Series;
     ejercicioHelper.repeticiones = f.value.Repeticiones;
-    console.log(ejercicioHelper);
     this.addEjercicio(ejercicioHelper);
   }
 

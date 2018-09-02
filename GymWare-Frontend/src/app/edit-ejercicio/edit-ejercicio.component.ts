@@ -36,9 +36,6 @@ export class EditEjercicioComponent implements OnInit {
     var ejercicio = new Ejercicio();
     ejercicio.EjercicioId = this.data.editedObject.EjercicioId;
     ejercicio.Descripcion = f.value.Descripcion;
-    console.log(ejercicio.Descripcion);
-    console.log(ejercicio.EjercicioId);
-    console.log(JSON.stringify(ejercicio));
     this.ejercicioService.update(ejercicio as Ejercicio).subscribe( 
       data => { 
         this.dialogRef.close(data);

@@ -14,23 +14,18 @@
       <input matInput placeholder="Tipo" [disabled]="!enableEdit" ngModel name="Tipo" [(ngModel)]="editedObject.Rutina.Tipo"/>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Sexo" [disabled]="!enableEdit" ngModel name="Sexo" [(ngModel)]="editedObject.Rutina.Sexo"/>
-    </mat-form-field>
-    <mat-form-field>
       <input matInput placeholder="EdadMin" [disabled]="!enableEdit" type=number min="1" ngModel name="EdadMinima" [(ngModel)]="editedObject.Rutina.EdadMinima"/>
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="EdadMax" [disabled]="!enableEdit" type=number min="1" max="1" ngModel name="EdadMaxima" [(ngModel)]="editedObject.Rutina.EdadMaxima"/>
     </mat-form-field>
-    <!-- <mat-form-control>
-      <mat-radio-group ngModel name="Sexo">
-        <mat-radio-button value="Hombre">Hombre</mat-radio-button>
-        <mat-radio-button value="Mujer">Mujer</mat-radio-button>
-      </mat-radio-control>
-    </mat-form-field>
+    <mat-radio-group ngModel name="Sexo" [disabled]="!enableEdit" [(ngModel)]="editedObject.Rutina.Sexo">
+      <mat-radio-button value="Hombre">Hombre</mat-radio-button>
+      <mat-radio-button value="Mujer">Mujer</mat-radio-button>
+    </mat-radio-group>
     <mat-form-field>
-      <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea>
-    </mat-form-field> -->
+      <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" ngModel name="Descripcion" [(ngModel)]="editedObject.Rutina.Descripcion"></textarea>
+    </mat-form-field>
     <button mat-raised-button color="primary" [hidden]="!enableEdit" type="submit">Guardar</button>
   </div>
 </form>

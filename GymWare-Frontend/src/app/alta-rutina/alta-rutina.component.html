@@ -32,9 +32,6 @@
         <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea>
       </mat-form-field>
     </div>
-    <!-- <mat-group-control> -->
-
-    <!-- </mat-group-control> -->
 
     <div class="col-lg-24 boton-form">
       <button mat-raised-button color="primary" type="submit">Guardar</button>
@@ -48,8 +45,8 @@
     <div class="col-lg-12">
       <h3>Agregar ejercicios</h3>
     </div>
-    <mat-select placeholder="Ejercicios" ngModel name="ejercicioSelect" class="col-lg-12 div-form-derecha">
-      <mat-option *ngFor="let ejercicio of ejercicios" [value]="ejercicio">
+    <mat-select placeholder="Ejercicios" ngModel name="cboxEjercicios" class="col-lg-12 div-form-derecha">
+      <mat-option *ngFor="let ejercicio of cboxEjercicios" [value]="ejercicio">
         {{ejercicio.Descripcion}}
       </mat-option>
     </mat-select>
