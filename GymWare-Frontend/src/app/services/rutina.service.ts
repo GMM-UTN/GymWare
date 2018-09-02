@@ -34,8 +34,6 @@ export class RutinaService extends CRUDHttpService {
   public delete(idRutina: number): Observable<any> {
     var id = idRutina;
     const path = `${url}/DeleteRutinaConEjercicios/${id}`;
-    console.log(id);
-    console.log(path);
 
     return this.http.delete<any>(path, httpOptions).pipe(
       catchError(this.handleError('deleteRutina'))
@@ -47,8 +45,6 @@ export class RutinaService extends CRUDHttpService {
   }
 
   getAll(): Observable<RutinaEjerciciosDTO[]> {
-    console.log(`${url}/GetAllRutinasConEjercicios`);
-
     return this.http.get<RutinaEjerciciosDTO[]>(`${url}/GetAllRutinasConEjercicios`, httpOptions).pipe(
       catchError(this.handleError('getRutinas'))
     );

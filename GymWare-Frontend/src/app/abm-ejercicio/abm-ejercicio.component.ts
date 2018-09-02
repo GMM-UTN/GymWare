@@ -6,10 +6,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { AltaEjercicioComponent } from '../alta-ejercicio/alta-ejercicio.component';
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.component';
-import { EditRutinaComponent } from '../edit-rutina/edit-rutina.component';
-
-  const initialSelection = [];
-  const allowMultiSelect = true;
 
 @Component({
   selector: 'app-abm-ejercicio',
@@ -21,8 +17,7 @@ import { EditRutinaComponent } from '../edit-rutina/edit-rutina.component';
 })
 export class AbmEjercicioComponent implements OnInit {
 
-  selection = new SelectionModel<Ejercicio>(allowMultiSelect, initialSelection);
-  displayedColumns: string[] = ['select','EjercicioId','Descripcion', 'actions', 'add'];
+  displayedColumns: string[] = ['Descripcion', 'actions', 'add'];
   dataSource: MatTableDataSource<Ejercicio>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,18 +38,6 @@ export class AbmEjercicioComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
-  }
-  
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   openDialogAlta() {

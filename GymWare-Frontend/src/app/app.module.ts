@@ -12,7 +12,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FormularioAltaRutinaComponent } from './formulario-alta-rutina/formulario-alta-rutina.component';
-import { DatatableEjerciciosComponent } from './datatable-ejercicios/datatable-ejercicios.component';
 import { MatTableModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
@@ -83,7 +82,6 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     FormularioAltaRutinaComponent,
-    DatatableEjerciciosComponent,
     HeaderComponent,
     FooterComponent,
     CenterComponent,
@@ -118,7 +116,7 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     EjercicioService,

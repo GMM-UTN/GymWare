@@ -1,5 +1,4 @@
 import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { RutinaService } from '../services/rutina.service';
 import { AltaRutinaComponent } from 'src/app/alta-rutina/alta-rutina.component';
@@ -32,7 +31,9 @@ export class AmbRutinaComponent implements OnInit {
 
   ngOnInit() {
     this.getAll();
-    console.log(this.dataSource.data);
+    this.dataSource.filterPredicate = function(data, filter): boolean {
+      return data.Rutina.Nombre.toLowerCase().includes(filter);
+    };
   }
 
   ngAfterViewInit() {
@@ -54,7 +55,6 @@ export class AmbRutinaComponent implements OnInit {
   }
 
   openDialogBaja(id: number) {
-    console.log(id);
     const dialogRef = this.dialog.open(DeleteDialogBoxComponent
     );
 
@@ -93,14 +93,13 @@ export class AmbRutinaComponent implements OnInit {
 
   getAll():void {
     this.rutinaService.getAll().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      console.log(data + ' get all');
+      this.dataSource.data = data;
     });
   }
 
   private refresh(): void {
     this.getAll();
     this.dataSource.connect();
-}
+  }
 
 }

@@ -74,8 +74,6 @@ export class EditRutinaComponent implements OnInit {
   }
 
   removeEjercicio(ejercicioId: number) {
-    debugger;
-    console.log(this.selectedEjercicios);
     var index = this.contains(ejercicioId);
     if (index != -1) {
       this.selectedEjercicios.splice(index, 1);
@@ -150,7 +148,6 @@ export class EditRutinaComponent implements OnInit {
   }
 
   onSubmitEjercicio(f: NgForm) {
-    debugger;
     var ejercicio = new Ejercicio();
     ejercicio.EjercicioId = f.value.cboxEjercicios.EjercicioId;
     ejercicio.Descripcion = f.value.cboxEjercicios.Descripcion;

@@ -18,9 +18,6 @@ export class EjercicioService extends CRUDHttpService {
   }
 
   public save(ejercicio: Ejercicio): Observable<Ejercicio> {
-    console.log(ejercicio);
-    console.log("entra");
-    console.log(url);
     return this.http.post<Ejercicio>(`${url}/PostEjercicio`, ejercicio, httpOptions).pipe(
       catchError(this.handleError('addProvider'))
     );
@@ -40,8 +37,6 @@ export class EjercicioService extends CRUDHttpService {
   public delete(ejercicio: Ejercicio | number): Observable<any> {
     const id = typeof ejercicio === 'number' ? ejercicio : ejercicio.EjercicioId;
     const path = `${url}/DeleteEjercicio/${id}`;
-    console.log(id);
-    console.log(path);
 
     return this.http.delete<any>(path, httpOptions).pipe(
       catchError(this.handleError('deleteCustomer'))
