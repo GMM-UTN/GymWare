@@ -21,15 +21,22 @@ namespace GymWare.DataAccess.DAL
             return _db.DietaComida.Find(id);
         }
 
-        public bool Update(Dieta dieta, List<DietaComida> dietaComida)
+        public string Update(int idDieta, List<DietaComida> dietaComida)
         {
-            _db.DietaComida.RemoveRange(_db.DietaComida.Where(x => x.Dieta.DietaId == dieta.DietaId));
-            _db.SaveChanges();
+            try
+            {
+                _db.DietaComida.RemoveRange(_db.DietaComida.Where(x => x.Dieta.DietaId == idDieta));
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }            
             foreach (var item in dietaComida)
             {
                 DietaComida dc = new DietaComida();
                 Comida co = _db.Comidas.Find(item.Comida.ComidaId);
-                Dieta di = _db.Dietas.Find(dieta.DietaId);
+                Dieta di = _db.Dietas.Find(idDieta);
                 dc.Comida = co;
                 dc.Dieta = di;
                 dc.DiasSemana = item.DiasSemana;
@@ -38,11 +45,11 @@ namespace GymWare.DataAccess.DAL
             try
             {
                 _db.SaveChanges();
-                return true;
+                return "Dieta modificada correctamente";
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
         }
 
@@ -60,11 +67,18 @@ namespace GymWare.DataAccess.DAL
             return true;
         }
 
-        public bool Delete(int id)
-        {
-            _db.DietaComida.RemoveRange(_db.DietaComida.Where(x => x.Dieta.DietaId == id));
-            _db.SaveChanges();
-            return true;
-        }
+        //public string Delete(int id)
+        //{
+        //    try
+        //    {
+        //        _db.DietaComida.RemoveRange(_db.DietaComida.Where(x => x.Dieta.DietaId == id));
+        //        _db.SaveChanges();
+        //        return "Dieta eliminada correctamente";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.Message;
+        //    }            
+        //}
     }
 }

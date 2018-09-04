@@ -43,24 +43,54 @@ namespace GymWare.DataAccess.DAL
             }
         }
 
-        public bool Insert(Ejercicio ejercicio)
+        public string Insert(Ejercicio ejercicio)
         {
-            _db.Ejercicios.Add(ejercicio);
-            _db.SaveChanges();
-            return true;
-        }
-
-        public bool Delete(int id)
-        {
-            if(_db.Ejercicios.Find(id) == null)
+            Ejercicio ej = _db.Ejercicios.Where(x => x.Descripcion.ToLower() == ejercicio.Descripcion.ToLower()).FirstOrDefault();
+            if (ej == null)
             {
-                return false;
+                try
+                {
+                    _db.Ejercicios.Add(ejercicio);
+                    _db.SaveChanges();
+                    return "Ejercicio agregado correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
             else
             {
-                _db.Ejercicios.Remove(_db.Ejercicios.Find(id));
-                _db.SaveChanges();
-                return true;
+                return "Un ejercicio con esa misma Descripción ya existe!";
+            }
+        }
+
+        public string Delete(int id)
+        {
+            if(_db.Ejercicios.Find(id) == null)
+            {
+                return "Error al buscar el ejercicio. Asegúrese de enviar un ID existente";
+            }
+            else
+            {
+                List<RutinaEjercicio> ruejs = _db.RutinaEjercicio.ToList();
+                foreach (var re in ruejs)
+                {
+                    if(re.Ejercicio.EjercicioId == id)
+                    {
+                        return "No se puede eliminar el ejercicio porque pertenece a una Rutina";
+                    }
+                }
+                try
+                {
+                    _db.Ejercicios.Remove(_db.Ejercicios.Find(id));
+                    _db.SaveChanges();
+                    return "Ejercicio eliminado correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }                
             }       
         }
 
