@@ -60,29 +60,14 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (_co.Insert(comida))
-            {
-                return CreatedAtRoute("DefaultApi", new { id = comida.ComidaId }, comida);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_co.Insert(comida));
         }
 
         // DELETE: api/Comidas/5
         [ResponseType(typeof(Comida))]
         public IHttpActionResult DeleteComida(int id)
         {
-            if (_co.Delete(id))
-            {
-                return Ok("Eliminado correctamente");
-            }
-            else
-            {
-                return Ok("Error al eliminar");
-            }
-
+            return Ok(_co.Delete(id));
         }
     }
 }

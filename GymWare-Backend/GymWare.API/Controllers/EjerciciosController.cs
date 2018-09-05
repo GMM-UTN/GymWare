@@ -64,15 +64,8 @@ namespace GymWare.API.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }            
-            if(_ej.Insert(ejercicio))
-            {
-                return CreatedAtRoute("DefaultApi", new { id = ejercicio.EjercicioId }, ejercicio);
             }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_ej.Insert(ejercicio));
         }
 
         // DELETE: api/Ejercicios/5
@@ -80,15 +73,7 @@ namespace GymWare.API.Controllers
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "DELETE")]
         public IHttpActionResult DeleteEjercicio(int id)
         {
-            if(_ej.Delete(id))
-            {
-                return Ok("Eliminado correctamente");
-            }
-            else
-            {
-                return Ok("Error al eliminar");
-            }
-            
+            return Ok(_ej.Delete(id));            
         }
     }
 }

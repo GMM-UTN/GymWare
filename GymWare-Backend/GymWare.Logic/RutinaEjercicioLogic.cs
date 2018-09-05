@@ -38,33 +38,40 @@ namespace GymWare.Logic
             return _re.GetOne(id);
         }
 
-        public bool Update(int idRutina, RutinaEjerciciosDTO rutinaEjercicio)
+        public string Update(int idRutina, RutinaEjerciciosDTO rutinaEjercicio)
         {
-            Rutina rutina = _ru.Update(idRutina, rutinaEjercicio.Rutina);
-            return _re.Update(rutina, rutinaEjercicio.RutinaEjercicios);
-        }
-
-        public bool Insert(RutinaEjerciciosDTO rutinaEjercicio)
-        {
-            Rutina rutina = _ru.Insert(rutinaEjercicio.Rutina);
-            return _re.Insert(rutina, rutinaEjercicio.RutinaEjercicios);
-        }
-
-        public bool InsertEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
-        {
-            if (_ru.InsertEmpleadoClienteRutina(empleadoClienteRutina) != null)
+            string resultado = _ru.Update(idRutina, rutinaEjercicio.Rutina);
+            if (resultado == "Rutina modificada correctamente")
             {
-                return true;
+                return _re.Update(idRutina, rutinaEjercicio.RutinaEjercicios);
             }
             else
             {
-                return false;
+                return resultado;
             }
         }
 
-        public bool Delete(int idRutina)
+        public string Insert(RutinaEjerciciosDTO rutinaEjercicio)
         {
-            return _re.Delete(idRutina) == _ru.Delete(idRutina);
+            Rutina rutina = _ru.Insert(rutinaEjercicio.Rutina);
+            if (rutina != null)
+            {
+                return _re.Insert(rutina, rutinaEjercicio.RutinaEjercicios);
+            }
+            else
+            {
+                return "Error al intentar crear la Rutina";
+            }
+        }
+
+        public string InsertEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
+        {
+            return _ru.InsertEmpleadoClienteRutina(empleadoClienteRutina);
+        }
+
+        public string Delete(int idRutina)
+        {
+            return _ru.Delete(idRutina);
         }
     }
 }

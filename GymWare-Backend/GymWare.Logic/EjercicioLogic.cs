@@ -26,12 +26,12 @@ namespace GymWare.Logic
             return _ej.Update(id, ejercicio);
         }
 
-        public bool Insert(Ejercicio ejercicio)
+        public string Insert(Ejercicio ejercicio)
         {
             return _ej.Insert(ejercicio);
         }
 
-        public bool Delete(int id)
+        public string Delete(int id)
         {
             return _ej.Delete(id);
         }

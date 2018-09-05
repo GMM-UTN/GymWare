@@ -46,16 +46,7 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-
-            if (_re.Update(id, rutinaEjerciciosDTO))
-            {
-                return Ok("Modificado correctamente");
-            }
-            else
-            {
-                return Ok("Error al modificar");
-            }
+            return Ok(_re.Update(id, rutinaEjerciciosDTO));
         }
 
         //POST: api/Rutinas
@@ -67,14 +58,7 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (_re.Insert(rutinaEjerciciosDTO))
-            {
-                return CreatedAtRoute("DefaultApi", new { }, rutinaEjerciciosDTO);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_re.Insert(rutinaEjerciciosDTO));
         }
 
         [ResponseType(typeof(EmpleadoClienteRutina))]
@@ -84,14 +68,7 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (_re.InsertEmpleadoClienteRutina(empleadoClienteRutina))
-            {
-                return CreatedAtRoute("DefaultApi", new { }, empleadoClienteRutina);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_re.InsertEmpleadoClienteRutina(empleadoClienteRutina));
         }
 
         // DELETE: api/Rutinas/5
@@ -99,15 +76,7 @@ namespace GymWare.API.Controllers
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "DELETE")]
         public IHttpActionResult DeleteRutinaConEjercicios(int id)
         {
-            if (_re.Delete(id))
-            {
-                return Ok("Eliminado correctamente");
-            }
-            else
-            {
-                return Ok("Error al eliminar");
-            }
-
+            return Ok(_re.Delete(id));
         }
     }
 }

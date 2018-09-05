@@ -26,12 +26,12 @@ namespace GymWare.Logic
             return _co.Update(id, comida);
         }
 
-        public bool Insert(Comida comida)
+        public string Insert(Comida comida)
         {
             return _co.Insert(comida);
         }
 
-        public bool Delete(int id)
+        public string Delete(int id)
         {
             return _co.Delete(id);
         }
