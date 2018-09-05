@@ -53,18 +53,25 @@ namespace GymWare.DataAccess.DAL
             }
         }
 
-        public bool Insert(Dieta dieta, List<DietaComida> dietaComida)
+        public string Insert(Dieta dieta, List<DietaComida> dietaComida)
         {
             foreach (var item in dietaComida)
             {
-                Comida co = _db.Comidas.Find(item.Comida.ComidaId);
-                Dieta di = _db.Dietas.Find(dieta.DietaId);
-                item.Comida = co;
-                item.Dieta = di;
-                _db.DietaComida.Add(item);
-                _db.SaveChanges();
+                try
+                {
+                    Comida co = _db.Comidas.Find(item.Comida.ComidaId);
+                    Dieta di = _db.Dietas.Find(dieta.DietaId);
+                    item.Comida = co;
+                    item.Dieta = di;
+                    _db.DietaComida.Add(item);
+                    _db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
-            return true;
+            return "Dieta creada correctamente";
         }
 
         //public string Delete(int id)

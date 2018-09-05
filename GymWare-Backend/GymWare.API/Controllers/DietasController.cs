@@ -54,14 +54,7 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (_dc.Insert(dietaComidasDTO))
-            {
-                return CreatedAtRoute("DefaultApi", new { }, dietaComidasDTO);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_dc.Insert(dietaComidasDTO));
         }
 
         [ResponseType(typeof(DietaCliente))]

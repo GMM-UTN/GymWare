@@ -11,7 +11,7 @@ namespace GymWare.DataAccess.DAL
 {
     public class RutinaRepository : BaseRepository
     {
-        public Rutina Update(int id, Rutina rutina)
+        public string Update(int id, Rutina rutina)
         {
             Rutina ru = _db.Rutinas.Find(id);
             ru.Nombre = rutina.Nombre == null ? ru.Nombre : rutina.Nombre;
@@ -23,11 +23,11 @@ namespace GymWare.DataAccess.DAL
             try
             {
                 _db.SaveChanges();
-                return ru;
+                return "Rutina modificada correctamente";
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                throw;
+                return ex.Message;
             }
         }
 
@@ -38,37 +38,69 @@ namespace GymWare.DataAccess.DAL
             return rutina;
         }
 
-        public EmpleadoClienteRutina InsertEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
+        public string InsertEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
         {
             Empleado empleado = _db.Empleados.Find(empleadoClienteRutina.Empleado.EmpleadoId);
             Cliente cliente = _db.Clientes.Find(empleadoClienteRutina.Cliente.ClienteId);
             Rutina rutina = _db.Rutinas.Find(empleadoClienteRutina.Rutina.RutinaId);
-            empleadoClienteRutina.Empleado = empleado;
-            empleadoClienteRutina.Cliente = cliente;
-            empleadoClienteRutina.Rutina = rutina;
-            _db.EmpleadoClienteRutina.Add(empleadoClienteRutina);
-            try
+            EmpleadoClienteRutina ecr = _db.EmpleadoClienteRutina.Where(x => x.Empleado.EmpleadoId == empleado.EmpleadoId && x.Cliente.ClienteId == cliente.ClienteId && x.Rutina.RutinaId == rutina.RutinaId).FirstOrDefault();
+            if (ecr == null)
             {
-                _db.SaveChanges();
-                return empleadoClienteRutina;
-            }
-            catch (Exception)
-            {
-                throw;
-            }            
-        }
-
-        public bool Delete(int id)
-        {
-            if (_db.Rutinas.Find(id) == null)
-            {
-                return false;
+                empleadoClienteRutina.Empleado = empleado;
+                empleadoClienteRutina.Cliente = cliente;
+                empleadoClienteRutina.Rutina = rutina;                
+                try
+                {
+                    _db.EmpleadoClienteRutina.Add(empleadoClienteRutina);
+                    _db.SaveChanges();
+                    return "Rutina asignada correctamente al cliente y empleado";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                } 
             }
             else
             {
+                return "El cliente y el empleado ya tienen asignada esta Rutina";
+            }
+        }
+
+        public string Delete(int id)
+        {
+            Rutina rutina = _db.Rutinas.Find(id);
+            if (rutina == null)
+            {
+                return "No existe ninguna rutina con ese Id";
+            }
+            else
+            {
+                List<EmpleadoClienteRutina> empleadoClienteRutina = _db.EmpleadoClienteRutina.ToList();
+                foreach (var ecr in empleadoClienteRutina)
+                {
+                    if (ecr.Rutina.RutinaId == id)
+                    {
+                        return "No se puede eliminar la rutina porque ya está asignada a Clientes";
+                    }
+                }
+                List<RutinaEjercicio> rutinaEjercicio = _db.RutinaEjercicio.ToList();
+                foreach (var re in rutinaEjercicio)
+                {
+                    if (re.Rutina.RutinaId == id)
+                    {
+                        _db.RutinaEjercicio.Remove(re);
+                    }
+                }
                 _db.Rutinas.Remove(_db.Rutinas.Find(id));
-                _db.SaveChanges();
-                return true;
+                try
+                {
+                    _db.SaveChanges();
+                    return "Rutina eliminada correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
         }
     }

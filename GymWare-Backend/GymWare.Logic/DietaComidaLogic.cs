@@ -51,10 +51,17 @@ namespace GymWare.Logic
             }            
         }
 
-        public bool Insert(DietaComidaDTO dietaComida)
+        public string Insert(DietaComidaDTO dietaComida)
         {
             Dieta dieta = _di.Insert(dietaComida.Dieta);
-            return _dc.Insert(dieta, dietaComida.DietaComidas);
+            if(dieta != null)
+            {
+                return _dc.Insert(dieta, dietaComida.DietaComidas);
+            }
+            else
+            {
+                return "Error al intentar crear la Dieta";
+            }            
         }
 
         public string InsertDietaCliente(DietaCliente dietaCliente)

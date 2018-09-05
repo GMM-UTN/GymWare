@@ -50,8 +50,15 @@ namespace GymWare.DataAccess.DAL
             {
                 dieta.Empleados.Add(e);
             }
-            _db.Dietas.Add(dieta);
-            _db.SaveChanges();
+            try
+            {
+                _db.Dietas.Add(dieta);
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return null;
+            }            
             foreach (var e in dieta.Empleados)
             {
                 if(e != null)
@@ -59,9 +66,17 @@ namespace GymWare.DataAccess.DAL
                     Empleado em = _db.Empleados.Find(e.EmpleadoId);
                     if (em != null)
                     {
-                        Empleado empleado = em;
-                        empleado.Dietas.Add(dieta);
-                        _db.SaveChanges();
+                        try
+                        {
+                            Empleado empleado = em;
+                            empleado.Dietas.Add(dieta);
+                            _db.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+                            return null;
+                        }
+                        
                     }
                 }
             }
@@ -91,7 +106,7 @@ namespace GymWare.DataAccess.DAL
             else
             {
                 return "El cliente ya tiene asignada esta Dieta";
-            }            
+            }
         }
 
         public string Delete(int id)
