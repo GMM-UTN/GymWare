@@ -11,19 +11,26 @@ namespace GymWare.DataAccess.DAL
 {
     public class DietaRepository : BaseRepository
     {
-        public Dieta Update(int id, Dieta dieta)
+        public string Update(int id, Dieta dieta)
         {
-            Dieta di = _db.Dietas.Find(id);
-            di.Nombre = dieta.Nombre == null ? di.Nombre : dieta.Nombre;
-            di.Descripcion = dieta.Descripcion == null ? di.Descripcion : dieta.Descripcion;
-            try
+            if(_db.DietaCliente.Where(x => x.Dieta.DietaId == id).FirstOrDefault() == null)
             {
-                _db.SaveChanges();
-                return di;
+                try
+                {
+                    Dieta di = _db.Dietas.Find(id);
+                    di.Nombre = dieta.Nombre == null ? di.Nombre : dieta.Nombre;
+                    di.Descripcion = dieta.Descripcion == null ? di.Descripcion : dieta.Descripcion;
+                    _db.SaveChanges();
+                    return "Dieta modificada correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            else
             {
-                throw;
+                return "Esta dieta está asignada a un Cliente, por lo que no puede modificarse";
             }
         }
 
@@ -33,15 +40,25 @@ namespace GymWare.DataAccess.DAL
             foreach (var e in dieta.Empleados)
             {
                 Empleado empleado = _db.Empleados.Find(e.EmpleadoId);
-                empleados.Add(empleado);                
+                if(empleado != null)
+                {
+                    empleados.Add(empleado);
+                }                
             }
             dieta.Empleados.Clear();
             foreach (var e in empleados)
             {
                 dieta.Empleados.Add(e);
             }
-            _db.Dietas.Add(dieta);
-            _db.SaveChanges();
+            try
+            {
+                _db.Dietas.Add(dieta);
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return null;
+            }            
             foreach (var e in dieta.Empleados)
             {
                 if(e != null)
@@ -49,39 +66,55 @@ namespace GymWare.DataAccess.DAL
                     Empleado em = _db.Empleados.Find(e.EmpleadoId);
                     if (em != null)
                     {
-                        Empleado empleado = em;
-                        empleado.Dietas.Add(dieta);
-                        _db.SaveChanges();
+                        try
+                        {
+                            Empleado empleado = em;
+                            empleado.Dietas.Add(dieta);
+                            _db.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+                            return null;
+                        }
+                        
                     }
                 }
             }
             return dieta;
         }
 
-        public DietaCliente InsertDietaCliente(DietaCliente dietaCliente)
+        public string InsertDietaCliente(DietaCliente dietaCliente)
         {
             Dieta dieta = _db.Dietas.Find(dietaCliente.Dieta.DietaId);
             Cliente cliente = _db.Clientes.Find(dietaCliente.Cliente.ClienteId);
-            dietaCliente.Dieta = dieta;
-            dietaCliente.Cliente = cliente;
-            _db.DietaCliente.Add(dietaCliente);
-            try
+            DietaCliente dc = _db.DietaCliente.Where(x => x.Dieta.DietaId == dieta.DietaId && x.Cliente.ClienteId == cliente.ClienteId).FirstOrDefault();
+            if (dc == null)
             {
-                _db.SaveChanges();
-                return dietaCliente;
+                dietaCliente.Dieta = dieta;
+                dietaCliente.Cliente = cliente;
+                try
+                {
+                    _db.DietaCliente.Add(dietaCliente);
+                    _db.SaveChanges();
+                    return "Dieta asignada correctamente al cliente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
-            catch (Exception)
+            else
             {
-                throw;
+                return "El cliente ya tiene asignada esta Dieta";
             }
         }
 
-        public bool Delete(int id)
+        public string Delete(int id)
         {
             Dieta dieta = _db.Dietas.Find(id);
             if (dieta == null)
             {
-                return false;
+                return "No existe ninguna dieta con ese Id";
             }
             else
             {
@@ -90,25 +123,32 @@ namespace GymWare.DataAccess.DAL
                 {
                     if(dc.Dieta.DietaId == id)
                     {
-                        return false;
+                        return "No se puede eliminar la dieta porque ya está asignada a Clientes";
+                    }
+                }
+                List<DietaComida> dietaComida = _db.DietaComida.ToList();
+                foreach (var dc in dietaComida)
+                {
+                    if (dc.Dieta.DietaId == id)
+                    {
+                        _db.DietaComida.Remove(dc);
                     }
                 }
                 foreach (var e in dieta.Empleados)
                 {
                     Empleado empleado = _db.Empleados.Find(e.EmpleadoId);
                     empleado.Dietas.Remove(dieta);
-                }
-                List<DietaComida> dietaComida = _db.DietaComida.ToList();
-                foreach (var dc in dietaComida)
-                {
-                    if(dc.Dieta.DietaId == id)
-                    {
-                        _db.DietaComida.Remove(dc);
-                    }
-                }
+                }                
                 _db.Dietas.Remove(_db.Dietas.Find(id));
-                _db.SaveChanges();
-                return true;
+                try
+                {
+                    _db.SaveChanges();
+                    return "Dieta eliminada correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }                
             }
         }
     }

@@ -46,15 +46,7 @@ namespace GymWare.API.Controllers
                 return BadRequest(ModelState);
             }
 
-
-            if (_dc.Update(id, dietaComidasDTO))
-            {
-                return Ok("Modificado correctamente");
-            }
-            else
-            {
-                return Ok("Error al modificar");
-            }
+            return Ok(_dc.Update(id, dietaComidasDTO));
         }
 
         //POST: api/Dietas
@@ -66,31 +58,13 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (_dc.Insert(dietaComidasDTO))
-            {
-                return CreatedAtRoute("DefaultApi", new { }, dietaComidasDTO);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_dc.Insert(dietaComidasDTO));
         }
 
         [ResponseType(typeof(DietaCliente))]
         public IHttpActionResult PostDietaCliente(DietaCliente dietaCliente)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            if (_dc.InsertDietaCliente(dietaCliente))
-            {
-                return CreatedAtRoute("DefaultApi", new { }, dietaCliente);
-            }
-            else
-            {
-                return NotFound();
-            }
+            return Ok(_dc.InsertDietaCliente(dietaCliente));
         }
 
         // DELETE: api/Dietas/5
@@ -98,15 +72,7 @@ namespace GymWare.API.Controllers
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "DELETE")]
         public IHttpActionResult DeleteDietaConComidas(int id)
         {
-            if (_dc.Delete(id))
-            {
-                return Ok("Eliminado correctamente");
-            }
-            else
-            {
-                return Ok("Error al eliminar");
-            }
-
+            return Ok(_dc.Delete(id));
         }
     }
 }

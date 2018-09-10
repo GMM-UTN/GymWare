@@ -21,15 +21,22 @@ namespace GymWare.DataAccess.DAL
             return _db.RutinaEjercicio.Find(id);
         }
 
-        public bool Update(Rutina rutina, List<RutinaEjercicio> rutinaEjercicio)
+        public string Update(int rutinaId, List<RutinaEjercicio> rutinaEjercicio)
         {
-            _db.RutinaEjercicio.RemoveRange(_db.RutinaEjercicio.Where(x => x.Rutina.RutinaId == rutina.RutinaId));
-            _db.SaveChanges();
+            try
+            {
+                _db.RutinaEjercicio.RemoveRange(_db.RutinaEjercicio.Where(x => x.Rutina.RutinaId == rutinaId));
+                _db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
             foreach (var item in rutinaEjercicio)
             {
                 RutinaEjercicio re = new RutinaEjercicio();
                 Ejercicio ej = _db.Ejercicios.Find(item.Ejercicio.EjercicioId);
-                Rutina ru = _db.Rutinas.Find(rutina.RutinaId);                
+                Rutina ru = _db.Rutinas.Find(rutinaId);
                 re.Ejercicio = ej;
                 re.Rutina = ru;
                 re.Repeticiones = item.Repeticiones;
@@ -39,33 +46,40 @@ namespace GymWare.DataAccess.DAL
             try
             {
                 _db.SaveChanges();
-                return true;
+                return "Rutina modificada correctamente";
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                return false;
+                return ex.Message;
             }
         }
 
-        public bool Insert(Rutina rutina, List<RutinaEjercicio> rutinaEjercicio)
+        public string Insert(Rutina rutina, List<RutinaEjercicio> rutinaEjercicio)
         {
             foreach (var item in rutinaEjercicio)
             {
-                Ejercicio ej = _db.Ejercicios.Find(item.Ejercicio.EjercicioId);
-                Rutina ru = _db.Rutinas.Find(rutina.RutinaId);
-                item.Ejercicio = ej;
-                item.Rutina = ru;
-                _db.RutinaEjercicio.Add(item);
-                _db.SaveChanges();
-            }            
-            return true;
+                try
+                {
+                    Ejercicio ej = _db.Ejercicios.Find(item.Ejercicio.EjercicioId);
+                    Rutina ru = _db.Rutinas.Find(rutina.RutinaId);
+                    item.Ejercicio = ej;
+                    item.Rutina = ru;
+                    _db.RutinaEjercicio.Add(item);
+                    _db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
+            return "Rutina creada correctamente";
         }
 
-        public bool Delete(int id)
-        {
-            _db.RutinaEjercicio.RemoveRange(_db.RutinaEjercicio.Where(x => x.Rutina.RutinaId == id));
-            _db.SaveChanges();
-            return true;
-        }
+        //public bool Delete(int id)
+        //{
+        //    _db.RutinaEjercicio.RemoveRange(_db.RutinaEjercicio.Where(x => x.Rutina.RutinaId == id));
+        //    _db.SaveChanges();
+        //    return true;
+        //}
     }
 }

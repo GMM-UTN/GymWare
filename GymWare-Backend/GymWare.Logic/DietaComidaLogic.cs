@@ -38,33 +38,40 @@ namespace GymWare.Logic
             return _dc.GetOne(id);
         }
 
-        public bool Update(int idDieta, DietaComidaDTO dietaComida)
+        public string Update(int idDieta, DietaComidaDTO dietaComida)
         {
-            Dieta dieta = _di.Update(idDieta, dietaComida.Dieta);
-            return _dc.Update(dieta, dietaComida.DietaComidas);
-        }
-
-        public bool Insert(DietaComidaDTO dietaComida)
-        {
-            Dieta dieta = _di.Insert(dietaComida.Dieta);
-            return _dc.Insert(dieta, dietaComida.DietaComidas);
-        }
-
-        public bool InsertDietaCliente(DietaCliente dietaCliente)
-        {
-            if (_di.InsertDietaCliente(dietaCliente) != null)
+            string resultado = _di.Update(idDieta, dietaComida.Dieta);
+            if (resultado == "Dieta modificada correctamente")
             {
-                return true;
+                return _dc.Update(idDieta, dietaComida.DietaComidas);
             }
             else
             {
-                return false;
-            }
+                return resultado;
+            }            
         }
 
-        public bool Delete(int idDieta)
+        public string Insert(DietaComidaDTO dietaComida)
         {
-            return _dc.Delete(idDieta) == _di.Delete(idDieta);
+            Dieta dieta = _di.Insert(dietaComida.Dieta);
+            if(dieta != null)
+            {
+                return _dc.Insert(dieta, dietaComida.DietaComidas);
+            }
+            else
+            {
+                return "Error al intentar crear la Dieta";
+            }            
+        }
+
+        public string InsertDietaCliente(DietaCliente dietaCliente)
+        {
+            return _di.InsertDietaCliente(dietaCliente);
+        }
+
+        public string Delete(int idDieta)
+        {
+            return _di.Delete(idDieta);
         }
     }
 }

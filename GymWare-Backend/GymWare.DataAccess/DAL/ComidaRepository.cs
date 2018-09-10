@@ -46,24 +46,54 @@ namespace GymWare.DataAccess.DAL
             }
         }
 
-        public bool Insert(Comida comida)
+        public string Insert(Comida comida)
         {
-            _db.Comidas.Add(comida);
-            _db.SaveChanges();
-            return true;
-        }
-
-        public bool Delete(int id)
-        {
-            if (_db.Comidas.Find(id) == null)
+            Comida co = _db.Comidas.Where(x => x.Nombre.ToLower() == comida.Nombre.ToLower()).FirstOrDefault();
+            if (co == null)
             {
-                return false;
+                try
+                {
+                    _db.Comidas.Add(comida);
+                    _db.SaveChanges();
+                    return "Comida agregada correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
             else
             {
-                _db.Comidas.Remove(_db.Comidas.Find(id));
-                _db.SaveChanges();
-                return true;
+                return "Una comida con ese mismo Nombre ya existe!";
+            }
+        }
+
+        public string Delete(int id)
+        {
+            if (_db.Comidas.Find(id) == null)
+            {
+                return "Error al buscar la comida. Asegúrese de enviar un ID existente";
+            }
+            else
+            {
+                List<DietaComida> dicos = _db.DietaComida.ToList();
+                foreach (var dc in dicos)
+                {
+                    if (dc.Comida.ComidaId == id)
+                    {
+                        return "No se puede eliminar la comida porque pertenece a una Dieta";
+                    }
+                }
+                try
+                {
+                    _db.Comidas.Remove(_db.Comidas.Find(id));
+                    _db.SaveChanges();
+                    return "Comida eliminada correctamente";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
             }
         }
 
