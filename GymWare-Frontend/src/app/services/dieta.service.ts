@@ -23,7 +23,6 @@ export class DietaService extends CRUDHttpService{
 
   update(dietaComidaDTO: DietaComidaDTO): Observable<DietaComidaDTO> {
     var id = dietaComidaDTO.Dieta.DietaId;
-    debugger;
     return this.http.put<DietaComidaDTO>(`${url}/PutDietaConEjercicios/${id}`, dietaComidaDTO, httpOptions).pipe(
       catchError(this.handleError('UpdateDietaComidas'))
     );
