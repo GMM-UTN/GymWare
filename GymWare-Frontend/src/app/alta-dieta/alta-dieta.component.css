@@ -1,0 +1,46 @@
+.div-form {
+    margin-top: 1%;
+    padding-top: 0.5%;
+}
+.div-form-derecha {
+    margin-top: 3%;
+    padding-top: 0.5%;
+}
+.div-form-derecha-alt {
+    margin-top: 2%;
+    padding-top: 0.5%;
+}
+.boton-form {
+    float: right;
+    padding-top: 0% !important;
+    margin-bottom: 2%;
+}
+
+table{
+    width: 100%;
+}
+
+.mat-column-select {
+    overflow: initial;
+  }
+
+.expanded{
+    width: 50%;
+}
+
+.btn-add{
+    background-color: #f2b632;
+}
+.table-custom { 
+    font-family: 'Montserrat', sans-serif;
+}
+.filter-custom {
+    font-family: 'Montserrat', sans-serif;
+}
+.column-title {
+    font-size: 15px;
+}
+.paginator-custom {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+}

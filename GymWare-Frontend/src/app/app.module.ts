@@ -37,6 +37,12 @@ import { AlertService } from './services/alert.service';
 import { DefaultComponent } from './default/default.component';
 import { PresentacionComponent } from './presentacion/presentacion.component';
 import { EditRutinaComponent } from './edit-rutina/edit-rutina.component';
+import { AbmComidaComponent } from './abm-comida/abm-comida.component';
+import { AltaComidaComponent } from './alta-comida/alta-comida.component';
+import { EditComidaComponent } from './edit-comida/edit-comida.component';
+import { AbmDietaComponent } from './abm-dieta/abm-dieta.component';
+import { AltaDietaComponent } from './alta-dieta/alta-dieta.component';
+import { EditDietaComponent } from './edit-dieta/edit-dieta.component';
 
 
 const routes: Routes = [
@@ -72,6 +78,14 @@ const routes: Routes = [
       {
         path: 'rutinas',
         component: AmbRutinaComponent
+      },
+      {
+        path: 'comidas',
+        component: AbmComidaComponent
+      },
+      {
+        path: 'dietas',
+        component: AbmDietaComponent
       }
     ]
   }
@@ -94,7 +108,13 @@ const routes: Routes = [
     PresentacionComponent,
     AmbRutinaComponent,
     AltaRutinaComponent,
-    EditRutinaComponent
+    EditRutinaComponent,
+    AbmComidaComponent,
+    AltaComidaComponent,
+    EditComidaComponent,
+    AbmDietaComponent,
+    AltaDietaComponent,
+    EditDietaComponent
   ],
   imports: [
     BrowserModule,
@@ -127,7 +147,11 @@ const routes: Routes = [
     DeleteDialogBoxComponent,
     EditEjercicioComponent,
     AltaRutinaComponent,
-    EditRutinaComponent
+    EditRutinaComponent,
+    AltaComidaComponent,
+    EditComidaComponent,
+    AltaDietaComponent,
+    EditDietaComponent
   ],
   bootstrap: [AppComponent]
 })
