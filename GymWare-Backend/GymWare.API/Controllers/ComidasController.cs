@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 
 namespace GymWare.API.Controllers
@@ -14,6 +15,7 @@ namespace GymWare.API.Controllers
     {
         private ComidaLogic _co = new ComidaLogic();
         // GET: api/Comidas
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
         public List<Comida> GetComidas()
         {
             return _co.GetAll();
@@ -34,6 +36,7 @@ namespace GymWare.API.Controllers
 
         // PUT: api/Comidas/5
         [ResponseType(typeof(void))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "PUT")]
         public IHttpActionResult PutComida(int id, Comida comida)
         {
             if (!ModelState.IsValid)
@@ -54,6 +57,7 @@ namespace GymWare.API.Controllers
 
         // POST: api/Comidas
         [ResponseType(typeof(Comida))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
         public IHttpActionResult PostComida(Comida comida)
         {
             if (!ModelState.IsValid)
@@ -65,6 +69,7 @@ namespace GymWare.API.Controllers
 
         // DELETE: api/Comidas/5
         [ResponseType(typeof(Comida))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "DELETE")]
         public IHttpActionResult DeleteComida(int id)
         {
             return Ok(_co.Delete(id));

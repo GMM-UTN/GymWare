@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { CRUDHttpService, baseURL, httpOptions } from '../interfaces/CRUDHttpService';
+import { Usuario } from '../classes/Usuario';
+import { Empleado } from '../classes/Empleado';
 
 const url = baseURL + 'usuarios';
 
@@ -31,5 +33,14 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+    }
+
+    getCurrentUserId(): number{
+        var storedUser = JSON.parse(localStorage.getItem('currentUser'));
+        if(storedUser.EmpleadoId != null) {
+            return storedUser.EmpleadoId;
+        } else {
+            return storedUser.ClienteId;
+        }
     }
 }

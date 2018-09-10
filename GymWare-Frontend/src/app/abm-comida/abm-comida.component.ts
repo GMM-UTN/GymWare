@@ -1,28 +1,30 @@
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
-import { Ejercicio } from '../classes/ejercicio';
-import { EjercicioService } from '../services/ejercicio.service';
+import { Comida } from '../classes/comida';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/material';
 import { AltaEjercicioComponent } from '../alta-ejercicio/alta-ejercicio.component';
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.component';
+import { ComidaService } from '../services/comida.service';
+import { AltaComidaComponent } from '../alta-comida/alta-comida.component';
+import { EditComidaComponent } from '../edit-comida/edit-comida.component';
 
 @Component({
-  selector: 'app-abm-ejercicio',
-  templateUrl: './abm-ejercicio.component.html',
-  styleUrls: ['./abm-ejercicio.component.css']
+  selector: 'app-abm-comida',
+  templateUrl: './abm-comida.component.html',
+  styleUrls: ['./abm-comida.component.css']
 })
 @Injectable({
   providedIn: 'root'
 })
-export class AbmEjercicioComponent implements OnInit {
+export class AbmComidaComponent implements OnInit {
 
-  displayedColumns: string[] = ['Descripcion', 'actions', 'add'];
-  dataSource: MatTableDataSource<Ejercicio>;
+  displayedColumns: string[] = ['Nombre','Descripcion', 'Calorias', 'actions', 'add'];
+  dataSource: MatTableDataSource<Comida>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private ejercicioService: EjercicioService, public dialog: MatDialog) { 
+  constructor(private comidaService: ComidaService, public dialog: MatDialog) { 
     this.dataSource = new MatTableDataSource([]);
   }
 
@@ -40,7 +42,7 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   openDialogAlta() {
-    const dialogRef = this.dialog.open(AltaEjercicioComponent);
+    const dialogRef = this.dialog.open(AltaComidaComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       this.getAll();
@@ -62,7 +64,7 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   openDialogModification(editedObject: any, edit: Boolean) {
-    const dialogRef = this.dialog.open(EditEjercicioComponent, 
+    const dialogRef = this.dialog.open(EditComidaComponent, 
       {data :
         { editedObject: editedObject, 
           edit: edit
@@ -83,7 +85,7 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   getAll(): void {
-    this.ejercicioService.getAll().subscribe(data => {
+    this.comidaService.getAll().subscribe(data => {
       this.dataSource.data = data;
     }, 
     error => alert(error)
@@ -91,7 +93,7 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.ejercicioService.delete(id).subscribe( data => {
+    this.comidaService.delete(id).subscribe( data => {
       this.refresh();
     },
     error => alert(error)

@@ -30,13 +30,17 @@
           Gimnasio
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/default/ejercicios">Ejercicios</a>
+          <a class="dropdown-item" [routerLink]="['/default/ejercicios']">Ejercicios</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/default/rutinas">Rutinas</a>
+          <a class="dropdown-item" [routerLink]="['/default/rutinas']">Rutinas</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Productos</a>
+          <a class="dropdown-item" [routerLink]="['/default/comidas']">Comidas</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Proveedores</a>
+          <a class="dropdown-item" [routerLink]="['/default/dietas']">Dietas</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/default/home']">Productos</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/default/home']">Proveedores</a>
         </div>
       </li>
       <li class="nav-item dropdown header-item">

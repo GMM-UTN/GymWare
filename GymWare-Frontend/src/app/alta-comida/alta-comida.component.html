@@ -1,0 +1,19 @@
+<label>Alta Comida</label>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 
+  <div class="form-container">
+      <mat-form-field>
+          <input matInput placeholder="Nombre" ngModel name="Nombre" /> 
+      </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea> 
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Calorias" ngModel name="Calorias" type="number" min="1" max="5000"/> 
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    </div>
+  </div>
+</form>
