@@ -12,6 +12,10 @@ namespace GymWare.DataAccess.DAL
 {
     public class UsuarioRepository : BaseRepository
     {
+        public List<Cliente> GetAll()
+        {
+            return _db.Clientes.ToList();
+        }
         public Cliente CheckCliente(UsuarioLoginDTO usuarioLoginDTO)
         {
             return _db.Clientes.FirstOrDefault(x => x.NombreUsuario == usuarioLoginDTO.Usuario && x.Contrasenia == usuarioLoginDTO.Contrasenia);

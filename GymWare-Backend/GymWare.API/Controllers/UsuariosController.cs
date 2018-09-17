@@ -16,6 +16,13 @@ namespace GymWare.API.Controllers
     {
         private UsuarioLogic _us = new UsuarioLogic();
 
+        // GET: api/Usuarios/GetClientes
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
+        public List<Cliente> GetClientes()
+        {
+            return _us.GetAll();
+        }
+
         //POST: api/Usuarios/CheckUsuario
         [ResponseType(typeof(Usuario))]
 
