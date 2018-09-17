@@ -12,7 +12,12 @@ namespace GymWare.Logic
     public class UsuarioLogic
     {
         private UsuarioRepository _us = new UsuarioRepository();
-        
+
+        public List<Cliente> GetAll()
+        {
+            return _us.GetAll();
+        }
+
         public Usuario CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
         {
             Usuario cliente = _us.CheckCliente(usuarioLoginDTO);
