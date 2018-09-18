@@ -43,6 +43,8 @@ import { EditComidaComponent } from './edit-comida/edit-comida.component';
 import { AbmDietaComponent } from './abm-dieta/abm-dieta.component';
 import { AltaDietaComponent } from './alta-dieta/alta-dieta.component';
 import { EditDietaComponent } from './edit-dieta/edit-dieta.component';
+import { DietaClienteComponent } from './dieta-cliente/dieta-cliente.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 const routes: Routes = [
@@ -86,6 +88,10 @@ const routes: Routes = [
       {
         path: 'dietas',
         component: AbmDietaComponent
+      },
+      {
+        path: 'dieta-cliente',
+        component: DietaClienteComponent
       }
     ]
   }
@@ -114,7 +120,8 @@ const routes: Routes = [
     EditComidaComponent,
     AbmDietaComponent,
     AltaDietaComponent,
-    EditDietaComponent
+    EditDietaComponent,
+    DietaClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -137,6 +144,7 @@ const routes: Routes = [
     MatSortModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatStepperModule,
   ],
   providers: [
     EjercicioService,

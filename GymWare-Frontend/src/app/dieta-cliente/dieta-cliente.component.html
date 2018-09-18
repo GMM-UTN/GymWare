@@ -1,0 +1,74 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
+
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Apellido">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.Apellido}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Dni">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.Dni}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab class="mr-3 btn-add">
+            <i class="material-icons" (click)="SelectCustomer(element)" matStepperNext>visibility</i>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+
+      <ng-template matStepLabel>Fecha desde</ng-template>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="fechaDesde" placeholder="Fecha desde">
+        <mat-datepicker-toggle matSuffix [for]="fechaDesde"></mat-datepicker-toggle>
+        <mat-datepicker #fechaDesde></mat-datepicker>
+      </mat-form-field>
+
+      <ng-template matStepLabel>Fecha hasta</ng-template>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="fechaHasta" placeholder="Fecha hasta">
+        <mat-datepicker-toggle matSuffix [for]="fechaHasta"></mat-datepicker-toggle>
+        <mat-datepicker #fechaHasta></mat-datepicker>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <abm-dieta-component></abm-dieta-component>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
