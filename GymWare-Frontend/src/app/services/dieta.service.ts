@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { DietaComidaDTO } from '../classes/DietaComidaDTO';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { DietaCliente } from '../classes/DietaCliente';
 
 const url = baseURL + 'dietas';
 
@@ -19,6 +20,11 @@ export class DietaService extends CRUDHttpService{
   save(dietaComidaDTO: DietaComidaDTO): Observable<DietaComidaDTO> {
     return this.http.post<DietaComidaDTO>(`${url}/PostDietaConComidas`, dietaComidaDTO, httpOptions).pipe(
       catchError(this.handleError('postDietas')));
+  }
+
+  saveDietaCliente(dietaCliente: DietaCliente): Observable<DietaCliente> {
+    return this.http.post<DietaCliente>(`${url}/PostDietaCliente`, dietaCliente, httpOptions).pipe(
+      catchError(this.handleError("postDietaCliente")));
   }
 
   update(dietaComidaDTO: DietaComidaDTO): Observable<DietaComidaDTO> {
@@ -46,5 +52,7 @@ export class DietaService extends CRUDHttpService{
       catchError(this.handleError('getDietas'))
     );
   }
+
+
 
 }

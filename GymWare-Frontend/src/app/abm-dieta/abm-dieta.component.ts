@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Comida } from '../classes/comida';
+import { Component, OnInit, ViewChild, Injectable, Output, EventEmitter, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { DietaComidaDTO } from '../classes/DietaComidaDTO';
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
 import { DietaService } from 'src/app/services/dieta.service';
 import { AltaDietaComponent } from 'src/app/alta-dieta/alta-dieta.component';
 import { EditDietaComponent } from 'src/app/edit-dieta/edit-dieta.component';
+import { Dieta } from '../classes/Dieta';
 
 @Component({
   selector: 'app-abm-dieta',
@@ -13,6 +13,9 @@ import { EditDietaComponent } from 'src/app/edit-dieta/edit-dieta.component';
   styleUrls: ['./abm-dieta.component.css']
 })
 export class AbmDietaComponent implements OnInit {
+
+  @Input() onlyCheck: Boolean;
+  @Output() dieta = new EventEmitter<Dieta>();
 
   displayedColumns: string[] = ['Nombre', 'Descripcion', 'actions', 'add'];
   dataSource: MatTableDataSource<DietaComidaDTO>;
@@ -78,6 +81,10 @@ export class AbmDietaComponent implements OnInit {
       this.getAll();
       this.dataSource.connect();
     });
+  }
+
+  selectDieta(dieta: Dieta) {
+    this.dieta.emit(dieta);
   }
 
   delete(id: number): void {

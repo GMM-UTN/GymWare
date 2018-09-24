@@ -30,8 +30,8 @@ export class ClienteService extends CRUDHttpService{
   }
   
   getAll(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${url}/GetUsuarios`).pipe(
-      catchError(this.handleError('getUsuarios'))
+    return this.http.get<Cliente[]>(`${url}/GetClientes`).pipe(
+      catchError(this.handleError('GetClientes'))
     );
   }
 

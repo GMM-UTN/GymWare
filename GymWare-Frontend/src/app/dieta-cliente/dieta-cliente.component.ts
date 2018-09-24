@@ -1,8 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { ClienteService } from '../services/cliente.service';
 import { Cliente } from '../classes/Cliente';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { Dieta } from 'src/app/classes/Dieta';
+import { DietaCliente } from '../classes/DietaCliente';
+import { MatStepper } from '@angular/material';
+import { DietaService } from '../services/dieta.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dieta-cliente',
@@ -11,17 +15,22 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class DietaClienteComponent implements OnInit {
 
+  @ViewChild('stepper') stepper: MatStepper;
+
+  selectedDieta: Dieta;
+  selectedCliente: Cliente;
+  editedObject: DietaCliente;
+
   isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  displayedColumns: string[] = ['NombreUsuario', 'Nombre', 'Apellido', 'Dni', 'actions'];
-  dataSource: MatTableDataSource<Cliente>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private formBuilder: FormBuilder, private usuarioService: ClienteService) { }
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private dietaService: DietaService) {
+      this.editedObject = new DietaCliente();
+    }
 
   ngOnInit() {
     this.firstFormGroup = this.formBuilder.group({
@@ -30,21 +39,36 @@ export class DietaClienteComponent implements OnInit {
     this.secondFormGroup = this.formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-    this.getAll();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  onSelectDieta(dieta: Dieta) {
+    console.log(dieta);
+    this.selectedDieta = dieta;
+    this.stepper.next();
   }
 
-  getAll(): void{
-    this.usuarioService.getAll().subscribe(data => {
-      this.dataSource.data = data;
-    }, 
-    error => alert(error)
+  onSelectCliente(cliente: Cliente) {
+    console.log(cliente);
+    this.selectedCliente = cliente;
+    this.stepper.next();
+  }
+
+  submitFormFechas(form: NgForm) {
+    this.editedObject.FechaInicio = form.value.fechaInicio;
+    this.editedObject.FechaFin = form.value.fechaFin;
+    this.stepper.next();
+  }
+
+  save() {
+    this.editedObject.Dieta = this.selectedDieta;
+    this.editedObject.Cliente = this.selectedCliente;
+    this.dietaService.saveDietaCliente(this.editedObject as DietaCliente).subscribe( 
+      data => { 
+        this.editedObject = data
+        this.router.navigate(['/dietas']);
+      }, 
+      error => alert(error) 
     ); 
   }
-
 
 }

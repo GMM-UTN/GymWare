@@ -1,74 +1,47 @@
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+<mat-horizontal-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="firstFormGroup">
+      
+    <ng-template matStepLabel>Cliente</ng-template>
 
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
-
-      <ng-container matColumnDef="Nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
-        <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Apellido">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
-        <td mat-cell *matCellDef="let element"> {{element.Apellido}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Dni">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
-        <td mat-cell *matCellDef="let element"> {{element.Dni}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab class="mr-3 btn-add">
-            <i class="material-icons" (click)="SelectCustomer(element)" matStepperNext>visibility</i>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+    <app-abm-cliente (cliente)="onSelectCliente($event)"></app-abm-cliente>
 
   </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Dieta</ng-template>
+    <app-abm-dieta [onlyCheck]="true" (dieta)="onSelectDieta($event)"></app-abm-dieta>
+  </mat-step>
+
   <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-
-      <ng-template matStepLabel>Fecha desde</ng-template>
-
-      <mat-form-field>
-        <input matInput [matDatepicker]="fechaDesde" placeholder="Fecha desde">
-        <mat-datepicker-toggle matSuffix [for]="fechaDesde"></mat-datepicker-toggle>
-        <mat-datepicker #fechaDesde></mat-datepicker>
-      </mat-form-field>
-
-      <ng-template matStepLabel>Fecha hasta</ng-template>
-
-      <mat-form-field>
-        <input matInput [matDatepicker]="fechaHasta" placeholder="Fecha hasta">
-        <mat-datepicker-toggle matSuffix [for]="fechaHasta"></mat-datepicker-toggle>
-        <mat-datepicker #fechaHasta></mat-datepicker>
-      </mat-form-field>
-
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
+      <form [formGroup]="secondFormGroup" validate>
+  
+        <ng-template matStepLabel>Periodo</ng-template>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" required>
+          <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+          <mat-datepicker #fechaInicio></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="fechaFin" placeholder="Fecha fin" required>
+          <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+          <mat-datepicker #fechaFin></mat-datepicker>
+        </mat-form-field>
+  
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext type="submit">Next</button>
+        </div>
+      </form>
+    </mat-step>
 
   <mat-step>
-    <abm-dieta-component></abm-dieta-component>
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
+    <ng-template matStepLabel>Terminar</ng-template>
+    Definir dieta para cliente terminado.
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button  mat-raised-button matStepperPrevious>Volver</button>
+      <button  mat-raised-button (click)="save()" color="primary">Guardar</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

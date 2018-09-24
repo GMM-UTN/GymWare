@@ -45,6 +45,8 @@ import { AltaDietaComponent } from './alta-dieta/alta-dieta.component';
 import { EditDietaComponent } from './edit-dieta/edit-dieta.component';
 import { DietaClienteComponent } from './dieta-cliente/dieta-cliente.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule, MatNativeDateModule  } from '@angular/material';
+import { AbmClienteComponent } from './abm-cliente/abm-cliente.component'
 
 
 const routes: Routes = [
@@ -121,7 +123,8 @@ const routes: Routes = [
     AbmDietaComponent,
     AltaDietaComponent,
     EditDietaComponent,
-    DietaClienteComponent
+    DietaClienteComponent,
+    AbmClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -145,6 +148,8 @@ const routes: Routes = [
     MatCheckboxModule,
     MatDialogModule,
     MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     EjercicioService,
@@ -159,7 +164,7 @@ const routes: Routes = [
     AltaComidaComponent,
     EditComidaComponent,
     AltaDietaComponent,
-    EditDietaComponent
+    EditDietaComponent,
   ],
   bootstrap: [AppComponent]
 })
