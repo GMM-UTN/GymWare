@@ -62,6 +62,7 @@ namespace GymWare.API.Controllers
         }
 
         [ResponseType(typeof(DietaCliente))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
         public IHttpActionResult PostDietaCliente(DietaCliente dietaCliente)
         {
             return Ok(_dc.InsertDietaCliente(dietaCliente));
