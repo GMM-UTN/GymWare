@@ -670,7 +670,7 @@ animation-delay: .8s;
 
  ***/
 .page-middle-banner {
-  background: url(../images/home/1.jpg) no-repeat center;
+  background: url(../images/home/homebanner.jpg) no-repeat center;
   background-size: cover;
   background-attachment: fixed;
   margin-top: 70px;
@@ -1088,7 +1088,7 @@ animation-delay: .8s;
 
  ***/
 #partner-section {
-  margin: 100px 0 0 0;
+  margin: 0 0 0 0;
   background: #f9f9f9;
   padding: 50px 0;
 }
@@ -1099,6 +1099,10 @@ animation-delay: .8s;
 }
 #partner-section .item img {
   margin: 0 auto;
+}
+.imagen-logo{
+  width: 150px;
+  height: 75px;
 }
 /*** 
 
@@ -1620,4 +1624,13 @@ footer p {
 }
 .blog-details-post-wrapper .post-comment form button:hover {
   background:#fff;
+}
+
+.overlay-desc {
+  background: rgba(0,0,0,0);
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
