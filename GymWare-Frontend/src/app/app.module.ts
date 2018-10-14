@@ -46,7 +46,11 @@ import { EditDietaComponent } from './edit-dieta/edit-dieta.component';
 import { DietaClienteComponent } from './dieta-cliente/dieta-cliente.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule, MatNativeDateModule  } from '@angular/material';
-import { AbmClienteComponent } from './abm-cliente/abm-cliente.component'
+import { AbmClienteComponent } from './abm-cliente/abm-cliente.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { ClienteAsistenciaComponent } from './cliente-asistencia/cliente-asistencia.component';
+import { MembresiaComponent } from './membresia/membresia.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 
 const routes: Routes = [
@@ -76,6 +80,10 @@ const routes: Routes = [
         component: CenterComponent
       },
       {
+        path: 'cliente',
+        component: ClienteComponent
+      },
+      {
         path: 'ejercicios',
         component: AbmEjercicioComponent
       },
@@ -94,6 +102,14 @@ const routes: Routes = [
       {
         path: 'dieta-cliente',
         component: DietaClienteComponent
+      },
+      {
+        path: 'asistencia-cliente',
+        component: ClienteAsistenciaComponent
+      },
+      {
+        path: 'membresia-cliente',
+        component: MembresiaComponent
       }
     ]
   }
@@ -124,7 +140,10 @@ const routes: Routes = [
     AltaDietaComponent,
     EditDietaComponent,
     DietaClienteComponent,
-    AbmClienteComponent
+    AbmClienteComponent,
+    ClienteComponent,
+    ClienteAsistenciaComponent,
+    MembresiaComponent
   ],
   imports: [
     BrowserModule,
@@ -150,6 +169,7 @@ const routes: Routes = [
     MatStepperModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ChartsModule,
   ],
   providers: [
     EjercicioService,

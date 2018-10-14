@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CRUDHttpService, baseURL, httpOptions  } from '../interfaces/CRUDHttpService';
 import { Observable } from 'rxjs';
-import { Cliente } from '../classes/Cliente';
+import { MembresiaCuotaDTO } from '../classes/index';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
-const url = baseURL + 'usuarios';
+const url = baseURL + 'membresias';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteService extends CRUDHttpService{
-  
+export class MembresiaService extends CRUDHttpService{
+
   constructor(private http: HttpClient) {
     super();
    }
@@ -28,14 +28,12 @@ export class ClienteService extends CRUDHttpService{
   get(object: Object): Observable<any> {
     throw new Error("Method not implemented.");
   }
-  getAll(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>(`${url}/GetClientes`).pipe(
-      catchError(this.handleError('GetClientes'))
-    );
+  getAll(): Observable<MembresiaCuotaDTO[]> {
+    throw new Error("Method not implemented.");
   }
-  registrarAsistencia(cliente: Object): Observable<any> {
-    return this.http.post<Object>(`${baseURL}Asistencias/CreateAsistencia`,cliente,httpOptions).pipe(
-      catchError(this.handleError('registrarAsistencia'))
+  CreateRenovateMembresia(membresiaCuotaDTO: MembresiaCuotaDTO): Observable<any>{
+    return this.http.post<MembresiaCuotaDTO>(`${url}/CreateRenovateMembresia`,membresiaCuotaDTO,httpOptions).pipe(
+      catchError(this.handleError('createRenovateMembresia'))
     )
   }
 }

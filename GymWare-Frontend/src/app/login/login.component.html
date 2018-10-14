@@ -16,7 +16,7 @@
         </mat-form-field>
         <mat-form-field class="form-login">
           <i matPrefix class="material-icons icon-login">lock</i>
-          <input required matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+          <input required matInput placeholder="Contraseña" [type]="hide ? 'text' : 'password'" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Password is required</div>
           </div>
