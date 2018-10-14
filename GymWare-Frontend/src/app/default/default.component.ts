@@ -10,6 +10,12 @@ export class DefaultComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if(localStorage.getItem("tipo") === undefined || localStorage.getItem("tipo") === null){
+
+    }
+    else if(localStorage.getItem("tipo") === '2'){
+      alert('Bienvenido');
+    }
   }
 
 }

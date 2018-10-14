@@ -1,45 +1,49 @@
 <section id="footer">
-	<div class="row text-center text-xs-center text-sm-center text-md-center">
-		<div class="col-xs-12 col-sm-4 col-md-4">
-			<h5>Administración</h5>
-			<ul class="list-unstyled quick-links">
-				<li>
-					<a href="javascript:void();">
-						<i class="fa fa-angle-double-right"></i>Empleados</a>
-				</li>
-				<li>
-					<a href="javascript:void();">
-						<i class="fa fa-angle-double-right"></i>Clientes</a>
-				</li>
-			</ul>
-		</div>
-		<div class="col-xs-12 col-sm-4 col-md-4">
-			<h5>Gimnasio</h5>
-			<ul class="list-unstyled quick-links">
-				<li>
-					<a href="javascript:void();">
-						<i class="fa fa-angle-double-right"></i>Ejercicios</a>
-				</li>
-				<li>
-					<a href="javascript:void();">
-						<i class="fa fa-angle-double-right"></i>Rutinas</a>
-				</li>
-			</ul>
-		</div>
-		<div class="col-xs-12 col-sm-4 col-md-4">
-			<h5>Nutrición</h5>
-			<ul class="list-unstyled quick-links">
-				<li>
-					<a href="javascript:void();">
-						<i class="fa fa-angle-double-right"></i>Comidas</a>
-				</li>
-				<li>
-					<a href="https://wwwe.sunlimetech.com" title="Design and developed by">
-						<i class="fa fa-angle-double-right"></i>Dietas</a>
-				</li>
+	<div *ngIf="this.tipo === '1'">
+		<div class="row text-center text-xs-center text-sm-center text-md-center">
+			<div class="col-xs-12 col-sm-4 col-md-4">
+				<h5>Administración</h5>
+				<ul class="list-unstyled quick-links">
+					<li>
+						<a href="javascript:void();">
+							<i class="fa fa-angle-double-right"></i>Empleados</a>
+					</li>
+					<li>
+						<a href="javascript:void();">
+							<i class="fa fa-angle-double-right"></i>Clientes</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4">
+				<h5>Gimnasio</h5>
+				<ul class="list-unstyled quick-links">
+					<li>
+						<a href="javascript:void();">
+							<i class="fa fa-angle-double-right"></i>Ejercicios</a>
+					</li>
+					<li>
+						<a href="javascript:void();">
+							<i class="fa fa-angle-double-right"></i>Rutinas</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-4 col-md-4">
+				<h5>Nutrición</h5>
+				<ul class="list-unstyled quick-links">
+					<li>
+						<a href="javascript:void();">
+							<i class="fa fa-angle-double-right"></i>Comidas</a>
+					</li>
+					<li>
+						<a href="https://wwwe.sunlimetech.com" title="Design and developed by">
+							<i class="fa fa-angle-double-right"></i>Dietas</a>
+					</li>
 
-			</ul>
+				</ul>
+			</div>
 		</div>
+
+
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">

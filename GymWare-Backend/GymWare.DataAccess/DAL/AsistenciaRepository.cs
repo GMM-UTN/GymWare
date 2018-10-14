@@ -27,7 +27,7 @@ namespace GymWare.DataAccess.DAL
                         asistencia.Fecha = DateTime.Today.Date;
                         _db.Asistencias.Add(asistencia);
                         _db.SaveChanges();
-                        return "Asistencia registrada correctamente!";
+                        return "Bienvenido de nuevo: " + cliente.Nombre + " !";
                     }
                     else
                     {

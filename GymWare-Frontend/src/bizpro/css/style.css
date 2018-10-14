@@ -375,6 +375,18 @@ animation-delay: .8s;
   cursor: pointer;
   line-height: 44px;
 }
+.logoGym {    
+  text-transform: uppercase;
+  color: #d73e4d;
+  font-weight: 700;
+  background: transparent;
+  padding: 9px 15px;
+  transition: all .3s ease-in-out;
+  font-size: 30px;
+}
+.logoGym :hover {
+  color:white;
+}
 /*** 
 
 ====================================================================

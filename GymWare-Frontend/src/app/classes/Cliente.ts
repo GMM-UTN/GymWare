@@ -7,4 +7,6 @@ export class Cliente extends Usuario {
     AlturaInicial: number;
     PesoActual: number;
     AlturaActual: number;
+    Nombre: string;
+    Apellido: string;
 }
