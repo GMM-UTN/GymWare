@@ -1,5 +1,37 @@
 <div class="row">
+  <div class="col-lg-12">
+    <h2 class="text-center">Ficha personal de:
+      <strong>{{this.cliente.Nombre}} {{this.cliente.Apellido}}</strong>
+    </h2>
+  </div>
   <div class="col-lg-6">
-    <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" [options]="pieChartOptions"></canvas>
+    <h3 class="text-center">Asistencias
+      <small>última semana</small>
+    </h3>
+    <canvas baseChart [data]="barChartData" [labels]="barChartLabels" [chartType]="barChartType" [options]="barChartOptions"></canvas>
+  </div>
+  <div class="col-lg-6">
+    <h3 class="text-center">Características
+      <small>evolución histórica</small>
+    </h3>
+    <div class="col-lg-6">
+      <mat-card class="card-cliente">Peso Inicial:
+        <strong>{{this.cliente.PesoInicial}}</strong> Kg</mat-card>
+    </div>
+    <div class="col-lg-6">
+      <mat-card class="card-cliente">Altura Inicial:
+        <strong>{{this.cliente.AlturaInicial}}</strong> cm</mat-card>
+    </div>
+    <div class="col-lg-6 card-cliente-container">
+      <mat-card class="card-cliente">Peso Actual:
+        <strong>{{this.cliente.PesoActual}}</strong> Kg</mat-card>
+    </div>
+    <div class="col-lg-6 card-cliente-container">
+      <mat-card class="card-cliente">Altura Actual:
+        <strong>{{this.cliente.AlturaActual}}</strong> cm</mat-card>
+    </div>
+    <div class="col-lg-12 card-cliente-container">
+      <mat-card class="text-center card-cliente card-progress"><div class="div-progress text-center"><strong>75%</strong></div></mat-card>
+    </div>
   </div>
 </div>

@@ -1,0 +1,15 @@
+.card-cliente {
+    font-family: 'Montserrat', sans-serif;
+}
+.card-cliente-container {
+    margin-top: 2%;
+}
+.div-progress {
+    background-color: #dc3545;
+    height: 68px;
+    width: 350px;
+    padding-top: 25px;
+}
+.card-progress {
+    padding: 0;
+}

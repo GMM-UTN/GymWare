@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-default',
@@ -6,16 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./default.component.css']
 })
 export class DefaultComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    private _router: Router,) { }
 
   ngOnInit() {
-    if(localStorage.getItem("tipo") === undefined || localStorage.getItem("tipo") === null){
-
-    }
-    else if(localStorage.getItem("tipo") === '2'){
-      alert('Bienvenido');
+    if(localStorage.getItem("currentUser") === undefined || localStorage.getItem("currentUser") === null){
+      this._router.navigate(['/']);
     }
   }
-
 }
