@@ -64,10 +64,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrlEmpleado]);
           localStorage.setItem("tipo","1");
         }
-        else {
+        else if (data.ClienteId != undefined && data.ClienteId != null){
           this.router.navigate([this.returnUrlCliente]);
           localStorage.setItem("tipo","2");
         }
+        else {
+          alert('Datos ingresados incorrectos !');
+        }
+        this.loading = false;
       },
       error => {
         this.alertService.error(error);
