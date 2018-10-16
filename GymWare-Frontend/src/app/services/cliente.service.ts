@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CRUDHttpService, baseURL } from '../interfaces/CRUDHttpService';
+import { CRUDHttpService, baseURL, httpOptions  } from '../interfaces/CRUDHttpService';
 import { Observable } from 'rxjs';
 import { Cliente } from '../classes/Cliente';
 import { HttpClient } from '@angular/common/http';
@@ -28,12 +28,14 @@ export class ClienteService extends CRUDHttpService{
   get(object: Object): Observable<any> {
     throw new Error("Method not implemented.");
   }
-  
   getAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${url}/GetClientes`).pipe(
       catchError(this.handleError('GetClientes'))
     );
   }
-
-  
+  registrarAsistencia(cliente: Object): Observable<any> {
+    return this.http.post<Object>(`${baseURL}Asistencias/CreateAsistencia`,cliente,httpOptions).pipe(
+      catchError(this.handleError('registrarAsistencia'))
+    )
+  }
 }

@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
+  returnUrlEmpleado: string;
+  returnUrlCliente: string;
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, 
     private formBuilder: FormBuilder,
@@ -33,12 +34,15 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
+    localStorage.removeItem("tipo");
+
     // reset login status
     this.authenticationService.logout();
 
     // get return url from route parameters or default to '/'
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/default/home';
+    this.returnUrlEmpleado = this.route.snapshot.queryParams['returnUrl'] || '/default/home';
+    this.returnUrlCliente = this.route.snapshot.queryParams['returnUrl'] || '/default/cliente';
   }
 
   get f() { return this.loginForm.controls; }
@@ -56,7 +60,14 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
       data => {
-        this.router.navigate([this.returnUrl]);
+        if(data.EmpleadoId != undefined && data.EmpleadoId != null){
+          this.router.navigate([this.returnUrlEmpleado]);
+          localStorage.setItem("tipo","1");
+        }
+        else {
+          this.router.navigate([this.returnUrlCliente]);
+          localStorage.setItem("tipo","2");
+        }
       },
       error => {
         this.alertService.error(error);

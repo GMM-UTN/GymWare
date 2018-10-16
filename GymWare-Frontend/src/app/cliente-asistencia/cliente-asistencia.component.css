@@ -1,0 +1,18 @@
+.title-asist {
+    text-align: center;
+}
+.form-asistencia {
+    width: 400px;
+    margin: 4% auto;
+    border: 0.5px double lightgray;
+    border-radius: 5px;
+    padding: 1%;
+}
+.button-aceptar {
+ background-color: #252839;
+ color: white;   
+}
+.button-div {
+    width: 24%;
+    margin: 5% auto;
+}
