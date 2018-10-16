@@ -30,7 +30,6 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
-import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 import { AltaRutinaComponent } from './alta-rutina/alta-rutina.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
@@ -51,6 +50,8 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { ClienteAsistenciaComponent } from './cliente-asistencia/cliente-asistencia.component';
 import { MembresiaComponent } from './membresia/membresia.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { RutinaClienteComponent } from './rutina-cliente/rutina-cliente.component';
+import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 
 
 const routes: Routes = [
@@ -110,6 +111,10 @@ const routes: Routes = [
       {
         path: 'membresia-cliente',
         component: MembresiaComponent
+      },
+      {
+        path: 'rutina-cliente',
+        component: RutinaClienteComponent
       }
     ]
   }
@@ -143,7 +148,8 @@ const routes: Routes = [
     AbmClienteComponent,
     ClienteComponent,
     ClienteAsistenciaComponent,
-    MembresiaComponent
+    MembresiaComponent,
+    RutinaClienteComponent
   ],
   imports: [
     BrowserModule,

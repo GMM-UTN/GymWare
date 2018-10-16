@@ -1,0 +1,47 @@
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+      
+    <ng-template matStepLabel>Cliente</ng-template>
+
+    <app-abm-cliente (cliente)="onSelectCliente($event)"></app-abm-cliente>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Rutina</ng-template>
+    <app-amb-rutina [onlyCheck]="true" (rutina)="onSelectRutina($event)"></app-amb-rutina>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup" validate>
+  
+        <ng-template matStepLabel>Periodo</ng-template>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" required>
+          <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+          <mat-datepicker #fechaInicio></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="fechaFin" placeholder="Fecha fin" required>
+          <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+          <mat-datepicker #fechaFin></mat-datepicker>
+        </mat-form-field>
+  
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext type="submit">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Terminar</ng-template>
+    Definir rutina para cliente terminado.
+    <div>
+      <button  mat-raised-button matStepperPrevious>Volver</button>
+      <button  mat-raised-button (click)="save()" color="primary">Guardar</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

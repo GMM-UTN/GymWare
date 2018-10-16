@@ -39,9 +39,9 @@ export class AuthenticationService {
     getCurrentUserId(): number{
         var storedUser = JSON.parse(localStorage.getItem('currentUser'));
         if(storedUser.EmpleadoId != null) {
-            return storedUser.EmpleadoId;
+            return storedUser.EmpleadoId as number;
         } else {
-            return storedUser.ClienteId;
+            return storedUser.ClienteId as number;
         }
     }
 }

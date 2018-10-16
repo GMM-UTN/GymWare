@@ -62,6 +62,7 @@ namespace GymWare.API.Controllers
         }
 
         [ResponseType(typeof(EmpleadoClienteRutina))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
         public IHttpActionResult PostEmpleadoClienteRutina(EmpleadoClienteRutina empleadoClienteRutina)
         {
             if (!ModelState.IsValid)

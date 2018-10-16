@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { Rutina } from '../classes/rutina';
 import { RutinaEjercicio } from '../classes/rutinaEjercicio';
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
+import { EmpleadoClienteRutina } from '../classes/EmpleadoClienteRutina';
 
 const url = baseURL + 'rutinas';
 
@@ -21,6 +22,11 @@ export class RutinaService extends CRUDHttpService {
   save(rutinaEjerciciosDTO: RutinaEjerciciosDTO): Observable<RutinaEjerciciosDTO> {
     return this.http.post<RutinaEjerciciosDTO>(`${url}/PostRutinaConEjercicios`, rutinaEjerciciosDTO, httpOptions).pipe(
       catchError(this.handleError('postRutinas')));
+  }
+
+  public saveRutinaCliente(rutinaCliente: EmpleadoClienteRutina): Observable<EmpleadoClienteRutina> {
+    return this.http.post<EmpleadoClienteRutina>(`${url}/PostEmpleadoClienteRutina`, rutinaCliente, httpOptions).pipe(
+      catchError(this.handleError("PostEmpleadoClienteRutina")));
   }
 
   update(rutinaEjerciciosDTO: RutinaEjerciciosDTO): Observable<RutinaEjerciciosDTO> {
