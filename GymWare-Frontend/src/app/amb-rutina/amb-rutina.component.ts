@@ -1,10 +1,11 @@
-import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatPaginator, MatSort } from '@angular/material';
 import { RutinaService } from '../services/rutina.service';
 import { AltaRutinaComponent } from 'src/app/alta-rutina/alta-rutina.component';
 import { DeleteDialogBoxComponent } from 'src/app/delete-dialog-box/delete-dialog-box.component';
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { EditRutinaComponent } from 'src/app/edit-rutina/edit-rutina.component';
+import { Rutina } from 'src/app/classes/rutina';
 
 
 @Component({
@@ -12,10 +13,10 @@ import { EditRutinaComponent } from 'src/app/edit-rutina/edit-rutina.component';
   templateUrl: './amb-rutina.component.html',
   styleUrls: ['./amb-rutina.component.css']
 })
-@Injectable({
-  providedIn: 'root'
-})
 export class AmbRutinaComponent implements OnInit {
+
+  @Input() onlyCheck: Boolean;
+  @Output() rutina = new EventEmitter<Rutina>();
 
   displayedColumns: string[] = ['Nombre', 'Tipo', 'actions', 'add'];
   dataSource: MatTableDataSource<RutinaEjerciciosDTO>;
@@ -100,6 +101,10 @@ export class AmbRutinaComponent implements OnInit {
   private refresh(): void {
     this.getAll();
     this.dataSource.connect();
+  }
+
+  selectRutina(rutina: Rutina) {
+    this.rutina.emit(rutina);
   }
 
 }

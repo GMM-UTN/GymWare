@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
-import { ClienteService } from '../services/cliente.service';
 import { Cliente } from '../classes/Cliente';
 import { Dieta } from 'src/app/classes/Dieta';
 import { DietaCliente } from '../classes/DietaCliente';

@@ -30,7 +30,6 @@ import { MatCheckboxModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogBoxComponent } from './delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from './edit-ejercicio/edit-ejercicio.component';
-import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 import { AltaRutinaComponent } from './alta-rutina/alta-rutina.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertService } from './services/alert.service';
@@ -46,7 +45,9 @@ import { EditDietaComponent } from './edit-dieta/edit-dieta.component';
 import { DietaClienteComponent } from './dieta-cliente/dieta-cliente.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule, MatNativeDateModule  } from '@angular/material';
-import { AbmClienteComponent } from './abm-cliente/abm-cliente.component'
+import { AbmClienteComponent } from './abm-cliente/abm-cliente.component';
+import { RutinaClienteComponent } from './rutina-cliente/rutina-cliente.component';
+import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,10 @@ const routes: Routes = [
       {
         path: 'dieta-cliente',
         component: DietaClienteComponent
+      },
+      {
+        path: 'rutina-cliente',
+        component: RutinaClienteComponent
       }
     ]
   }
@@ -124,7 +129,8 @@ const routes: Routes = [
     AltaDietaComponent,
     EditDietaComponent,
     DietaClienteComponent,
-    AbmClienteComponent
+    AbmClienteComponent,
+    RutinaClienteComponent
   ],
   imports: [
     BrowserModule,
