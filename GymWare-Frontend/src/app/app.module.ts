@@ -148,7 +148,7 @@ const routes: Routes = [
     AbmClienteComponent,
     ClienteComponent,
     ClienteAsistenciaComponent,
-    MembresiaComponent
+    MembresiaComponent,
     RutinaClienteComponent
   ],
   imports: [
