@@ -52,6 +52,8 @@ import { MembresiaComponent } from './membresia/membresia.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { RutinaClienteComponent } from './rutina-cliente/rutina-cliente.component';
 import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
+import { AltaClienteComponent } from './alta-cliente/alta-cliente.component';
+import { ToastrModule } from 'ng6-toastr-notifications';
 
 
 const routes: Routes = [
@@ -115,6 +117,10 @@ const routes: Routes = [
       {
         path: 'rutina-cliente',
         component: RutinaClienteComponent
+      },
+      {
+        path: 'alta-cliente',
+        component: AltaClienteComponent
       }
     ]
   }
@@ -149,7 +155,8 @@ const routes: Routes = [
     ClienteComponent,
     ClienteAsistenciaComponent,
     MembresiaComponent,
-    RutinaClienteComponent
+    RutinaClienteComponent,
+    AltaClienteComponent
   ],
   imports: [
     BrowserModule,
@@ -166,6 +173,7 @@ const routes: Routes = [
     HttpClientModule,
     MatMenuModule,
     RouterModule.forRoot(routes),
+    ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,

@@ -8,6 +8,7 @@ import { Ejercicio } from 'src/app/classes/ejercicio';
 import { EjercicioHelper } from '../classes/ejercicioHelper';
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { RutinaEjercicio } from '../classes/rutinaEjercicio';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-alta-rutina',
@@ -27,7 +28,8 @@ export class AltaRutinaComponent implements OnInit {
   constructor(
     private ejercicioService: EjercicioService,
     private rutinaService: RutinaService,
-    public dialogRef: MatDialogRef<AltaRutinaComponent>) {
+    public dialogRef: MatDialogRef<AltaRutinaComponent>,
+    public toastr: ToastrManager) {
     this.dataSource = new MatTableDataSource([]);
   }
 
@@ -94,7 +96,7 @@ export class AltaRutinaComponent implements OnInit {
     this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
       this.dialogRef.close(data);
     },
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     );
   }
 

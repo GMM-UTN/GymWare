@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/cor
 import { MatTableDataSource, MatPaginator, MatSort, MatStepper } from '@angular/material';
 import { Cliente } from 'src/app/classes/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-abm-cliente',
@@ -18,7 +19,8 @@ export class AbmClienteComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private usuarioService: ClienteService) {
+  constructor(private usuarioService: ClienteService,
+    public toastr: ToastrManager) {
     this.dataSource = new MatTableDataSource([]);
    }
 
@@ -34,9 +36,8 @@ export class AbmClienteComponent implements OnInit {
   getAll(): void{
     this.usuarioService.getAll().subscribe(data => {
       this.dataSource.data = data;
-      console.log(data);
     }, 
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     ); 
   }
 

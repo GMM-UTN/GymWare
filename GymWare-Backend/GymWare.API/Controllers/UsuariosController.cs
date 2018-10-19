@@ -46,6 +46,7 @@ namespace GymWare.API.Controllers
 
         // POST: api/Usuarios/CreateCliente
         [ResponseType(typeof(Cliente))]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
         public IHttpActionResult CreateCliente(Cliente cliente)
         {
             if (!ModelState.IsValid)

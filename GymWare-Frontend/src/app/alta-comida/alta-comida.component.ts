@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { ComidaService } from '../services/comida.service';
 import { Comida } from '../classes/comida';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
 @Component({
   selector: 'app-alta-comida',
   templateUrl: './alta-comida.component.html',
@@ -14,6 +14,7 @@ export class AltaComidaComponent implements OnInit {
   editedObject: Comida;
 
   constructor(private comidaService: ComidaService,
+              public toastr: ToastrManager,
               public dialogRef: MatDialogRef<AltaComidaComponent>) { }
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class AltaComidaComponent implements OnInit {
       data => { 
          this.editedObject = data
       }, 
-      error => alert(error) 
+      error => this.toastr.errorToastr(error, 'Error') 
     ); 
     this.closeDialog();
   } 
