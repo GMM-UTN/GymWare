@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Cliente } from '../classes/Cliente';
 import { ClienteService, AlertService } from '../services';
 import { first } from 'rxjs/operators';
+import { ToastrManager } from 'ng6-toastr-notifications';
+
 @Component({
   selector: 'app-cliente-asistencia',
   templateUrl: './cliente-asistencia.component.html',
@@ -19,7 +21,8 @@ export class ClienteAsistenciaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    public toastr: ToastrManager) {
     }
 
   get f() { return this.asistenciaForm.controls; }
@@ -47,15 +50,15 @@ export class ClienteAsistenciaComponent implements OnInit {
       .subscribe(
       data => {
         if (data.includes('Bienvenido de nuevo:')) {
-          this.mensaje = data;
+          this.toastr.successToastr(data, 'Éxito');
         }
         else {
-          this.mensaje = data;
+          this.toastr.errorToastr(data, 'Error');
         }
         this.loading = false;
       },
       error => {
-        this.alertService.error(error);
+        this.toastr.errorToastr(error, 'Error');
         this.loading = false;
       });
       this.asistenciaForm.reset();

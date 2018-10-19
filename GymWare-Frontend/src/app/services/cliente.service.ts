@@ -38,4 +38,9 @@ export class ClienteService extends CRUDHttpService{
       catchError(this.handleError('registrarAsistencia'))
     )
   }
+  createCliente(cliente: Object): Observable<any> {
+    return this.http.post<Object>(`${url}/CreateCliente`,cliente,httpOptions).pipe(
+      catchError(this.handleError('createCliente'))
+    )
+  }
 }

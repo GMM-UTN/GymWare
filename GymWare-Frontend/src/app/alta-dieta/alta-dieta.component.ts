@@ -10,6 +10,7 @@ import { Dieta } from '../classes/Dieta';
 import { DietaComida } from '../classes/DietaComida';
 import { AuthenticationService } from '../services';
 import { Empleado } from '../classes/Empleado';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-alta-dieta',
@@ -30,7 +31,8 @@ export class AltaDietaComponent implements OnInit {
     private comidaService: ComidaService,
     private dietaService: DietaService,
     private authenticationService: AuthenticationService,
-    public dialogRef: MatDialogRef<AltaDietaComponent>) {
+    public dialogRef: MatDialogRef<AltaDietaComponent>,
+    public toastr: ToastrManager) {
     this.dataSource = new MatTableDataSource([]);
   }
 
@@ -100,7 +102,7 @@ export class AltaDietaComponent implements OnInit {
     this.dietaService.save(dietaComidasDTO).subscribe(data => {
       this.dialogRef.close(data);
     },
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     );
   }
 

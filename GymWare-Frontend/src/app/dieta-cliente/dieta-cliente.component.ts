@@ -6,6 +6,7 @@ import { DietaCliente } from '../classes/DietaCliente';
 import { MatStepper } from '@angular/material';
 import { DietaService } from '../services/dieta.service';
 import { Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-dieta-cliente',
@@ -27,7 +28,8 @@ export class DietaClienteComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private dietaService: DietaService) {
+    private dietaService: DietaService,
+    public toastr: ToastrManager) {
       this.editedObject = new DietaCliente();
     }
 
@@ -66,7 +68,7 @@ export class DietaClienteComponent implements OnInit {
         this.editedObject = data
         this.router.navigate(['/default/dietas']);
       }, 
-      error => alert(error) 
+      error => this.toastr.errorToastr(error, 'Error')
     ); 
   }
 

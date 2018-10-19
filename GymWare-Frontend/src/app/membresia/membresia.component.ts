@@ -5,6 +5,7 @@ import { Cliente, Plan, Cuota, MembresiaCuotaDTO } from '../classes/index';
 import { MembresiaService, AlertService, ClienteService } from '../services';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-membresia',
@@ -30,7 +31,8 @@ export class MembresiaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    public toastr: ToastrManager
   ) { }
 
   get f() { return this.membresiaForm.controls; }
@@ -68,16 +70,16 @@ export class MembresiaComponent implements OnInit {
     .subscribe(
     data => {
       if(data.MembresiaId != undefined && data.MembresiaId != null) {
-        alert('Memebresía cargada correctamente !');
+        this.toastr.successToastr('Membresía creada correctamente', 'Éxito');
         this.loading = false;
       } 
       else {
-        alert(data);
+        this.toastr.errorToastr(data, 'Error');
         this.loading = false;
       }
     },
     error => {
-      this.alertService.error(error);
+      this.toastr.errorToastr(error, 'Error');
       this.loading = false;
     });
     this.membresiaForm.reset();

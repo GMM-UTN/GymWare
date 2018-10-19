@@ -7,6 +7,7 @@ import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.compone
 import { ComidaService } from '../services/comida.service';
 import { AltaComidaComponent } from '../alta-comida/alta-comida.component';
 import { EditComidaComponent } from '../edit-comida/edit-comida.component';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-abm-comida',
@@ -24,7 +25,9 @@ export class AbmComidaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private comidaService: ComidaService, public dialog: MatDialog) { 
+  constructor(private comidaService: ComidaService, 
+    public dialog: MatDialog,
+    public toastr: ToastrManager) { 
     this.dataSource = new MatTableDataSource([]);
   }
 
@@ -88,7 +91,7 @@ export class AbmComidaComponent implements OnInit {
     this.comidaService.getAll().subscribe(data => {
       this.dataSource.data = data;
     }, 
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     ); 
   }
 
@@ -96,7 +99,7 @@ export class AbmComidaComponent implements OnInit {
     this.comidaService.delete(id).subscribe( data => {
       this.refresh();
     },
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     );
   }
 }

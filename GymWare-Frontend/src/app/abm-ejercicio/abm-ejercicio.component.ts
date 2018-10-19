@@ -5,6 +5,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialog} from '@angular/ma
 import { AltaEjercicioComponent } from '../alta-ejercicio/alta-ejercicio.component';
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.component';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-abm-ejercicio',
@@ -22,7 +23,8 @@ export class AbmEjercicioComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private ejercicioService: EjercicioService, public dialog: MatDialog) { 
+  constructor(private ejercicioService: EjercicioService, public dialog: MatDialog,
+    public toastr: ToastrManager) { 
     this.dataSource = new MatTableDataSource([]);
   }
 
@@ -86,7 +88,7 @@ export class AbmEjercicioComponent implements OnInit {
     this.ejercicioService.getAll().subscribe(data => {
       this.dataSource.data = data;
     }, 
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     ); 
   }
 
@@ -94,7 +96,7 @@ export class AbmEjercicioComponent implements OnInit {
     this.ejercicioService.delete(id).subscribe( data => {
       this.refresh();
     },
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     );
   }
 }
