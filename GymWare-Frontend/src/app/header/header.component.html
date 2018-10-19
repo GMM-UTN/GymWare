@@ -1,7 +1,6 @@
 <div *ngIf="this.tipo == '1'">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-header">
-        <a class="navbar-brand header-title" href="">
-          <i class="fas fa-dumbbell header-icon"></i>GymWare</a>
+        <span class="navbar-brand header-title"><i class="fas fa-dumbbell header-icon "></i>GymWare</span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
           aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -18,9 +17,8 @@
                   Administración
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/default/alta-cliente">Clientes</a>
-                  <!-- <a class="dropdown-item">Empleados</a> -->
-                  <!-- <div class="dropdown-divider"></div> -->
+                  <a class="dropdown-item" [routerLink]="['/default/alta-cliente']">Clientes</a>
+                  <div class="dropdown-divider"></div>
                   <a class="dropdown-item" [routerLink]="['/default/asistencia-cliente']">Asistencia</a>
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" [routerLink]="['/default/membresia-cliente']">Membresía</a>
@@ -57,6 +55,21 @@
                 </div>
               </li>
           </ul>
+        </div>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item header-item">                    
+                    <a class="nav-link" href="../../assets/Manual de usuario de GymWare.pdf" role="button">
+                    <i class="fas fa-info-circle"></i>
+                    </a>
+                </li>
+                <li class="nav-item header-item">
+                    <a class="nav-link" [routerLink]="['/login']" role="button" data-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false">
+                      Cerrar sesión
+                    </a>
+                </li>
+            </ul>
         </div>
       </nav>
 </div>
