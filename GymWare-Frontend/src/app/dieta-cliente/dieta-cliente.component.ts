@@ -64,7 +64,7 @@ export class DietaClienteComponent implements OnInit {
     this.dietaService.saveDietaCliente(this.editedObject as DietaCliente).subscribe( 
       data => { 
         this.editedObject = data
-        this.router.navigate(['/dietas']);
+        this.router.navigate(['/default/dietas']);
       }, 
       error => alert(error) 
     ); 
