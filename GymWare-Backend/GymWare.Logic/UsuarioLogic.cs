@@ -68,29 +68,7 @@ namespace GymWare.Logic
                 }
             }
         }
-        //public UsuarioLogeadoDTO CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
-        //{
-        //    UsuarioLogeadoDTO usuarioLogeado = new UsuarioLogeadoDTO();
-        //    usuarioLogeado.Cliente = _us.CheckCliente(usuarioLoginDTO);
-        //    if (usuarioLogeado.Cliente != null)
-        //    {
-        //        usuarioLogeado.Dietas = _di.GetAllDietasByUser(usuarioLogeado.Cliente.ClienteId);
-        //        usuarioLogeado.Rutinas = _ru.GetAllRutinasByUser(usuarioLogeado.Cliente.ClienteId);
-        //        return usuarioLogeado;
-        //    }
-        //    else
-        //    {                
-        //        usuarioLogeado.Empleado = _us.CheckEmpleado(usuarioLoginDTO);
-        //        if (usuarioLogeado.Empleado != null)
-        //        {
-        //            return usuarioLogeado;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
+
         public bool Insert(Cliente cliente)
         {
             return _us.Insert(cliente);
