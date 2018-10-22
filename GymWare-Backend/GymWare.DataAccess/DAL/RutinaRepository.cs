@@ -11,6 +11,20 @@ namespace GymWare.DataAccess.DAL
 {
     public class RutinaRepository : BaseRepository
     {
+        public List<Rutina> GetAllRutinasByUser(int idUsuario)
+        {
+            List<Rutina> rutinas = new List<Rutina>();
+            List<EmpleadoClienteRutina> rutinasClientes = _db.EmpleadoClienteRutina.Where(x => x.Cliente.ClienteId == idUsuario).ToList();
+            foreach (var rc in rutinasClientes)
+            {
+                Rutina rutina = _db.Rutinas.Find(rc.Rutina.RutinaId);
+                if (rutina != null)
+                {
+                    rutinas.Add(rutina);
+                }
+            }
+            return rutinas;
+        }
         public string Update(int id, Rutina rutina)
         {
             Rutina ru = _db.Rutinas.Find(id);

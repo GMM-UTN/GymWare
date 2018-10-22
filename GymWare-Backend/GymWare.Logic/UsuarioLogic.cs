@@ -12,25 +12,30 @@ namespace GymWare.Logic
     public class UsuarioLogic
     {
         private UsuarioRepository _us = new UsuarioRepository();
+        private DietaRepository _di = new DietaRepository();
+        private RutinaRepository _ru = new RutinaRepository();
 
         public List<Cliente> GetAll()
         {
             return _us.GetAll();
         }
 
-        public Usuario CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
+        public UsuarioLogeadoDTO CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
         {
-            Usuario cliente = _us.CheckCliente(usuarioLoginDTO);
-            if (cliente != null)
+            UsuarioLogeadoDTO usuarioLogeado = new UsuarioLogeadoDTO();
+            usuarioLogeado.Cliente = _us.CheckCliente(usuarioLoginDTO);
+            if (usuarioLogeado.Cliente != null)
             {
-                return cliente;
+                usuarioLogeado.Dietas = _di.GetAllDietasByUser(usuarioLogeado.Cliente.ClienteId);
+                usuarioLogeado.Rutinas = _ru.GetAllRutinasByUser(usuarioLogeado.Cliente.ClienteId);
+                return usuarioLogeado;
             }
             else
-            {
-                Usuario empleado = _us.CheckEmpleado(usuarioLoginDTO);
-                if (empleado != null)
+            {                
+                usuarioLogeado.Empleado = _us.CheckEmpleado(usuarioLoginDTO);
+                if (usuarioLogeado.Empleado != null)
                 {
-                    return empleado;
+                    return usuarioLogeado;
                 }
                 else
                 {

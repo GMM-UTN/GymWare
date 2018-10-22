@@ -11,6 +11,21 @@ namespace GymWare.DataAccess.DAL
 {
     public class DietaRepository : BaseRepository
     {
+        public List<Dieta> GetAllDietasByUser(int idUsuario)
+        {
+            List<Dieta> dietas = new List<Dieta>();
+            List<DietaCliente> dietasClientes = _db.DietaCliente.Where(x => x.Cliente.ClienteId == idUsuario).ToList();
+            foreach (var dc in dietasClientes)
+            {                
+                Dieta dieta = _db.Dietas.Find(dc.Dieta.DietaId);
+                if(dieta != null)
+                {
+                    dietas.Add(dieta);
+                }
+            }
+            return dietas;
+        }
+
         public string Update(int id, Dieta dieta)
         {
             if(_db.DietaCliente.Where(x => x.Dieta.DietaId == id).FirstOrDefault() == null)

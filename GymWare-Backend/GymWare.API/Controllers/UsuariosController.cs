@@ -33,10 +33,10 @@ namespace GymWare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            Usuario usuario = _us.CheckUsuario(usuarioLoginDTO);
-            if (usuario != null)
+            UsuarioLogeadoDTO usuarioLogeado = _us.CheckUsuario(usuarioLoginDTO);
+            if (usuarioLogeado != null)
             {
-                return Json(usuario);
+                return Json(usuarioLogeado);
             }
             else
             {
