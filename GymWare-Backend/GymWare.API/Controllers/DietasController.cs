@@ -27,7 +27,7 @@ namespace GymWare.API.Controllers
         [ResponseType(typeof(DietaComida))]
         public IHttpActionResult GetDietaConComidas(int id)
         {
-            DietaComida dietaComida = _dc.GetDietaConComidas(id);
+            List<DietaComida> dietaComida = _dc.GetDietaConComidas(id);
             if (dietaComida == null)
             {
                 return NotFound();

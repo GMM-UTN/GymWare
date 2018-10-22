@@ -16,9 +16,9 @@ namespace GymWare.DataAccess.DAL
             return _db.DietaComida.ToList();
         }
 
-        public DietaComida GetOne(int id)
+        public List<DietaComida> GetOne(int id)
         {
-            return _db.DietaComida.Find(id);
+            return _db.DietaComida.Where(e => e.Dieta.DietaId == id).ToList();
         }
 
         public string Update(int idDieta, List<DietaComida> dietaComida)

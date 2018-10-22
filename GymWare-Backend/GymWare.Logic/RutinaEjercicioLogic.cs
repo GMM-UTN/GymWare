@@ -33,7 +33,7 @@ namespace GymWare.Logic
             return r;
         }
 
-        public RutinaEjercicio GetRutinaConEjercicios(int id)
+        public List<RutinaEjercicio> GetRutinaConEjercicios(int id)
         {
             return _re.GetOne(id);
         }

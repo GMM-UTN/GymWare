@@ -14,6 +14,8 @@ namespace GymWare.Logic
         private UsuarioRepository _us = new UsuarioRepository();
         private DietaRepository _di = new DietaRepository();
         private RutinaRepository _ru = new RutinaRepository();
+        private DietaComidaLogic _dc = new DietaComidaLogic();
+        private RutinaEjercicioLogic _re = new RutinaEjercicioLogic();
 
         public List<Cliente> GetAll()
         {
@@ -23,26 +25,72 @@ namespace GymWare.Logic
         public UsuarioLogeadoDTO CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
         {
             UsuarioLogeadoDTO usuarioLogeado = new UsuarioLogeadoDTO();
-            usuarioLogeado.Cliente = _us.CheckCliente(usuarioLoginDTO);
-            if (usuarioLogeado.Cliente != null)
+            Cliente cliente = _us.CheckCliente(usuarioLoginDTO);
+            if (cliente != null)
             {
-                usuarioLogeado.Dietas = _di.GetAllDietasByUser(usuarioLogeado.Cliente.ClienteId);
-                usuarioLogeado.Rutinas = _ru.GetAllRutinasByUser(usuarioLogeado.Cliente.ClienteId);
+                List<Dieta> dietas = _di.GetAllDietasByUser(cliente.ClienteId);
+                usuarioLogeado.DietasComidas = new List<DietaComida>();
+                foreach (var d in dietas)
+                {
+                    List<DietaComida> dc = _dc.GetDietaConComidas(d.DietaId);
+                    foreach (var dc1 in dc)
+                    {
+                        usuarioLogeado.DietasComidas.Add(dc1);
+                    }                    
+                }
+                List<Rutina> rutinas = _ru.GetAllRutinasByUser(cliente.ClienteId);
+                usuarioLogeado.RutinasEjercicios = new List<RutinaEjercicio>();
+                foreach (var r in rutinas)
+                {
+                    List<RutinaEjercicio> re = _re.GetRutinaConEjercicios(r.RutinaId);
+                    foreach (var re1 in re)
+                    {
+                        usuarioLogeado.RutinasEjercicios.Add(re1);
+                    }
+                }
+                usuarioLogeado.Cliente = cliente;
+                usuarioLogeado.Mensaje = "Cliente logueado correctamente";
                 return usuarioLogeado;
             }
             else
-            {                
+            {
+                
                 usuarioLogeado.Empleado = _us.CheckEmpleado(usuarioLoginDTO);
                 if (usuarioLogeado.Empleado != null)
                 {
+                    usuarioLogeado.Mensaje = "Empleado logueado correctamente";
                     return usuarioLogeado;
                 }
                 else
                 {
-                    return null;
+                    usuarioLogeado.Mensaje = "Error al intentar loguear";
+                    return usuarioLogeado;
                 }
             }
         }
+        //public UsuarioLogeadoDTO CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
+        //{
+        //    UsuarioLogeadoDTO usuarioLogeado = new UsuarioLogeadoDTO();
+        //    usuarioLogeado.Cliente = _us.CheckCliente(usuarioLoginDTO);
+        //    if (usuarioLogeado.Cliente != null)
+        //    {
+        //        usuarioLogeado.Dietas = _di.GetAllDietasByUser(usuarioLogeado.Cliente.ClienteId);
+        //        usuarioLogeado.Rutinas = _ru.GetAllRutinasByUser(usuarioLogeado.Cliente.ClienteId);
+        //        return usuarioLogeado;
+        //    }
+        //    else
+        //    {                
+        //        usuarioLogeado.Empleado = _us.CheckEmpleado(usuarioLoginDTO);
+        //        if (usuarioLogeado.Empleado != null)
+        //        {
+        //            return usuarioLogeado;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //}
         public bool Insert(Cliente cliente)
         {
             return _us.Insert(cliente);

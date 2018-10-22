@@ -16,9 +16,9 @@ namespace GymWare.DataAccess.DAL
             return _db.RutinaEjercicio.ToList();
         }
 
-        public RutinaEjercicio GetOne(int id)
+        public List<RutinaEjercicio> GetOne(int id)
         {
-            return _db.RutinaEjercicio.Find(id);
+            return _db.RutinaEjercicio.Where(e => e.Rutina.RutinaId == id).ToList();
         }
 
         public string Update(int rutinaId, List<RutinaEjercicio> rutinaEjercicio)

@@ -27,21 +27,11 @@ namespace GymWare.API.Controllers
         [ResponseType(typeof(Usuario))]
 
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "POST")]
-        public IHttpActionResult CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
+        public UsuarioLogeadoDTO CheckUsuario(UsuarioLoginDTO usuarioLoginDTO)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             UsuarioLogeadoDTO usuarioLogeado = _us.CheckUsuario(usuarioLoginDTO);
-            if (usuarioLogeado != null)
-            {
-                return Json(usuarioLogeado);
-            }
-            else
-            {
-                return Json("Usuario o Contraseña incorrectos!");
-            }
+            return (usuarioLogeado);
+
         }
 
         // POST: api/Usuarios/CreateCliente

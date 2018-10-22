@@ -33,7 +33,7 @@ namespace GymWare.Logic
             return r;
         }
 
-        public DietaComida GetDietaConComidas(int id)
+        public List<DietaComida> GetDietaConComidas(int id)
         {
             return _dc.GetOne(id);
         }
