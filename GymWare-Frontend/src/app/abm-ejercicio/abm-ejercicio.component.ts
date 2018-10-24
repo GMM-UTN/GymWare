@@ -28,8 +28,8 @@ export class AbmEjercicioComponent implements OnInit {
     this.dataSource = new MatTableDataSource([]);
   }
 
-  ngOnInit() {
-    this.getAll();
+  ngOnInit() {    
+    this.getAll();    
   }
 
   ngAfterViewInit() {

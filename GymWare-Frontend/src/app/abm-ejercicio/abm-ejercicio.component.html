@@ -1,8 +1,7 @@
 <mat-form-field class="expanded filter-custom">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
 </mat-form-field>
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
-
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">  
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
       <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
@@ -52,4 +51,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<button (click)="print()">AAAAAAAAAAAAAAAAAAAA</button>
+<app-export-pdf></app-export-pdf>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
