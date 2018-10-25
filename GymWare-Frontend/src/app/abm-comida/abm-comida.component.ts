@@ -8,6 +8,8 @@ import { ComidaService } from '../services/comida.service';
 import { AltaComidaComponent } from '../alta-comida/alta-comida.component';
 import { EditComidaComponent } from '../edit-comida/edit-comida.component';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-abm-comida',
@@ -101,5 +103,29 @@ export class AbmComidaComponent implements OnInit {
     },
     error => this.toastr.errorToastr(error, 'Error')
     );
+  }
+
+  print() {
+    var columns = [
+      {title: "Nombre", dataKey: "nombre"},
+      {title: "Descripcion", dataKey: "descripcion"},
+      {title: "Calorías", dataKey: "calorias"}
+    ];
+    var rows = [];
+
+    for (let i = 0; i < this.dataSource.data.length; i++) {
+      var obj = {
+        "nombre": this.dataSource.data[i].Nombre,
+        "descripcion": this.dataSource.data[i].Descripcion,
+        "calorias": this.dataSource.data[i].Calorias
+      }
+
+      rows.push(obj);
+    }
+
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.save('Comidas.pdf');
   }
 }

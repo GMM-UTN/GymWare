@@ -6,6 +6,8 @@ import { AltaEjercicioComponent } from '../alta-ejercicio/alta-ejercicio.compone
 import { DeleteDialogBoxComponent } from '../delete-dialog-box/delete-dialog-box.component';
 import { EditEjercicioComponent } from '../edit-ejercicio/edit-ejercicio.component';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-abm-ejercicio',
@@ -28,8 +30,8 @@ export class AbmEjercicioComponent implements OnInit {
     this.dataSource = new MatTableDataSource([]);
   }
 
-  ngOnInit() {
-    this.getAll();
+  ngOnInit() {    
+    this.getAll();    
   }
 
   ngAfterViewInit() {
@@ -98,5 +100,25 @@ export class AbmEjercicioComponent implements OnInit {
     },
     error => this.toastr.errorToastr(error, 'Error')
     );
+  }
+
+  print() {
+    var columns = [
+      {title: "Ejercicio", dataKey: "descripcion"}
+    ];
+    var rows = [];
+
+    for (let i = 0; i < this.dataSource.data.length; i++) {
+      var obj = {
+        "descripcion": this.dataSource.data[i].Descripcion
+      }
+
+      rows.push(obj);
+    }
+
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.save('Ejercicios.pdf');
   }
 }

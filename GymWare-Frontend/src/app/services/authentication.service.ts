@@ -19,10 +19,16 @@ export class AuthenticationService {
                 if (user) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
-                    if(user.ClienteId != undefined){
+                    // if(user.ClienteId != undefined){
+                    //     console.log("cliente");
+                    // }
+                    // else if(user.EmpleadoId != undefined) {
+                    //     console.log("empleado");
+                    // }
+                    if(user.Cliente != null){
                         console.log("cliente");
                     }
-                    else if(user.EmpleadoId != undefined) {
+                    else if(user.Empleado != null) {
                         console.log("empleado");
                     }
                 }
@@ -38,10 +44,15 @@ export class AuthenticationService {
 
     getCurrentUserId(): number{
         var storedUser = JSON.parse(localStorage.getItem('currentUser'));
-        if(storedUser.EmpleadoId != null) {
-            return storedUser.EmpleadoId as number;
+        // if(storedUser.EmpleadoId != null) {
+        //     return storedUser.EmpleadoId as number;
+        // } else {
+        //     return storedUser.ClienteId as number;
+        // }
+        if(storedUser.Empleado != null) {
+            return storedUser.Empleado.EmpleadoId as number;
         } else {
-            return storedUser.ClienteId as number;
+            return storedUser.Cliente.ClienteId as number;
         }
     }
 }

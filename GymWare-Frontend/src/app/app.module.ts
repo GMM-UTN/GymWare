@@ -156,7 +156,7 @@ const routes: Routes = [
     ClienteAsistenciaComponent,
     MembresiaComponent,
     RutinaClienteComponent,
-    AltaClienteComponent
+    AltaClienteComponent,
   ],
   imports: [
     BrowserModule,

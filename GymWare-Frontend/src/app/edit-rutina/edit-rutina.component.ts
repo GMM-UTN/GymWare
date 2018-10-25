@@ -8,6 +8,8 @@ import { Ejercicio } from 'src/app/classes/ejercicio';
 import { EjercicioHelper } from '../classes/ejercicioHelper';
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { RutinaEjercicio } from '../classes/rutinaEjercicio';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-edit-rutina',
@@ -156,6 +158,53 @@ export class EditRutinaComponent implements OnInit {
     ejercicioHelper.series = f.value.Series;
     ejercicioHelper.repeticiones = f.value.Repeticiones;
     this.addEjercicio(ejercicioHelper);
+  }
+
+  print() {
+    var columns = [
+      {title: "Nombre de la rutina", dataKey: "nombreRutina"},
+      {title: "Descripcion", dataKey: "descripcionRutina"},
+      {title: "Tipo", dataKey: "tipo"},
+      {title: "Edad mínima", dataKey: "edadMinima"},
+      {title: "Edad máxima", dataKey: "edadMaxima"},
+      {title: "Sexo", dataKey: "sexo"},
+      {title: "Ejercicio", dataKey: "ejercicio"},
+      {title: "Repeticiones", dataKey: "repeticiones"},
+      {title: "Series", dataKey: "series"},
+    ];
+    var rows = [];
+
+    var rutina = {
+      "nombreRutina": this.editedObject.Rutina.Nombre,
+      "descripcionRutina": this.editedObject.Rutina.Descripcion,
+      "tipo": this.editedObject.Rutina.Tipo,
+      "edadMinima": this.editedObject.Rutina.EdadMinima,
+      "edadMaxima": this.editedObject.Rutina.EdadMaxima,
+      "sexo": this.editedObject.Rutina.Sexo
+    }
+
+    rows.push(rutina);
+
+    this.editedObject.RutinaEjercicios.forEach(element => {
+      var ejercicio = {
+        "ejercicio": element.Ejercicio.Descripcion,
+        "repeticiones": element.Repeticiones,
+        "series": element.Series,
+      }  
+      rows.push(ejercicio);
+    });
+      
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows, {styles: {overflow: 'linebreak'}, 
+    columnStyles: {
+      nombreRutina: {columnWidth: 80},
+      descripcionRutina: {columnWidth: 80},
+      edadMinima: {columnWidth: 50},
+      edadMaxima: {columnWidth: 50},
+      repeticiones: {columnWidth:50}
+     }});
+    doc.save('Rutina-' + this.editedObject.Rutina.Nombre + '.pdf');
   }
 
 }

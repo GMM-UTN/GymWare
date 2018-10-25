@@ -28,7 +28,7 @@ namespace GymWare.API.Controllers
         [ResponseType(typeof(RutinaEjercicio))]
         public IHttpActionResult GetRutinaConEjercicios(int id)
         {
-            RutinaEjercicio rutinaEjercicio = _re.GetRutinaConEjercicios(id);
+            List<RutinaEjercicio> rutinaEjercicio = _re.GetRutinaConEjercicios(id);
             if (rutinaEjercicio == null)
             {
                 return NotFound();

@@ -6,7 +6,8 @@ import { DeleteDialogBoxComponent } from 'src/app/delete-dialog-box/delete-dialo
 import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { EditRutinaComponent } from 'src/app/edit-rutina/edit-rutina.component';
 import { Rutina } from 'src/app/classes/rutina';
-
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-amb-rutina',
@@ -105,6 +106,55 @@ export class AmbRutinaComponent implements OnInit {
 
   selectRutina(rutina: Rutina) {
     this.rutina.emit(rutina);
+  }
+
+  print() {
+    var columns = [
+      {title: "Nombre de la rutina", dataKey: "nombreRutina"},
+      {title: "Descripcion", dataKey: "descripcionRutina"},
+      {title: "Tipo", dataKey: "tipo"},
+      {title: "Edad mínima", dataKey: "edadMinima"},
+      {title: "Edad máxima", dataKey: "edadMaxima"},
+      {title: "Sexo", dataKey: "sexo"},
+      {title: "Ejercicio", dataKey: "ejercicio"},
+      {title: "Repeticiones", dataKey: "repeticiones"},
+      {title: "Series", dataKey: "series"},
+    ];
+    var rows = [];
+
+    for (let i = 0; i < this.dataSource.data.length; i++) {
+      var dieta = {
+        "nombreRutina": this.dataSource.data[i].Rutina.Nombre,
+        "descripcionRutina": this.dataSource.data[i].Rutina.Descripcion,
+        "tipo": this.dataSource.data[i].Rutina.Tipo,
+        "edadMinima": this.dataSource.data[i].Rutina.EdadMinima,
+        "edadMaxima": this.dataSource.data[i].Rutina.EdadMaxima,
+        "sexo": this.dataSource.data[i].Rutina.Sexo
+      }
+
+      rows.push(dieta);
+      this.dataSource.data[i].RutinaEjercicios.forEach(element => {
+        var ejercicio = {
+          "ejercicio": element.Ejercicio.Descripcion,
+          "repeticiones": element.Repeticiones,
+          "series": element.Series,
+        }  
+        rows.push(ejercicio);
+      });
+      
+    }
+
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows, {styles: {overflow: 'linebreak'}, 
+    columnStyles: {
+      nombreRutina: {columnWidth: 80},
+      descripcionRutina: {columnWidth: 80},
+      edadMinima: {columnWidth: 50},
+      edadMaxima: {columnWidth: 50},
+      repeticiones: {columnWidth:50}
+     }});
+    doc.save('Rutinas.pdf');
   }
 
 }

@@ -60,11 +60,19 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
       data => {
-        if(data.EmpleadoId != undefined && data.EmpleadoId != null){
+        // if(data.EmpleadoId != undefined && data.EmpleadoId != null){
+        //   this.router.navigate([this.returnUrlEmpleado]);
+        //   localStorage.setItem("tipo","1");
+        // }
+        // else if (data.ClienteId != undefined && data.ClienteId != null){
+        //   this.router.navigate([this.returnUrlCliente]);
+        //   localStorage.setItem("tipo","2");
+        // }
+        if(data.Empleado != null){
           this.router.navigate([this.returnUrlEmpleado]);
           localStorage.setItem("tipo","1");
         }
-        else if (data.ClienteId != undefined && data.ClienteId != null){
+        else if (data.Cliente != null){
           this.router.navigate([this.returnUrlCliente]);
           localStorage.setItem("tipo","2");
         }

@@ -7,6 +7,8 @@ import { AltaDietaComponent } from 'src/app/alta-dieta/alta-dieta.component';
 import { EditDietaComponent } from 'src/app/edit-dieta/edit-dieta.component';
 import { Dieta } from '../classes/Dieta';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-abm-dieta',
@@ -106,5 +108,41 @@ export class AbmDietaComponent implements OnInit {
   private refresh(): void {
     this.getAll();
     this.dataSource.connect();
+  }
+
+  print() {
+    var columns = [
+      {title: "Nombre de la dieta", dataKey: "nombreDieta"},
+      {title: "Descripcion de la dieta", dataKey: "descripcionDieta"},
+      {title: "Comida", dataKey: "comida"},
+      {title: "Descripción", dataKey: "descripcionComida"},
+      {title: "Días por semana", dataKey: "diasSemana"},
+      {title: "Calorías", dataKey: "calorias"}
+    ];
+    var rows = [];
+
+    for (let i = 0; i < this.dataSource.data.length; i++) {
+      var dieta = {
+        "nombreDieta": this.dataSource.data[i].Dieta.Nombre,
+        "descripcionDieta": this.dataSource.data[i].Dieta.Descripcion,
+      }
+
+      rows.push(dieta);
+      this.dataSource.data[i].DietaComidas.forEach(element => {
+        var comida = {
+          "comida": element.Comida.Nombre,
+          "descripcionComida": element.Comida.ComidaId,
+          "diasSemana": element.DiasSemana,
+          "calorias": element.Comida.Calorias
+        }  
+        rows.push(comida);
+      });
+      
+    }
+
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.save('Dietas.pdf');
   }
 }
