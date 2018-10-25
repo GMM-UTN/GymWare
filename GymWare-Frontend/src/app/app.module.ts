@@ -54,7 +54,6 @@ import { RutinaClienteComponent } from './rutina-cliente/rutina-cliente.componen
 import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 import { AltaClienteComponent } from './alta-cliente/alta-cliente.component';
 import { ToastrModule } from 'ng6-toastr-notifications';
-import { ExportPdfComponent } from './export-pdf/export-pdf.component';
 
 
 const routes: Routes = [
@@ -158,7 +157,6 @@ const routes: Routes = [
     MembresiaComponent,
     RutinaClienteComponent,
     AltaClienteComponent,
-    ExportPdfComponent
   ],
   imports: [
     BrowserModule,
