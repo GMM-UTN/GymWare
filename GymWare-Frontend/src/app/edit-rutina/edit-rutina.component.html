@@ -4,7 +4,7 @@
 <ng-template #viewLabel>
   <label>Ver Rutina</label>
 </ng-template>
-
+<button class="pdf" (click)="print()">PDF</button>
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
   <div class="form-container">
     <mat-form-field>

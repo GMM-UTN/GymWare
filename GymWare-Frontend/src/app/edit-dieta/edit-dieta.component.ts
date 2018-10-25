@@ -8,6 +8,8 @@ import { DietaService } from '../services/dieta.service';
 import { NgForm } from '@angular/forms';
 import { Dieta } from '../classes/Dieta';
 import { DietaComida } from '../classes/DietaComida';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-edit-dieta',
@@ -151,6 +153,40 @@ export class EditDietaComponent implements OnInit {
     comidaHelper.Comida = comida;
     comidaHelper.DiasSemana = f.value.DiasSemana;
     this.addComida(comidaHelper);
+  }
+
+  print() {
+    var columns = [
+      {title: "Nombre de la dieta", dataKey: "nombreDieta"},
+      {title: "Descripcion de la dieta", dataKey: "descripcionDieta"},
+      {title: "Comida", dataKey: "comida"},
+      {title: "Descripción", dataKey: "descripcionComida"},
+      {title: "Días por semana", dataKey: "diasSemana"},
+      {title: "Calorías", dataKey: "calorias"}
+    ];
+    var rows = [];
+
+    var dieta = {
+      "nombreDieta": this.editedObject.Dieta.Nombre,
+      "descripcionDieta": this.editedObject.Dieta.Descripcion,
+    }
+
+    rows.push(dieta);
+
+    this.editedObject.DietaComidas.forEach(element => {
+      var comida = {
+        "comida": element.Comida.Nombre,
+        "descripcionComida": element.Comida.ComidaId,
+        "diasSemana": element.DiasSemana,
+        "calorias": element.Comida.Calorias
+      }  
+      rows.push(comida);
+    });
+
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.save('Dieta-' + this.editedObject.Dieta.Nombre + '.pdf');
   }
 
 }
