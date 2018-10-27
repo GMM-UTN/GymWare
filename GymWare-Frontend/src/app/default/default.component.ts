@@ -14,5 +14,8 @@ export class DefaultComponent implements OnInit {
     if(localStorage.getItem("currentUser") === undefined || localStorage.getItem("currentUser") === null){
       this._router.navigate(['/']);
     }
+    else if (localStorage.getItem("tipo") == '2') {
+      this._router.navigate(['/']);
+    }
   }
 }

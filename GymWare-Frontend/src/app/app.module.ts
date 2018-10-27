@@ -75,16 +75,16 @@ const routes: Routes = [
     component: PresentacionComponent
   },
   {
+    path: 'cliente',
+    component: ClienteComponent
+  },
+  {
     path: 'default',
     component: DefaultComponent,
     children: [
       {
         path: 'home',
         component: CenterComponent
-      },
-      {
-        path: 'cliente',
-        component: ClienteComponent
       },
       {
         path: 'ejercicios',
