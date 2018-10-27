@@ -36,6 +36,7 @@ export class AltaEjercicioComponent implements OnInit {
     this.ejercicioService.save(editedObject).subscribe( 
       data => { 
          this.editedObject = data
+         this.toastr.successToastr('Ejercicio guardado', 'Exito')
       }, 
       error => this.toastr.errorToastr(error, 'Error')
     ); 

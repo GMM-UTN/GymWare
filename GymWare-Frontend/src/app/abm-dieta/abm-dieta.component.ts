@@ -93,6 +93,7 @@ export class AbmDietaComponent implements OnInit {
 
   delete(id: number): void {
     this.dietaService.delete(id).subscribe( data => {
+      this.toastr.successToastr('Dieta eliminada', 'Exito')
       this.refresh();
     },
     error => this.toastr.errorToastr(error, 'Error')

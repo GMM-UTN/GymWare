@@ -101,6 +101,7 @@ export class AltaDietaComponent implements OnInit {
     
     this.dietaService.save(dietaComidasDTO).subscribe(data => {
       this.dialogRef.close(data);
+      this.toastr.successToastr('Dieta guardada', 'Exito')
     },
     error => this.toastr.errorToastr(error, 'Error')
     );

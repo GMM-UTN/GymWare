@@ -10,6 +10,7 @@ import { RutinaEjerciciosDTO } from '../classes/rutinaEjerciciosDTO';
 import { RutinaEjercicio } from '../classes/rutinaEjercicio';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-rutina',
@@ -34,7 +35,8 @@ export class EditRutinaComponent implements OnInit {
     private ejercicioService: EjercicioService, 
     private rutinaService: RutinaService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditRutinaComponent>) {
+    public dialogRef: MatDialogRef<EditRutinaComponent>,
+    private toastr: ToastrManager) {
       this.enableEdit = data.edit;
       this.editedObject = data.editedObject;
       this.dataSource = new MatTableDataSource([]);
@@ -119,8 +121,9 @@ export class EditRutinaComponent implements OnInit {
       this.rutinaService.update(rutinaEjerciciosDTO as RutinaEjerciciosDTO).subscribe( 
         data => { 
           this.dialogRef.close(data);
+          this.toastr.successToastr('Rutina modificada', 'Exito')
         }, 
-        error => alert(error) 
+        error => this.toastr.errorToastr(error, 'Error')
       ); 
     } 
   }

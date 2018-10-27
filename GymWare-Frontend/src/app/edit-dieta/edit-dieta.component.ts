@@ -10,6 +10,7 @@ import { Dieta } from '../classes/Dieta';
 import { DietaComida } from '../classes/DietaComida';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-dieta',
@@ -34,7 +35,8 @@ export class EditDietaComponent implements OnInit {
     private comidaService: ComidaService, 
     private dietaService: DietaService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditDietaComponent>) {
+    public dialogRef: MatDialogRef<EditDietaComponent>,
+    private toastr: ToastrManager) {
       this.enableEdit = data.edit;
       this.editedObject = data.editedObject;
       this.dataSource = new MatTableDataSource([]);
@@ -118,8 +120,9 @@ export class EditDietaComponent implements OnInit {
       this.dietaService.update(dietaComidasDTO as DietaComidaDTO).subscribe( 
         data => { 
           this.dialogRef.close(data);
+          this.toastr.successToastr('Dieta modificada', 'Exito')
         }, 
-        error => alert(error) 
+        error => this.toastr.errorToastr(error, 'Error')
       ); 
     } 
   }

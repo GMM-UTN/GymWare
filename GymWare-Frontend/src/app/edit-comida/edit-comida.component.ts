@@ -3,6 +3,7 @@ import { Comida } from '../classes/comida';
 import { ComidaService } from '../services/comida.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-comida',
@@ -17,7 +18,8 @@ export class EditComidaComponent implements OnInit {
   constructor(
     private comidaService: ComidaService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditComidaComponent>) {
+    public dialogRef: MatDialogRef<EditComidaComponent>,
+    private toastr: ToastrManager) {
       this.enableEdit = data.edit;
      }
 
@@ -41,8 +43,9 @@ export class EditComidaComponent implements OnInit {
     this.comidaService.update(comida as Comida).subscribe( 
       data => { 
         this.dialogRef.close(data);
+        this.toastr.successToastr('Comida modificada', 'Exito')
       }, 
-      error => alert(error) 
+      error => this.toastr.errorToastr(error, 'Error')
     ); 
     
   }

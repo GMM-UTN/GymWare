@@ -95,6 +95,7 @@ export class AltaRutinaComponent implements OnInit {
     
     this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
       this.dialogRef.close(data);
+      this.toastr.successToastr('Rutina guardada', 'Exito')
     },
     error => this.toastr.errorToastr(error, 'Error')
     );
