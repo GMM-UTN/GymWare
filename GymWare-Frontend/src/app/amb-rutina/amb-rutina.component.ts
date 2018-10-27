@@ -8,6 +8,7 @@ import { EditRutinaComponent } from 'src/app/edit-rutina/edit-rutina.component';
 import { Rutina } from 'src/app/classes/rutina';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-amb-rutina',
@@ -27,7 +28,8 @@ export class AmbRutinaComponent implements OnInit {
 
   constructor(
     private rutinaService: RutinaService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private toastr: ToastrManager) {
     this.dataSource = new MatTableDataSource([]);
    }
 
@@ -87,9 +89,10 @@ export class AmbRutinaComponent implements OnInit {
 
   delete(id: number): void {
     this.rutinaService.delete(id).subscribe( data => {
+      this.toastr.successToastr('Rutina eliminada', 'Exito')
       this.refresh();
     },
-    error => alert(error)
+    error => this.toastr.errorToastr(error, 'Error')
     );
   }
 

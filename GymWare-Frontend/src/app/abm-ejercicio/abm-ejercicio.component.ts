@@ -44,7 +44,10 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   openDialogAlta() {
-    const dialogRef = this.dialog.open(AltaEjercicioComponent);
+    const dialogRef = this.dialog.open(AltaEjercicioComponent, {
+      height: '25%',
+      width: '40%',
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       this.getAll();
@@ -53,8 +56,10 @@ export class AbmEjercicioComponent implements OnInit {
   }
 
   openDialogBaja(id: number) {
-    const dialogRef = this.dialog.open(DeleteDialogBoxComponent
-    );
+    const dialogRef = this.dialog.open(DeleteDialogBoxComponent,{
+      height: '25%',
+      width: '25%',
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
@@ -67,8 +72,12 @@ export class AbmEjercicioComponent implements OnInit {
 
   openDialogModification(editedObject: any, edit: Boolean) {
     const dialogRef = this.dialog.open(EditEjercicioComponent, 
-      {data :
-        { editedObject: editedObject, 
+      {
+        height: '25%',
+        width: '40%',
+        data :
+        { 
+          editedObject: editedObject, 
           edit: edit
         }
       }
@@ -96,6 +105,7 @@ export class AbmEjercicioComponent implements OnInit {
 
   delete(id: number): void {
     this.ejercicioService.delete(id).subscribe( data => {
+      this.toastr.successToastr('Ejercicio eliminado', 'Exito')
       this.refresh();
     },
     error => this.toastr.errorToastr(error, 'Error')

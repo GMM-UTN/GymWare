@@ -54,6 +54,7 @@ import { RutinaClienteComponent } from './rutina-cliente/rutina-cliente.componen
 import { AmbRutinaComponent } from './amb-rutina/amb-rutina.component';
 import { AltaClienteComponent } from './alta-cliente/alta-cliente.component';
 import { ToastrModule } from 'ng6-toastr-notifications';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 const routes: Routes = [
@@ -184,6 +185,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     ChartsModule,
+    MatChipsModule
   ],
   providers: [
     EjercicioService,

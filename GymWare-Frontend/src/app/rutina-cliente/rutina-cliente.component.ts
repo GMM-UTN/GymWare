@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { RutinaService } from '../services/rutina.service';
 import { AuthenticationService } from '../services';
 import { Empleado } from 'src/app/classes/Empleado';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-rutina-cliente',
@@ -30,7 +31,8 @@ export class RutinaClienteComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private rutinaService: RutinaService,
-    private authService: AuthenticationService) {
+    private authService: AuthenticationService,
+    private toastr: ToastrManager) {
       this.editedObject = new EmpleadoClienteRutina();
     }
 
@@ -73,8 +75,9 @@ export class RutinaClienteComponent implements OnInit {
       data => { 
         this.editedObject = data
         this.router.navigate(['/default/rutinas']);
+        this.toastr.successToastr('Rutina para cliente definida', 'Exito')
       }, 
-      error => alert(error) 
+      error => this.toastr.errorToastr(error, 'Error')
     ); 
   }
 

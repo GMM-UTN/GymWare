@@ -99,6 +99,7 @@ export class AbmComidaComponent implements OnInit {
 
   delete(id: number): void {
     this.comidaService.delete(id).subscribe( data => {
+      this.toastr.successToastr('Comida eliminada', 'Exito')
       this.refresh();
     },
     error => this.toastr.errorToastr(error, 'Error')

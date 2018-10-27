@@ -67,6 +67,7 @@ export class DietaClienteComponent implements OnInit {
       data => { 
         this.editedObject = data
         this.router.navigate(['/default/dietas']);
+        this.toastr.successToastr('Dieta para cliente definida', 'Exito')
       }, 
       error => this.toastr.errorToastr(error, 'Error')
     ); 

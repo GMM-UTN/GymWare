@@ -37,6 +37,7 @@ export class AltaComidaComponent implements OnInit {
     this.comidaService.save(editedObject).subscribe( 
       data => { 
          this.editedObject = data
+         this.toastr.successToastr('Comida guardada', 'Exito')
       }, 
       error => this.toastr.errorToastr(error, 'Error') 
     ); 

@@ -3,6 +3,7 @@ import { EjercicioService } from '../services/ejercicio.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { Ejercicio } from '../classes/ejercicio';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-edit-ejercicio',
@@ -17,7 +18,8 @@ export class EditEjercicioComponent implements OnInit {
   constructor(
     private ejercicioService: EjercicioService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<EditEjercicioComponent>) {
+    public dialogRef: MatDialogRef<EditEjercicioComponent>,
+    private toastr: ToastrManager) {
       this.enableEdit = data.edit;
      }
 
@@ -39,8 +41,9 @@ export class EditEjercicioComponent implements OnInit {
     this.ejercicioService.update(ejercicio as Ejercicio).subscribe( 
       data => { 
         this.dialogRef.close(data);
+        this.toastr.successToastr('Ejercicio modificado', 'Exito')
       }, 
-      error => alert(error) 
+      error => this.toastr.errorToastr(error, 'Error')
     ); 
     
   }

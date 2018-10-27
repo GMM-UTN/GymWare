@@ -1,0 +1,17 @@
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container > * {
+  width: 100%;
+}
+
+mat-card {
+  width: 50%;
+}
