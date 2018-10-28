@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'node_modules/rxjs';
 import { Ejercicio } from '../classes/ejercicio';
 import { CRUDHttpService, baseURL, httpOptions } from '../interfaces/CRUDHttpService';
-import { map, filter, scan } from 'rxjs/operators';
 import { catchError, tap } from 'rxjs/operators';
-import { EmpleadoClienteRutina } from '../classes/EmpleadoClienteRutina';
 
 const url = baseURL + 'ejercicios';
 

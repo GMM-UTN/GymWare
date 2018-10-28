@@ -31,11 +31,11 @@ export class AmbRutinaComponent implements OnInit {
     public dialog: MatDialog,
     private toastr: ToastrManager) {
     this.dataSource = new MatTableDataSource([]);
-   }
+  }
 
   ngOnInit() {
     this.getAll();
-    this.dataSource.filterPredicate = function(data, filter): boolean {
+    this.dataSource.filterPredicate = function (data, filter): boolean {
       return data.Rutina.Nombre.toLowerCase().includes(filter);
     };
   }
@@ -50,7 +50,11 @@ export class AmbRutinaComponent implements OnInit {
   }
 
   openDialogAlta() {
-    const dialogRef = this.dialog.open(AltaRutinaComponent);
+    const dialogRef = this.dialog.open(AltaRutinaComponent,{
+      height: '60%',
+      width: '70%',
+
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       this.getAll();
@@ -63,7 +67,7 @@ export class AmbRutinaComponent implements OnInit {
     );
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.delete(id);
         this.getAll();
         this.dataSource.connect();
@@ -72,13 +76,17 @@ export class AmbRutinaComponent implements OnInit {
   }
 
   openDialogModification(editedObject: any, edit: Boolean) {
-    const dialogRef = this.dialog.open(EditRutinaComponent, 
-      {data :
-        { editedObject: editedObject, 
+    const dialogRef = this.dialog.open(EditRutinaComponent,
+      {
+        height: '60%',
+        width: '70%',
+        data:
+        {
+          editedObject: editedObject,
           edit: edit
         }
       }
-      
+
     );
 
     dialogRef.afterClosed().subscribe(result => {
@@ -88,15 +96,15 @@ export class AmbRutinaComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.rutinaService.delete(id).subscribe( data => {
+    this.rutinaService.delete(id).subscribe(data => {
       this.toastr.successToastr('Rutina eliminada', 'Exito')
       this.refresh();
     },
-    error => this.toastr.errorToastr(error, 'Error')
+      error => this.toastr.errorToastr(error, 'Error')
     );
   }
 
-  getAll():void {
+  getAll(): void {
     this.rutinaService.getAll().subscribe(data => {
       this.dataSource.data = data;
     });
@@ -113,15 +121,15 @@ export class AmbRutinaComponent implements OnInit {
 
   print() {
     var columns = [
-      {title: "Nombre de la rutina", dataKey: "nombreRutina"},
-      {title: "Descripcion", dataKey: "descripcionRutina"},
-      {title: "Tipo", dataKey: "tipo"},
-      {title: "Edad mínima", dataKey: "edadMinima"},
-      {title: "Edad máxima", dataKey: "edadMaxima"},
-      {title: "Sexo", dataKey: "sexo"},
-      {title: "Ejercicio", dataKey: "ejercicio"},
-      {title: "Repeticiones", dataKey: "repeticiones"},
-      {title: "Series", dataKey: "series"},
+      { title: "Nombre de la rutina", dataKey: "nombreRutina" },
+      { title: "Descripcion", dataKey: "descripcionRutina" },
+      { title: "Tipo", dataKey: "tipo" },
+      { title: "Edad mínima", dataKey: "edadMinima" },
+      { title: "Edad máxima", dataKey: "edadMaxima" },
+      { title: "Sexo", dataKey: "sexo" },
+      { title: "Ejercicio", dataKey: "ejercicio" },
+      { title: "Repeticiones", dataKey: "repeticiones" },
+      { title: "Series", dataKey: "series" },
     ];
     var rows = [];
 
@@ -141,22 +149,24 @@ export class AmbRutinaComponent implements OnInit {
           "ejercicio": element.Ejercicio.Descripcion,
           "repeticiones": element.Repeticiones,
           "series": element.Series,
-        }  
+        }
         rows.push(ejercicio);
       });
-      
+
     }
 
     // Only pt supported (not mm or in)
     var doc = new jsPDF('p', 'pt');
-    doc.autoTable(columns, rows, {styles: {overflow: 'linebreak'}, 
-    columnStyles: {
-      nombreRutina: {columnWidth: 80},
-      descripcionRutina: {columnWidth: 80},
-      edadMinima: {columnWidth: 50},
-      edadMaxima: {columnWidth: 50},
-      repeticiones: {columnWidth:50}
-     }});
+    doc.autoTable(columns, rows, {
+      styles: { overflow: 'linebreak' },
+      columnStyles: {
+        nombreRutina: { columnWidth: 80 },
+        descripcionRutina: { columnWidth: 80 },
+        edadMinima: { columnWidth: 50 },
+        edadMaxima: { columnWidth: 50 },
+        repeticiones: { columnWidth: 50 }
+      }
+    });
     doc.save('Rutinas.pdf');
   }
 

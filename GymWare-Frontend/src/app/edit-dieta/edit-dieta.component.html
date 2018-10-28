@@ -1,65 +1,86 @@
+<button class="pdf" (click)="print()">PDF</button>
+
 <ng-container *ngIf="enableEdit;else viewLabel">
-  <label>Editar Dieta</label>
+  <label mat-dialog-title>Editar Dieta</label>
 </ng-container>
 <ng-template #viewLabel>
-  <label>Ver Dieta</label>
+  <label mat-dialog-title>Ver Dieta</label>
 </ng-template>
-<button class="pdf" (click)="print()">PDF</button>
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <div class="form-container">
-    <mat-form-field>
-      <input matInput placeholder="Nombre" [disabled]="!enableEdit" ngModel name="Nombre" [(ngModel)]="editedObject.Dieta.Nombre"/>
-    </mat-form-field>
-    <mat-form-field>
-      <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" ngModel name="Descripcion" [(ngModel)]="editedObject.Dieta.Descripcion"></textarea>
-    </mat-form-field>
-    <button mat-raised-button color="primary" [hidden]="!enableEdit" type="submit">Guardar</button>
-  </div>
-</form>
 
-<form #formComida="ngForm" (ngSubmit)="onSubmitComida(formComida)" [hidden]="!enableEdit" novalidate>
-  <div class="form-container">
-    <mat-select placeholder="Comidas" ngModel name="cboxComidas">
-      <mat-option *ngFor="let comida of cboxComidas" [value]="comida">
-        {{comida.Nombre}}
-      </mat-option>
-    </mat-select>
-    <mat-form-field>
-      <input matInput placeholder="Dias a la semana" value="1" type=number min="1" max="7" ngModel name="DiasSemana" />
-    </mat-form-field>
-    <button mat-mini-fab color="primary" type="submit">
-      <i class="material-icons">add</i>
-    </button>
-  </div>
-</form>
+<mat-tab-group>
+  <mat-tab label="Datos">
+    <mat-dialog-content class="mat-typography mx-0">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="form-container col-lg-12 table-custom">
+          <div class="col-lg-12 div-form">
+            <mat-form-field class="col-lg-12 mt-5">
+              <input matInput placeholder="Nombre" [disabled]="!enableEdit" ngModel name="Nombre" [(ngModel)]="editedObject.Dieta.Nombre" />
+            </mat-form-field>
+            <mat-form-field class="col-lg-12 mt-3">
+              <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" ngModel name="Descripcion"
+                [(ngModel)]="editedObject.Dieta.Descripcion"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="offset-lg-9 col-lg-3 mt-5">
+            <button class="mr-3" mat-raised-button color="primary" [hidden]="!enableEdit" type="submit">Guardar</button>
+            <button mat-raised-button color="warn" [mat-dialog-close] [hidden]="!enableEdit">Cancelar</button>
+          </div>
+          <div class="button-row col-lg-2 offset-lg-10">
+            <button mat-raised-button mat-dialog-close color="primary" [hidden]="enableEdit">Cerrar</button>
+          </div>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-tab>
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
+  <mat-tab label="Comidas">
+    <mat-dialog-content class="mat-typography mx-0">
+      <form #formComida="ngForm" (ngSubmit)="onSubmitComida(formComida)" [hidden]="!enableEdit" novalidate>
+        <div class="form-container">
+          <mat-select placeholder="Comidas" ngModel name="cboxComidas">
+            <mat-option *ngFor="let comida of cboxComidas" [value]="comida">
+              {{comida.Nombre}}
+            </mat-option>
+          </mat-select>
+          <mat-form-field>
+            <input matInput placeholder="Dias a la semana" value="1" type=number min="1" max="7" ngModel name="DiasSemana" />
+          </mat-form-field>
+          <button mat-mini-fab color="primary" type="submit">
+            <i class="material-icons">add</i>
+          </button>
+        </div>
+      </form>
 
-  <ng-container matColumnDef="Nombre">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Nombre </th>
-    <td mat-cell *matCellDef="let element"> {{element.Comida.Nombre}} </td>
-  </ng-container>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
 
-  <ng-container matColumnDef="Calorias">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Calorias </th>
-    <td mat-cell *matCellDef="let element"> {{element.Comida.Calorias}} </td>
-  </ng-container>
+        <ng-container matColumnDef="Nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.Comida.Nombre}} </td>
+        </ng-container>
 
-  <ng-container matColumnDef="DiasSemana">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Dias a la semana </th>
-    <td mat-cell *matCellDef="let element"> {{element.DiasSemana}} </td>
-  </ng-container>
+        <ng-container matColumnDef="Calorias">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Calorias </th>
+          <td mat-cell *matCellDef="let element"> {{element.Comida.Calorias}} </td>
+        </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="warn" >
-        <i class="material-icons" (click)="removeComida(element.Comida.ComidaId)">delete</i>
-      </button>
-    </td>
-  </ng-container>
+        <ng-container matColumnDef="DiasSemana">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Dias a la semana </th>
+          <td mat-cell *matCellDef="let element"> {{element.DiasSemana}} </td>
+        </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="warn">
+              <i class="material-icons" (click)="removeComida(element.Comida.ComidaId)">delete</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+    </mat-dialog-content>
+  </mat-tab>
+</mat-tab-group>

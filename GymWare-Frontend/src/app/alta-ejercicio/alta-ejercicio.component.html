@@ -5,9 +5,9 @@
     <mat-form-field>
       <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea>
     </mat-form-field>
-    <div class="button-row">
+    <div class="button-row col-lg-5 offset-lg-7">
       <button mat-raised-button color="primary" type="submit">Guardar</button>
-      <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+      <button mat-raised-button [mat-dialog-close] color="warn">Cancelar</button>
     </div>
   </div>
 </form>

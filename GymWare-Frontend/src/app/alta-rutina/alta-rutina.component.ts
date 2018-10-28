@@ -19,8 +19,8 @@ export class AltaRutinaComponent implements OnInit {
 
   cboxEjercicios: Ejercicio[];
   private selectedEjercicios: EjercicioHelper[] = [];
-  
-  displayedColumns: string[] = ['EjercicioId', 'Descripcion', 'Series', 'Repeticiones', 'actions'];
+
+  displayedColumns: string[] = ['Descripcion', 'Series', 'Repeticiones', 'actions'];
   dataSource: MatTableDataSource<EjercicioHelper>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -89,16 +89,20 @@ export class AltaRutinaComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
-    rutinaEjerciciosDTO.Rutina = this.setRutinaAtributes(f);
-    rutinaEjerciciosDTO.RutinaEjercicios = this.setRutinaEjerciciosList(f);
-    
-    this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
-      this.dialogRef.close(data);
-      this.toastr.successToastr('Rutina guardada', 'Exito')
-    },
-    error => this.toastr.errorToastr(error, 'Error')
-    );
+    if (this.validate()) {
+      var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
+      rutinaEjerciciosDTO.Rutina = this.setRutinaAtributes(f);
+      rutinaEjerciciosDTO.RutinaEjercicios = this.setRutinaEjerciciosList(f);
+
+      this.rutinaService.save(rutinaEjerciciosDTO).subscribe(data => {
+        this.dialogRef.close(data);
+        this.toastr.successToastr('Rutina guardada', 'Exito')
+      },
+        error => this.toastr.errorToastr(error, 'Error')
+      );
+    } else {
+      this.toastr.errorToastr('Debe agregar al menos un ejercicio', 'Error');
+    }
   }
 
   setRutinaAtributes(f: NgForm): Rutina {
@@ -133,6 +137,10 @@ export class AltaRutinaComponent implements OnInit {
     ejercicioHelper.series = f.value.Series;
     ejercicioHelper.repeticiones = f.value.Repeticiones;
     this.addEjercicio(ejercicioHelper);
+  }
+
+  validate(): Boolean {
+    return this.selectedEjercicios.length != 0;
   }
 
 }

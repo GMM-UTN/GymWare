@@ -1,6 +1,6 @@
-<mat-horizontal-stepper [linear]="false" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-      
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+
     <ng-template matStepLabel>Cliente</ng-template>
 
     <app-abm-cliente (cliente)="onSelectCliente($event)"></app-abm-cliente>
@@ -12,36 +12,29 @@
     <app-amb-rutina [onlyCheck]="true" (rutina)="onSelectRutina($event)"></app-amb-rutina>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup" validate>
-  
-        <ng-template matStepLabel>Periodo</ng-template>
-  
-        <mat-form-field>
-          <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" required>
+  <mat-step>
+    <form #f="ngForm" (ngSubmit)="onSubmitFormFechas(f)" novalidate>
+
+      <ng-template matStepLabel>Periodo</ng-template>
+
+      <div class="col-lg-12 div-form">
+        <mat-form-field class="offset-lg-3 col-lg-3">
+          <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" ngModel name="fechaInicio" required>
           <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
           <mat-datepicker #fechaInicio></mat-datepicker>
         </mat-form-field>
-  
-        <mat-form-field>
-          <input matInput [matDatepicker]="fechaFin" placeholder="Fecha fin" required>
+
+        <mat-form-field class="ml-3 col-lg-3">
+          <input matInput [matDatepicker]="fechaFin" placeholder="Fecha fin" ngModel name="fechaFin" required>
           <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
           <mat-datepicker #fechaFin></mat-datepicker>
         </mat-form-field>
-  
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Next</button>
-        </div>
-      </form>
-    </mat-step>
+      </div>
 
-  <mat-step>
-    <ng-template matStepLabel>Terminar</ng-template>
-    Definir rutina para cliente terminado.
-    <div>
-      <button  mat-raised-button matStepperPrevious>Volver</button>
-      <button  mat-raised-button (click)="save()" color="primary">Guardar</button>
-    </div>
+      <div class="offset-5 col-lg-7 mt-5 div-form">
+        <button class="mr-3" mat-raised-button matStepperPrevious>Atras</button>
+        <button mat-raised-button matStepperNext type="submit" color="primary">Finalizar</button>
+      </div>
+    </form>
   </mat-step>
 </mat-horizontal-stepper>
