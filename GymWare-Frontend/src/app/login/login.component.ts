@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     // get return url from route parameters or default to '/'
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.returnUrlEmpleado = this.route.snapshot.queryParams['returnUrl'] || '/default/home';
-    this.returnUrlCliente = this.route.snapshot.queryParams['returnUrl'] || '/default/cliente';
+    this.returnUrlCliente = this.route.snapshot.queryParams['returnUrl'] || '/cliente';
   }
 
   get f() { return this.loginForm.controls; }
