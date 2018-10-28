@@ -121,6 +121,10 @@ const routes: Routes = [
         component: RutinaClienteComponent
       },
       {
+        path: 'abm-cliente',
+        component: AbmClienteComponent
+      },
+      {
         path: 'alta-cliente',
         component: AltaClienteComponent
       }

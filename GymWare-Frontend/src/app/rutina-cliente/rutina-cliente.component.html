@@ -3,7 +3,7 @@
 
     <ng-template matStepLabel>Cliente</ng-template>
 
-    <app-abm-cliente (cliente)="onSelectCliente($event)"></app-abm-cliente>
+    <app-abm-cliente [check]="true" (cliente)="onSelectCliente($event)"></app-abm-cliente>
 
   </mat-step>
 
