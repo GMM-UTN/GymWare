@@ -9,11 +9,13 @@ import { RutinaService } from '../services/rutina.service';
 import { AuthenticationService } from '../services';
 import { Empleado } from 'src/app/classes/Empleado';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-rutina-cliente',
   templateUrl: './rutina-cliente.component.html',
-  styleUrls: ['./rutina-cliente.component.css']
+  styleUrls: ['./rutina-cliente.component.css'],
+  providers: [DatePipe]
 })
 export class RutinaClienteComponent implements OnInit {
 
@@ -29,20 +31,14 @@ export class RutinaClienteComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
     private rutinaService: RutinaService,
     private authService: AuthenticationService,
-    private toastr: ToastrManager) {
+    private toastr: ToastrManager,
+    private datepipe: DatePipe) {
       this.editedObject = new EmpleadoClienteRutina();
     }
 
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
   }
 
   onSelectRutina(rutina: Rutina) {
@@ -57,10 +53,14 @@ export class RutinaClienteComponent implements OnInit {
     this.stepper.next();
   }
 
-  submitFormFechas(form: NgForm) {
-    this.editedObject.FechaInicio = form.value.fechaInicio;
-    this.editedObject.FechaFin = form.value.fechaFin;
-    this.stepper.next();
+  onSubmitFormFechas(form: NgForm) {
+    if(this.validate(form.value.fechaInicio,form.value.fechaFin)){
+      this.editedObject.FechaInicio = this.datepipe.transform(form.value.fechaInicio, 'yyyy-MM-dd');
+      this.editedObject.FechaFin = this.datepipe.transform(form.value.fechaFin, 'yyyy-MM-dd');
+      this.save();
+    } else {
+      this.toastr.errorToastr('La fecha de inicio es mayor a la fecha de fin', 'Error');
+    }  
   }
 
   save() {
@@ -79,6 +79,10 @@ export class RutinaClienteComponent implements OnInit {
       }, 
       error => this.toastr.errorToastr(error, 'Error')
     ); 
+  }
+
+  validate(fechaInicio: Date, fechaFin: Date): Boolean{
+    return fechaInicio < fechaFin;
   }
 
 }

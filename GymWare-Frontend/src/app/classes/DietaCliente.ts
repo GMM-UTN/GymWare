@@ -6,6 +6,6 @@ export class DietaCliente {
     DietaClienteId: number;
     Dieta: Dieta;
     Cliente: Cliente;
-    FechaInicio: Date;
-    FechaFin: Date;
+    FechaInicio: String;
+    FechaFin: String;
 }

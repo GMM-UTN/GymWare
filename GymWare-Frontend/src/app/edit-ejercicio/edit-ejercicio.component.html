@@ -6,14 +6,16 @@
 </ng-template>
 
 
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate> 
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
   <div class="form-container">
     <mat-form-field>
-        <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" name="Descripcion" [(ngModel)]="data.editedObject.Descripcion"></textarea> 
+      <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" name="Descripcion" [(ngModel)]="data.editedObject.Descripcion"></textarea>
     </mat-form-field>
-    <div class="button-row">
+    <div class="button-row col-lg-5 offset-lg-7">
       <button mat-raised-button color="primary" type="submit" [hidden]="!enableEdit">Guardar</button>
       <button mat-raised-button mat-dialog-close color="warn" [hidden]="!enableEdit">Cancelar</button>
+    </div>
+    <div class="button-row col-lg-3 offset-lg-9">
       <button mat-raised-button mat-dialog-close color="primary" [hidden]="enableEdit">Cerrar</button>
     </div>
   </div>

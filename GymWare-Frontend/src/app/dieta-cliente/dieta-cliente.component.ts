@@ -7,11 +7,13 @@ import { MatStepper } from '@angular/material';
 import { DietaService } from '../services/dieta.service';
 import { Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dieta-cliente',
   templateUrl: './dieta-cliente.component.html',
-  styleUrls: ['./dieta-cliente.component.css']
+  styleUrls: ['./dieta-cliente.component.css'],
+  providers: [DatePipe]
 })
 export class DietaClienteComponent implements OnInit {
 
@@ -27,19 +29,13 @@ export class DietaClienteComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
     private dietaService: DietaService,
-    public toastr: ToastrManager) {
+    public toastr: ToastrManager,
+    private datepipe: DatePipe) {
       this.editedObject = new DietaCliente();
     }
 
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
   }
 
   onSelectDieta(dieta: Dieta) {
@@ -54,10 +50,14 @@ export class DietaClienteComponent implements OnInit {
     this.stepper.next();
   }
 
-  submitFormFechas(form: NgForm) {
-    this.editedObject.FechaInicio = form.value.fechaInicio;
-    this.editedObject.FechaFin = form.value.fechaFin;
-    this.stepper.next();
+  onSubmitFormFechas(form: NgForm) {
+    if(this.validate(form.value.fechaInicio,form.value.fechaFin)){
+      this.editedObject.FechaInicio = this.datepipe.transform(form.value.fechaInicio, 'yyyy-MM-dd');
+      this.editedObject.FechaFin = this.datepipe.transform(form.value.fechaFin, 'yyyy-MM-dd');
+      this.save();
+    } else {
+      this.toastr.errorToastr('La fecha de inicio es mayor a la fecha de fin', 'Error');
+    }  
   }
 
   save() {
@@ -73,4 +73,7 @@ export class DietaClienteComponent implements OnInit {
     ); 
   }
 
+  validate(fechaInicio: Date, fechaFin: Date): Boolean{
+    return fechaInicio < fechaFin;
+  }
 }

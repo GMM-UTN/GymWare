@@ -50,7 +50,10 @@ export class AbmDietaComponent implements OnInit {
   }
 
   openDialogAlta() {
-    const dialogRef = this.dialog.open(AltaDietaComponent);
+    const dialogRef = this.dialog.open(AltaDietaComponent,{
+      height: '60%',
+      width: '70%',
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       this.getAll();
@@ -73,7 +76,10 @@ export class AbmDietaComponent implements OnInit {
 
   openDialogModification(editedObject: any, edit: Boolean) {
     const dialogRef = this.dialog.open(EditDietaComponent, 
-      {data :
+      {
+        height: '60%',
+        width: '70%',
+        data :
         { editedObject: editedObject, 
           edit: edit
         }

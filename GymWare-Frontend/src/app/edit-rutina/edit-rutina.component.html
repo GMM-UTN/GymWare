@@ -5,77 +5,108 @@
   <label>Ver Rutina</label>
 </ng-template>
 <button class="pdf" (click)="print()">PDF</button>
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <div class="form-container">
-    <mat-form-field>
-      <input matInput placeholder="Nombre" [disabled]="!enableEdit" ngModel name="Nombre" [(ngModel)]="editedObject.Rutina.Nombre"/>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Tipo" [disabled]="!enableEdit" ngModel name="Tipo" [(ngModel)]="editedObject.Rutina.Tipo"/>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="EdadMin" [disabled]="!enableEdit" type=number min="1" ngModel name="EdadMinima" [(ngModel)]="editedObject.Rutina.EdadMinima"/>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="EdadMax" [disabled]="!enableEdit" type=number min="1" max="1" ngModel name="EdadMaxima" [(ngModel)]="editedObject.Rutina.EdadMaxima"/>
-    </mat-form-field>
-    <mat-radio-group ngModel name="Sexo" [disabled]="!enableEdit" [(ngModel)]="editedObject.Rutina.Sexo">
-      <mat-radio-button value="Hombre">Hombre</mat-radio-button>
-      <mat-radio-button value="Mujer">Mujer</mat-radio-button>
-    </mat-radio-group>
-    <mat-form-field>
-      <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" ngModel name="Descripcion" [(ngModel)]="editedObject.Rutina.Descripcion"></textarea>
-    </mat-form-field>
-    <button mat-raised-button color="primary" [hidden]="!enableEdit" type="submit">Guardar</button>
-  </div>
-</form>
 
-<form #formEjercicio="ngForm" (ngSubmit)="onSubmitEjercicio(formEjercicio)" [hidden]="!enableEdit" novalidate>
-  <div class="form-container">
-    <mat-select placeholder="Ejercicios" ngModel name="cboxEjercicios">
-      <mat-option *ngFor="let ejercicio of cboxEjercicios" [value]="ejercicio">
-        {{ejercicio.Descripcion}}
-      </mat-option>
-    </mat-select>
-    <mat-form-field>
-      <input matInput placeholder="Series" value="1" type=number min="1" max="100" ngModel name="Series" />
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Repeticiones" value="1" type=number min="1" max="100" ngModel name="Repeticiones" />
-    </mat-form-field>
-    <button mat-mini-fab color="primary" type="submit">
-      <i class="material-icons">add</i>
-    </button>
-  </div>
-</form>
+<mat-tab-group>
+  <mat-tab label="Datos">
+    <mat-dialog-content class="mat-typography mx-0">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="form-container col-lg-12 table-custom">
+          <div class="col-lg-12 div-form">
+            <mat-form-field class="col-lg-4">
+              <input matInput placeholder="Nombre" [disabled]="!enableEdit" ngModel name="Nombre" [(ngModel)]="editedObject.Rutina.Nombre" />
+            </mat-form-field>
+            <mat-form-field class="col-lg-4">
+              <input matInput placeholder="Tipo" [disabled]="!enableEdit" ngModel name="Tipo" [(ngModel)]="editedObject.Rutina.Tipo" />
+            </mat-form-field>
+            <mat-form-field class="col-lg-2">
+              <input matInput placeholder="EdadMin" [disabled]="!enableEdit" type=number min="1" ngModel name="EdadMinima"
+                [(ngModel)]="editedObject.Rutina.EdadMinima" />
+            </mat-form-field>
+            <mat-form-field class="col-lg-2">
+              <input matInput placeholder="EdadMax" [disabled]="!enableEdit" type=number min="1" max="1" ngModel name="EdadMaxima"
+                [(ngModel)]="editedObject.Rutina.EdadMaxima" />
+            </mat-form-field>
+          </div>
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
+          <div class="col-lg-12 div-form">
+            <mat-radio-group ngModel name="Sexo" [disabled]="!enableEdit" [(ngModel)]="editedObject.Rutina.Sexo">
+              <mat-radio-button value="Hombre" class="col-lg-2">Hombre</mat-radio-button>
+              <mat-radio-button value="Mujer" class="col-lg-2">Mujer</mat-radio-button>
+            </mat-radio-group>
+          </div>
 
-  <ng-container matColumnDef="Descripcion">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
-    <td mat-cell *matCellDef="let element"> {{element.ejercicio.Descripcion}} </td>
-  </ng-container>
+          <div class="col-lg-12 div-form">
+            <mat-form-field class="col-lg-12">
+              <textarea matInput placeholder="Descripcion" [disabled]="!enableEdit" ngModel name="Descripcion"
+                [(ngModel)]="editedObject.Rutina.Descripcion"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
 
-  <ng-container matColumnDef="Series">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Series </th>
-    <td mat-cell *matCellDef="let element"> {{element.series}} </td>
-  </ng-container>
+        <div class="button-row col-lg-3 offset-lg-9 mt-5">
+          <button class="mr-3" mat-raised-button color="primary" type="submit" [hidden]="!enableEdit">Guardar</button>
+          <button mat-raised-button mat-dialog-close color="warn" [hidden]="!enableEdit">Cancelar</button>
+        </div>
+        <div class="button-row col-lg-2 offset-lg-10">
+          <button mat-raised-button mat-dialog-close color="primary" [hidden]="enableEdit">Cerrar</button>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-tab>
 
-  <ng-container matColumnDef="Repeticiones">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Repeticiones </th>
-    <td mat-cell *matCellDef="let element"> {{element.repeticiones}} </td>
-  </ng-container>
+  <mat-tab label="Ejercicios">
+    <mat-dialog-content class="mat-typography mx-0">
+      <form #formEjercicio="ngForm" (ngSubmit)="onSubmitEjercicio(formEjercicio)" [hidden]="!enableEdit" novalidate>
+        <div class="form-container col-lg-12">
+          <mat-select placeholder="Ejercicios" ngModel name="cboxEjercicios" class="col-lg-3 div-form-derecha">
+            <mat-option *ngFor="let ejercicio of cboxEjercicios" [value]="ejercicio">
+              {{ejercicio.Descripcion}}
+            </mat-option>
+          </mat-select>
+          <mat-form-field class="col-lg-3 div-form-derecha-alt">
+            <input matInput placeholder="Series" value="1" type=number min="1" max="100" ngModel name="Series" />
+          </mat-form-field>
+          <mat-form-field class="col-lg-3 div-form-derecha-alt">
+            <input matInput placeholder="Repeticiones" value="1" type=number min="1" max="100" ngModel name="Repeticiones" />
+          </mat-form-field>
+          <div class="col-lg-2 offset-lg-1 div-form">
+            <button class="mt-3" mat-raised-button color="primary" type="submit">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </form>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="warn" >
-        <i class="material-icons" (click)="removeEjercicio(element.ejercicio.EjercicioId)">delete</i>
-      </button>
-    </td>
-  </ng-container>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+        <ng-container matColumnDef="Descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
+          <td mat-cell *matCellDef="let element"> {{element.ejercicio.Descripcion}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Series">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Series </th>
+          <td mat-cell *matCellDef="let element"> {{element.series}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Repeticiones">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Repeticiones </th>
+          <td mat-cell *matCellDef="let element"> {{element.repeticiones}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="warn">
+              <i class="material-icons" (click)="removeEjercicio(element.ejercicio.EjercicioId)">delete</i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+    </mat-dialog-content>
+  </mat-tab>
+</mat-tab-group>

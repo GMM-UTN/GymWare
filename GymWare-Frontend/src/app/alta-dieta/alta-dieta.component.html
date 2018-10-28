@@ -1,71 +1,77 @@
-<label>Alta Dieta</label>
+<label mat-dialog-title>Alta Dieta</label>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <div class="form-container col-lg-6 table-custom ">
-    <div class="col-lg-12">
-      <h3>Crear dieta</h3>
-    </div>
-    <div class="col-lg-12 div-form">
-      <mat-form-field class="col-lg-4">
-        <input matInput placeholder="Nombre" ngModel name="Nombre" />
-      </mat-form-field>
-      <mat-form-field class="col-lg-4">
-        <input matInput placeholder="Descripcion" ngModel name="Descripcion" />
-      </mat-form-field>
-    </div>
-    <div class="col-lg-24 boton-form">
-      <button mat-raised-button color="primary" type="submit">Guardar</button>
-    </div>
+<mat-tab-group>
+  <mat-tab label="Datos">
+    <mat-dialog-content class="mat-typography mx-0">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="form-container col-lg-12 table-custom">
+          <div class="col-lg-12 div-form">
+            <mat-form-field class="col-lg-12 mt-3">
+              <input matInput placeholder="Nombre" ngModel name="Nombre" />
+            </mat-form-field>
+            <mat-form-field class="col-lg-12 mt-3">
+              <textarea matInput placeholder="Descripcion" ngModel name="Descripcion"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="offset-lg-9 col-lg-3 mt-5">
+            <button class="mr-3" mat-raised-button color="primary" type="submit">Guardar</button>
+            <button mat-raised-button color="warn" [mat-dialog-close]>Cancelar</button>
+          </div>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </mat-tab>
 
-  </div>
-</form>
+  <mat-tab label="Comidas">
+    <mat-dialog-content class="mat-typography mx-0">
+      <form #formComida="ngForm" (ngSubmit)="onSubmitComida(formComida)" novalidate>
+        <div class="form-container col-lg-12">
+          <mat-select placeholder="Comidas" ngModel name="cboxComidas" class="col-lg-6 div-form-derecha">
+            <mat-option *ngFor="let comida of cboxComidas" [value]="comida">
+              {{comida.Nombre}}
+            </mat-option>
+          </mat-select>
+          <mat-form-field class="col-lg-3 div-form-derecha-alt">
+            <input matInput placeholder="Dias a la semana" value="1" type=number min="1" max="7" ngModel name="DiasSemana" />
+          </mat-form-field>
+          <div class="col-lg-2 offset-lg-1 div-form">
+            <button mat-raised-button color="primary" type="submit" class="mt-4">
+              Agregar
+            </button>
+          </div>
+        </div>
+      </form>
 
-<form #formComida="ngForm" (ngSubmit)="onSubmitComida(formComida)" novalidate>
-  <div class="form-container col-lg-6">
-    <div class="col-lg-12">
-      <h3>Agregar comidas</h3>
-    </div>
-    <mat-select placeholder="Comidas" ngModel name="cboxComidas" class="col-lg-12 div-form-derecha">
-      <mat-option *ngFor="let comida of cboxComidas" [value]="comida">
-        {{comida.Nombre}}
-      </mat-option>
-    </mat-select>
-    <mat-form-field class="col-lg-6 div-form-derecha-alt">
-      <input matInput placeholder="Dias a la semana" value="1" type=number min="1" max="7" ngModel name="DiasSemana" />
-    </mat-form-field>
-    <button mat-mini-fab color="primary" type="submit" class="col-lg-12 div-form boton-form">
-      <i class="material-icons">add</i>
-    </button>
-  </div>
-</form>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
 
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
+        <ng-container matColumnDef="Nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.Comida.Nombre}} </td>
+        </ng-container>
 
-  <ng-container matColumnDef="Nombre">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Nombre </th>
-    <td mat-cell *matCellDef="let element"> {{element.Comida.Nombre}} </td>
-  </ng-container>
+        <ng-container matColumnDef="Calorias">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Calorias </th>
+          <td mat-cell *matCellDef="let element"> {{element.Comida.Calorias}} </td>
+        </ng-container>
 
-  <ng-container matColumnDef="Calorias">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Calorias </th>
-    <td mat-cell *matCellDef="let element"> {{element.Comida.Calorias}} </td>
-  </ng-container>
+        <ng-container matColumnDef="DiasSemana">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Dias a la semana </th>
+          <td mat-cell *matCellDef="let element"> {{element.DiasSemana}} </td>
+        </ng-container>
 
-  <ng-container matColumnDef="DiasSemana">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Dias a la semana </th>
-    <td mat-cell *matCellDef="let element"> {{element.DiasSemana}} </td>
-  </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="warn">
+              <i class="material-icons" (click)="removeComida(element.Comida.ComidaId)">delete</i>
+            </button>
+          </td>
+        </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="warn">
-        <i class="material-icons" (click)="removeComida(element.Comida.ComidaId)">delete</i>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+    </mat-dialog-content>
+  </mat-tab>
+</mat-tab-group>
