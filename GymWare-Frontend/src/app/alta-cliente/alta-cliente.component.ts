@@ -83,7 +83,7 @@ export class AltaClienteComponent implements OnInit {
       data => {
         if (data.ClienteId != undefined && data.ClienteId != null) {
           this.toastr.successToastr('Cliente creado correctamente', 'Éxito');
-          this.router.navigate(['/default/home']);
+          this.router.navigate(['/default/abm-cliente']);
         }
         else {
           this.toastr.errorToastr(data, 'Error');
