@@ -1,5 +1,5 @@
-<mat-horizontal-stepper [linear]="false" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
+<mat-horizontal-stepper [linear]="false" #stepper class="font-edit">
+  <mat-step [stepControl]="firstFormGroup" class="font-edit">
       
     <ng-template matStepLabel>Cliente</ng-template>
 
@@ -8,40 +8,40 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Rutina</ng-template>
+    <ng-template matStepLabel class="font-edit">Rutina</ng-template>
     <app-amb-rutina [onlyCheck]="true" (rutina)="onSelectRutina($event)"></app-amb-rutina>
   </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup" validate>
+  <mat-step [stepControl]="secondFormGroup" class="font-edit">
+      <form [formGroup]="secondFormGroup" validate class="font-edit">
   
         <ng-template matStepLabel>Periodo</ng-template>
   
         <mat-form-field>
-          <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" required>
-          <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
-          <mat-datepicker #fechaInicio></mat-datepicker>
+          <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" required class="font-edit">
+          <mat-datepicker-toggle matSuffix [for]="fechaInicio" class="font-edit"></mat-datepicker-toggle>
+          <mat-datepicker #fechaInicio class="font-edit"></mat-datepicker>
         </mat-form-field>
   
         <mat-form-field>
-          <input matInput [matDatepicker]="fechaFin" placeholder="Fecha fin" required>
-          <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
-          <mat-datepicker #fechaFin></mat-datepicker>
+          <input matInput [matDatepicker]="fechaFin" placeholder="Fecha fin" required class="font-edit">
+          <mat-datepicker-toggle matSuffix [for]="fechaFin" class="font-edit"></mat-datepicker-toggle>
+          <mat-datepicker #fechaFin class="font-edit"></mat-datepicker>
         </mat-form-field>
   
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Next</button>
+          <button mat-button matStepperPrevious class="font-edit">Back</button>
+          <button mat-button matStepperNext type="submit" class="font-edit">Next</button>
         </div>
       </form>
     </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Terminar</ng-template>
-    Definir rutina para cliente terminado.
+    <ng-template matStepLabel class="font-edit">Terminar</ng-template>
+    <p class="font-edit">Definir rutina para cliente terminado.</p>
     <div>
-      <button  mat-raised-button matStepperPrevious>Volver</button>
-      <button  mat-raised-button (click)="save()" color="primary">Guardar</button>
+      <button  mat-raised-button matStepperPrevious class="font-edit">Volver</button>
+      <button  mat-raised-button (click)="save()" color="primary" class="font-edit">Guardar</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

@@ -11,3 +11,15 @@ body {
 .red {
     color: red;
 }
+.mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+    font-family: 'Montserrat', sans-serif;
+}
+.mat-table {
+    font-family: 'Montserrat', sans-serif;
+}
+.mat-cell {
+    font-family: 'Montserrat', sans-serif;
+}
+.font-edit {
+    font-family: 'Montserrat', sans-serif;
+}

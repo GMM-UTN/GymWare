@@ -1,3 +1,7 @@
+<link href='/src/vendor/maerial-icons.css' rel='stylesheet' type='text/css'>
+<!-- <link href='/src/vendor/fullcalendar.min.css' rel='stylesheet' type='text/css'> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
+
 <div class="body">
   <div class="header">
     <app-header></app-header>
@@ -5,20 +9,76 @@
   <div class="center">
     <div class="row no-padding">
       <div class="col-lg-12">
-        <h2 class="text-center">Ficha personal de:
-          <strong>{{this.cliente.Nombre}} {{this.cliente.Apellido}}</strong>
-        </h2>
+
+        <h1 class="text-center">Ficha personal
+        </h1>
+        <hr>
+        <div class="col-lg-3">
+          <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">person</i>
+              </div>
+              <p class="card-category">Nombre y apellido</p>
+              <br>
+              <h3 class="card-title">{{this.cliente.Nombre}} {{this.cliente.Apellido}}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">info</i>
+              </div>
+              <p class="card-category">Número de documento</p>
+              <br>
+              <h3 class="card-title">{{this.cliente.Dni}}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">date_range</i>
+              </div>
+              <p class="card-category">Fecha de Nacimiento</p>
+              <br>
+              <h3 class="card-title">{{this.cliente.FechaNacimiento}}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card card-stats">
+            <div class="card-header card-header-primary card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">location_on</i>
+              </div>
+              <p class="card-category">Direccion</p>
+              <br>
+              <h3 class="card-title">{{this.cliente.Direccion}}
+              </h3>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-lg-6">
-        <h3 class="text-center">Asistencias
+        <h2 class="text-center">Asistencias
           <small>última semana</small>
-        </h3>
-        <canvas baseChart [data]="barChartData" [labels]="barChartLabels" [chartType]="barChartType" [options]="barChartOptions"></canvas>
+        </h2>
+        <div *ngIf="calendarOptions" class="calendar-div">
+            <ng-fullcalendar #ucCalendar [options]="calendarOptions"></ng-fullcalendar>
+        </div>
+        <!-- <canvas baseChart [data]="barChartData" [labels]="barChartLabels" [chartType]="barChartType" [options]="barChartOptions"></canvas> -->
       </div>
       <div class="col-lg-6">
-        <h3 class="text-center">Características
+        <h2 class="text-center">Características
           <small>evolución histórica</small>
-        </h3>
+        </h2>
         <div class="col-lg-6">
           <div class="col-lg-6">
             <mat-card class="card-cliente">Peso Inicial:
@@ -44,26 +104,52 @@
             </mat-card>
           </div>
         </div>
-        <div class="col-lg-3">
-          </div>
-          <div class="col-lg-12 table-custom">
-              <h3 class="text-center"><small>Musculación</small></h3>
-              <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table">
-                    <ng-container matColumnDef="EjercicioId">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> ID </th>
-                      <td mat-cell *matCellDef="let element"> {{element.EjercicioId}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Descripcion">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
-                      <td mat-cell *matCellDef="let element"> {{element.Descripcion}} </td>
-                    </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  </table>
-                  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
-          </div>
+        <div class="col-lg-6 table-custom">
+          <h3 class="text-center" style="margin-top:2%; margin-bottom: 6%;">
+            <small>Rutina - "{{this.rutina[0].Rutina.Nombre}}"</small>
+          </h3>
+          <table mat-table [dataSource]="dataSource2" matSort class="mat-elevation-z8 table">
+            <ng-container matColumnDef="EjercicioId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element.Ejercicio.EjercicioId}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Descripcion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
+              <td mat-cell *matCellDef="let element"> {{element.Ejercicio.Descripcion}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+          </table>
+          <mat-paginator pageSize="2" showFirstLastButtons class="paginator-custom"></mat-paginator>
+        </div>
+        <div class="col-lg-12 table-custom">
+          <h3 class="text-center" style="margin-top:0;">
+            <small>Dieta - "{{this.dieta[0].Dieta.Nombre}}"</small>
+          </h3>
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
+
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.Comida.Nombre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Descripcion">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Descripcion </th>
+              <td mat-cell *matCellDef="let element"> {{element.Comida.Descripcion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Calorias">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Calorias </th>
+              <td mat-cell *matCellDef="let element"> {{element.Comida.Calorias}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+        </div>
       </div>
-      
+
     </div>
   </div>
   <div class="footer">
