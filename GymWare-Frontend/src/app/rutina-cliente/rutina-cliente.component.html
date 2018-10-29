@@ -1,22 +1,16 @@
+
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step>
-
     <ng-template matStepLabel>Cliente</ng-template>
-
     <app-abm-cliente [check]="true" (cliente)="onSelectCliente($event)"></app-abm-cliente>
-
   </mat-step>
-
   <mat-step>
-    <ng-template matStepLabel>Rutina</ng-template>
+    <ng-template matStepLabel class="font-edit">Rutina</ng-template>
     <app-amb-rutina [onlyCheck]="true" (rutina)="onSelectRutina($event)"></app-amb-rutina>
   </mat-step>
-
   <mat-step>
     <form #f="ngForm" (ngSubmit)="onSubmitFormFechas(f)" novalidate>
-
       <ng-template matStepLabel>Periodo</ng-template>
-
       <div class="col-lg-12 div-form">
         <mat-form-field class="offset-lg-3 col-lg-3">
           <input matInput [matDatepicker]="fechaInicio" placeholder="Fecha inicio" ngModel name="fechaInicio" required>

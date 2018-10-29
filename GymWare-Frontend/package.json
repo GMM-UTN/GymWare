@@ -25,10 +25,13 @@
     "admin-lte": "^2.4.8",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.4",
+    "fullcalendar": "^3.6.1",
     "jquery": "^3.3.1",
     "jspdf": "^1.4.1",
     "jspdf-autotable": "^2.3.5",
+    "ng-fullcalendar": "^1.7.0",
     "ng2-charts": "^1.6.0",
+    "ng2-currency-mask": "^5.3.1",
     "ng6-toastr-notifications": "^1.0.4",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"

@@ -72,6 +72,7 @@ export class MembresiaComponent implements OnInit {
       if(data.MembresiaId != undefined && data.MembresiaId != null) {
         this.toastr.successToastr('Membresía creada correctamente', 'Éxito');
         this.loading = false;
+        this.router.navigate(['/default/asistencia-cliente']);
       } 
       else {
         this.toastr.errorToastr(data, 'Error');

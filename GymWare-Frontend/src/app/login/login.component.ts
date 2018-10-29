@@ -74,7 +74,9 @@ export class LoginComponent implements OnInit {
         }
         else if (data.Cliente != null){
           this.router.navigate([this.returnUrlCliente]);
+          localStorage.setItem("cliente", data.Cliente);
           localStorage.setItem("tipo","2");
+          console.log(data)
         }
         else {
           alert('Datos ingresados incorrectos !');

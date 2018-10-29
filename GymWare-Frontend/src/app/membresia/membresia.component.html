@@ -35,8 +35,9 @@
           </div>
         </mat-form-field>
         <mat-form-field class="form-field col-lg-3">
+          <i class="fa fa-usd"></i>
           <input type="number" matInput placeholder="Importe de Pago" formControlName="importePago" readonly
-            value="{{this.f.plan.value*this.f.cantidadMeses.value}}">
+            value="{{this.f.plan.value*this.f.cantidadMeses.value}}" class="money-field">
         </mat-form-field>
       </div>
       <div class="col-lg-12 button-div">
