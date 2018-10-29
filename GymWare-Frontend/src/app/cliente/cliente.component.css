@@ -37,4 +37,11 @@
 }
 h2 {
     margin-bottom: 15px;
+    font-size: 25px;
+}
+h3 {
+    font-size: 22px;
+}
+.fc-right h2 {
+    font-size: 23px;
 }
