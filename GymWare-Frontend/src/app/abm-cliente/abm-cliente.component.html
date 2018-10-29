@@ -12,15 +12,25 @@
 
   <ng-container matColumnDef="Dni">
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> DNI </th>
-    <td mat-cell *matCellDef="let element"> {{element.Dni}} </td>
+    <td mat-cell *matCellDef="let element">
+      {{element.Dni}}
+      <ng-container *ngIf="check">
+        <button class="ml-5" mat-mini-fab color="warn">
+          <i class="material-icons" (click)="selectCliente(element)">check</i>
+        </button>
+      </ng-container>
+    </td>
   </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> Acciones </th>
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef class="column-add">
+      <ng-container *ngIf="!check">
+        <button *ngIf="!check" mat-mini-fab color="primary">
+          <i class="material-icons" (click)="add()">add</i>
+        </button>
+      </ng-container>
+    </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-mini-fab color="warn">
-        <i class="material-icons" (click)="selectCliente(element)">check</i>
-      </button>
     </td>
   </ng-container>
 

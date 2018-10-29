@@ -8,6 +8,6 @@ export class EmpleadoClienteRutina {
     Cliente: Cliente;
     Empleado: Empleado;
     Rutina: Rutina;
-    FechaInicio: Date;
-    FechaFin: Date;
+    FechaInicio: String;
+    FechaFin: String;
 }

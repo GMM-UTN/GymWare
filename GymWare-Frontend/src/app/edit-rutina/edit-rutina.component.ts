@@ -27,26 +27,26 @@ export class EditRutinaComponent implements OnInit {
 
   displayedColumns: string[] = ['Descripcion', 'Series', 'Repeticiones', 'actions'];
   dataSource: MatTableDataSource<EjercicioHelper>;
-  
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private ejercicioService: EjercicioService, 
+    private ejercicioService: EjercicioService,
     private rutinaService: RutinaService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<EditRutinaComponent>,
     private toastr: ToastrManager) {
-      this.enableEdit = data.edit;
-      this.editedObject = data.editedObject;
-      this.dataSource = new MatTableDataSource([]);
+    this.enableEdit = data.edit;
+    this.editedObject = data.editedObject;
+    this.dataSource = new MatTableDataSource([]);
   }
 
   ngOnInit() {
-    if(this.enableEdit){
+    if (this.enableEdit) {
       this.getAllEjercicios();
     } else {
-      this.displayedColumns = this.displayedColumns.splice(0,3);
+      this.displayedColumns = this.displayedColumns.splice(0, 3);
     }
     this.setSelectedEjercicios();
     this.reloadTable();
@@ -113,19 +113,23 @@ export class EditRutinaComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
-    rutinaEjerciciosDTO.Rutina = this.setRutinaAtributes(f);
-    rutinaEjerciciosDTO.RutinaEjercicios = this.setRutinaEjerciciosList(f);
+    if (this.validate()) {
+      var rutinaEjerciciosDTO = new RutinaEjerciciosDTO();
+      rutinaEjerciciosDTO.Rutina = this.setRutinaAtributes(f);
+      rutinaEjerciciosDTO.RutinaEjercicios = this.setRutinaEjerciciosList(f);
 
-    if(this.enableEdit){
-      this.rutinaService.update(rutinaEjerciciosDTO as RutinaEjerciciosDTO).subscribe( 
-        data => { 
-          this.dialogRef.close(data);
-          this.toastr.successToastr('Rutina modificada', 'Exito')
-        }, 
-        error => this.toastr.errorToastr(error, 'Error')
-      ); 
-    } 
+      if (this.enableEdit) {
+        this.rutinaService.update(rutinaEjerciciosDTO as RutinaEjerciciosDTO).subscribe(
+          data => {
+            this.dialogRef.close(data);
+            this.toastr.successToastr('Rutina modificada', 'Exito')
+          },
+          error => this.toastr.errorToastr(error, 'Error')
+        );
+      }
+    } else {
+      this.toastr.errorToastr('Debe agregar al menos un ejercicio', 'Error');
+    }
   }
 
   setRutinaAtributes(f: NgForm): Rutina {
@@ -165,15 +169,15 @@ export class EditRutinaComponent implements OnInit {
 
   print() {
     var columns = [
-      {title: "Nombre de la rutina", dataKey: "nombreRutina"},
-      {title: "Descripcion", dataKey: "descripcionRutina"},
-      {title: "Tipo", dataKey: "tipo"},
-      {title: "Edad mínima", dataKey: "edadMinima"},
-      {title: "Edad máxima", dataKey: "edadMaxima"},
-      {title: "Sexo", dataKey: "sexo"},
-      {title: "Ejercicio", dataKey: "ejercicio"},
-      {title: "Repeticiones", dataKey: "repeticiones"},
-      {title: "Series", dataKey: "series"},
+      { title: "Nombre de la rutina", dataKey: "nombreRutina" },
+      { title: "Descripcion", dataKey: "descripcionRutina" },
+      { title: "Tipo", dataKey: "tipo" },
+      { title: "Edad mínima", dataKey: "edadMinima" },
+      { title: "Edad máxima", dataKey: "edadMaxima" },
+      { title: "Sexo", dataKey: "sexo" },
+      { title: "Ejercicio", dataKey: "ejercicio" },
+      { title: "Repeticiones", dataKey: "repeticiones" },
+      { title: "Series", dataKey: "series" },
     ];
     var rows = [];
 
@@ -193,21 +197,27 @@ export class EditRutinaComponent implements OnInit {
         "ejercicio": element.Ejercicio.Descripcion,
         "repeticiones": element.Repeticiones,
         "series": element.Series,
-      }  
+      }
       rows.push(ejercicio);
     });
-      
+
     // Only pt supported (not mm or in)
     var doc = new jsPDF('p', 'pt');
-    doc.autoTable(columns, rows, {styles: {overflow: 'linebreak'}, 
-    columnStyles: {
-      nombreRutina: {columnWidth: 80},
-      descripcionRutina: {columnWidth: 80},
-      edadMinima: {columnWidth: 50},
-      edadMaxima: {columnWidth: 50},
-      repeticiones: {columnWidth:50}
-     }});
+    doc.autoTable(columns, rows, {
+      styles: { overflow: 'linebreak' },
+      columnStyles: {
+        nombreRutina: { columnWidth: 80 },
+        descripcionRutina: { columnWidth: 80 },
+        edadMinima: { columnWidth: 50 },
+        edadMaxima: { columnWidth: 50 },
+        repeticiones: { columnWidth: 50 }
+      }
+    });
     doc.save('Rutina-' + this.editedObject.Rutina.Nombre + '.pdf');
+  }
+
+  validate(): Boolean {
+    return this.selectedEjercicios.length != 0;
   }
 
 }

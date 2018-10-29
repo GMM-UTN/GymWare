@@ -44,5 +44,10 @@ namespace GymWare.DataAccess.DAL
                 return "El dni ingresado no corresponde a ningún Cliente";
             }
         }
+
+        public List<Asistencia> GetTodayAsistencias()
+        {
+            return _db.Asistencias.Where(x => x.Fecha == DateTime.Today).ToList();
+        }
     }
 }

@@ -29,6 +29,13 @@ namespace GymWare.API.Controllers
             return Json(_as.CreateAsistencia(cliente.Dni));
         }
 
+        // GET: api/Asistencias/GetTodayAsistencias
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "GET")]
+        public List<Asistencia> GetTodayAsistencias()
+        {
+            return _as.GetTodayAsistencias();
+        }
+
     }
 }
 

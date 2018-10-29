@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 const url = baseURL + 'usuarios';
+const urlAsistencia = baseURL + 'asistencias';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,11 @@ export class ClienteService extends CRUDHttpService{
   }
   getAll(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(`${url}/GetClientes`).pipe(
+      catchError(this.handleError('GetClientes'))
+    );
+  }
+  getTodayAsistencias(): Observable<any[]> {
+    return this.http.get<any[]>(`${urlAsistencia}/GetTodayAsistencias`).pipe(
       catchError(this.handleError('GetClientes'))
     );
   }

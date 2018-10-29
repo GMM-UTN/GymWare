@@ -21,7 +21,7 @@ export class AltaDietaComponent implements OnInit {
 
   cboxComidas: Comida[];
   private selectedComidas: ComidaHelper[] = [];
-  
+
   displayedColumns: string[] = ['Nombre', 'Calorias', 'DiasSemana', 'actions'];
   dataSource: MatTableDataSource<ComidaHelper>;
 
@@ -95,16 +95,20 @@ export class AltaDietaComponent implements OnInit {
   }
 
   onSubmit(f: NgForm) {
-    var dietaComidasDTO = new DietaComidaDTO();
-    dietaComidasDTO.Dieta = this.setDietaAtributes(f);
-    dietaComidasDTO.DietaComidas = this.setDietaComidasList(f);
-    
-    this.dietaService.save(dietaComidasDTO).subscribe(data => {
-      this.dialogRef.close(data);
-      this.toastr.successToastr('Dieta guardada', 'Exito')
-    },
-    error => this.toastr.errorToastr(error, 'Error')
-    );
+    if (this.validate()) {
+      var dietaComidasDTO = new DietaComidaDTO();
+      dietaComidasDTO.Dieta = this.setDietaAtributes(f);
+      dietaComidasDTO.DietaComidas = this.setDietaComidasList(f);
+
+      this.dietaService.save(dietaComidasDTO).subscribe(data => {
+        this.dialogRef.close(data);
+        this.toastr.successToastr('Dieta guardada', 'Exito')
+      },
+        error => this.toastr.errorToastr(error, 'Error')
+      );
+    } else {
+      this.toastr.errorToastr('Debe agregar al menos una comida', 'Error');
+    }
   }
 
   setDietaAtributes(f: NgForm): Dieta {
@@ -140,6 +144,10 @@ export class AltaDietaComponent implements OnInit {
     comidaHelper.Comida = comida;
     comidaHelper.DiasSemana = f.value.DiasSemana;
     this.addComida(comidaHelper);
+  }
+
+  validate(): Boolean {
+    return this.selectedComidas.length != 0;
   }
 
 }
