@@ -17,5 +17,10 @@ namespace GymWare.Logic
         {
             return _as.InsertAsistencia(dni);
         }
+
+        public List<Asistencia> GetTodayAsistencias()
+        {
+            return _as.GetTodayAsistencias();
+        }        
     }
 }
