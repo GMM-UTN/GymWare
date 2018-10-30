@@ -35,3 +35,7 @@
     border-radius: 1px !important;
     font-family: 'Do Hyeon', sans-serif !important;
 }
+
+.navbar {
+    margin-bottom: 0px;
+}

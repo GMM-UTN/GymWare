@@ -4,6 +4,8 @@ import { Cliente } from 'src/app/classes/Cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { Router } from '@angular/router';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-abm-cliente',
@@ -52,4 +54,31 @@ export class AbmClienteComponent implements OnInit {
     this.router.navigate(['/default/alta-cliente']);
   }
 
+  print() {
+    var columns = [
+      {title: "Nombre", dataKey: "nombre"},
+      {title: "Apellido", dataKey: "apellido"},
+      {title: "Dni", dataKey: "dni"},
+      {title: "Mail", dataKey: "mail"},
+      {title: "Telefono", dataKey: "telefono"}
+    ];
+    var rows = [];
+
+    for (let i = 0; i < this.dataSource.data.length; i++) {
+      var obj = {
+        "nombre": this.dataSource.data[i].Nombre,
+        "apellido": this.dataSource.data[i].Apellido,
+        "dni": this.dataSource.data[i].Dni,
+        "mail": this.dataSource.data[i].Mail,
+        "telefono": this.dataSource.data[i].Telefono,
+      }
+
+      rows.push(obj);
+    }
+
+    // Only pt supported (not mm or in)
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, rows);
+    doc.save('Clientes.pdf');
+  }
 }
