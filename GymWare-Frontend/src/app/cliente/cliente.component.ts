@@ -54,7 +54,7 @@ export class ClienteComponent implements OnInit {
     this.dataSource.data = this.dieta;
     this.dataSource2.data = this.rutina;
     console.log(this.dataSource)
-    this.cliente.FechaNacimiento = formatDate(this.cliente.FechaNacimiento, "fullDate", "en-US");
+    this.cliente.FechaNacimiento = formatDate(this.cliente.FechaNacimiento, "MM-dd-yyyy", "en-US");
     this.calendarOptions = {
       editable: true,
       eventLimit: false,

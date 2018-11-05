@@ -68,7 +68,7 @@ export class RutinaClienteComponent implements OnInit {
     this.editedObject.Cliente = this.selectedCliente;
     console.log(this.editedObject);
     var empleado = new Empleado();
-    empleado.EmpleadoId = 9;
+    empleado.EmpleadoId = 4;
     this.editedObject.Empleado = empleado;
     console.log(this.editedObject.Empleado.EmpleadoId);
     this.rutinaService.saveRutinaCliente(this.editedObject as EmpleadoClienteRutina).subscribe( 
