@@ -4,7 +4,7 @@
   </div>
   <div class="col-lg-12">
     <form [formGroup]="asistenciaForm" (ngSubmit)="onSubmit()" class="form-asistencia">
-      <mat-form-field style="width:100%;">
+      <mat-form-field style="width:100%; font-family: 'Montserrat', sans-serif;">
         <input type="number" matInput placeholder="DNI" formControlName="dni" required>
         <div *ngIf="submitted && f.dni.errors" class="invalid-feedback">
           <div *ngIf="f.dni.errors.required">El DNI es requerido</div>
@@ -12,7 +12,7 @@
       </mat-form-field>
       <div class="button-div">
         <mat-card-actions>
-          <button [disabled]="loading" mat-raised-button mat-button class="button-aceptar">Aceptar</button>
+          <button [disabled]="loading" mat-raised-button mat-button class="button-aceptar" style="font-family: 'Montserrat', sans-serif;">Aceptar</button>
         </mat-card-actions>
       </div>
     </form>

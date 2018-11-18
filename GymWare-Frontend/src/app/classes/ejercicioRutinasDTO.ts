@@ -1,10 +1,10 @@
 import { Rutina } from "./rutina";
-import { Ejercicio } from "./ejercicio";
+import { EjercicioHelper } from "./ejercicioHelper";
 
 export class EjercicioRutinaDTO {
 
     Rutina: Rutina;
-    Ejercicio: Ejercicio;
+    Ejercicio: EjercicioHelper;
 
     constructor() {}
 }

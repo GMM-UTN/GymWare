@@ -17,7 +17,7 @@ export class ClienteComponent implements OnInit {
   calendarOptions: Options;
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
   
-  displayedColumns2: string[] = ['Descripcion'];
+  displayedColumns2: string[] = ['Descripcion', 'Series', 'Repeticiones'];
   
   displayedColumns: string[] = ['Nombre','Descripcion', 'Calorias'];
   dataSource2: MatTableDataSource<EjercicioRutinaDTO>;
@@ -29,30 +29,20 @@ export class ClienteComponent implements OnInit {
   cliente = this.datos.Cliente;
   dieta = this.datos.DietasComidas;
   rutina = this.datos.RutinasEjercicios;
-  barChartLabels: string[] = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
-  barChartData: number[] = [1, 0, 1, 0, 1];
-  barChartType: string = 'bar';
-  barChartOptions: any = {
-    'legend': {
-      display: false,
-    },
-    'backgroundColor': [
-      "#36A2EB",
-      "#4BC0C0",
-      "#FFCE56",
-      "#E7E9ED",
-      "#36A2EB"
-    ]
-  }
-  barChartLegend:string = "asistencia"
   constructor() { 
     this.dataSource = new MatTableDataSource([]);
     this.dataSource2 = new MatTableDataSource([]);
   }
 
   ngOnInit() {
-    this.dataSource.data = this.dieta;
-    this.dataSource2.data = this.rutina;
+    if(this.dieta != undefined && this.dieta != null)
+    {
+      this.dataSource.data = this.dieta;
+    }
+    if(this.rutina != undefined && this.rutina != null)
+    {
+      this.dataSource2.data = this.rutina;
+    }
     console.log(this.dataSource)
     this.cliente.FechaNacimiento = formatDate(this.cliente.FechaNacimiento, "MM-dd-yyyy", "en-US");
     this.calendarOptions = {

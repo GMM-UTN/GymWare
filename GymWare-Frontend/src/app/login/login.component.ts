@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AlertService, AuthenticationService } from '../services';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    public toastr: ToastrManager) {
     iconRegistry.addSvgIcon(
       'thumbs-up',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/thumbup-icon.svg'));
@@ -60,26 +62,19 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
       data => {
-        // if(data.EmpleadoId != undefined && data.EmpleadoId != null){
-        //   this.router.navigate([this.returnUrlEmpleado]);
-        //   localStorage.setItem("tipo","1");
-        // }
-        // else if (data.ClienteId != undefined && data.ClienteId != null){
-        //   this.router.navigate([this.returnUrlCliente]);
-        //   localStorage.setItem("tipo","2");
-        // }
         if(data.Empleado != null){
           this.router.navigate([this.returnUrlEmpleado]);
           localStorage.setItem("tipo","1");
+          this.toastr.successToastr('Bienvenido a GymWare !', 'Éxito');
         }
         else if (data.Cliente != null){
           this.router.navigate([this.returnUrlCliente]);
           localStorage.setItem("cliente", data.Cliente);
           localStorage.setItem("tipo","2");
-          console.log(data)
+          this.toastr.successToastr('Bienvenido a GymWare !', 'Éxito');
         }
         else {
-          alert('Datos ingresados incorrectos !');
+          this.toastr.errorToastr('Datos de inicio de sesión incorrectos', 'Error');
         }
         this.loading = false;
       },

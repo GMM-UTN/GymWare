@@ -1,10 +1,7 @@
 /* Footer */
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-section {
-    padding: 15px 0;
-}
 
-section .section-title {
+div .section-title {
     text-align: center;
     color: #f2b632;
     margin-bottom: 50px;

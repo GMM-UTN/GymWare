@@ -59,6 +59,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { FullCalendarModule } from 'ng-fullcalendar';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatPaginatorIntlSpanish } from './classes/spanishCustomDataTable';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 
 const routes: Routes = [
@@ -196,7 +197,8 @@ const routes: Routes = [
     MatChipsModule,
     CurrencyMaskModule,
     FullCalendarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSidenavModule
   ],
   providers: [
     EjercicioService,

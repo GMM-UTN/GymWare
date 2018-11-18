@@ -3,6 +3,7 @@
 }
 .form-field {
     margin-top: 2%;
+    font-family: 'Montserrat', sans-serif;
 }
 .button-div {
     text-align: center;
@@ -11,6 +12,7 @@
 .button-aceptar {
     background-color: #252839;
     color: white;   
+    font-family: 'Montserrat', sans-serif;
    }
 
 #membresia {
