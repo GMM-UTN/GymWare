@@ -13,5 +13,10 @@ namespace GymWare.Entities.DTO
         public List<DietaComida> DietasComidas { get; set; }
         public List<RutinaEjercicio> RutinasEjercicios { get; set; }
         public string Mensaje { get; set; }
+        public List<AsistenciaCalendar> Asistencias { get; set; }
+        public UsuarioLogeadoDTO()
+        {
+            Asistencias = new List<AsistenciaCalendar>();
+        }
     }
 }

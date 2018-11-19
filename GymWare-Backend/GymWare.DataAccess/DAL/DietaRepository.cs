@@ -105,6 +105,19 @@ namespace GymWare.DataAccess.DAL
             DietaCliente dc = _db.DietaCliente.Where(x => x.Dieta.DietaId == dieta.DietaId && x.Cliente.ClienteId == cliente.ClienteId).FirstOrDefault();
             if (dc == null)
             {
+                DietaCliente dc2 = _db.DietaCliente.Where(x => x.Cliente.ClienteId == cliente.ClienteId).FirstOrDefault();
+                if (dc2 != null)
+                {
+                    try
+                    {
+                        _db.DietaCliente.Remove(dc2);
+                        _db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex.Message;
+                    }
+                }
                 dietaCliente.Dieta = dieta;
                 dietaCliente.Cliente = cliente;
                 try

@@ -16,6 +16,7 @@ namespace GymWare.Logic
         private RutinaRepository _ru = new RutinaRepository();
         private DietaComidaLogic _dc = new DietaComidaLogic();
         private RutinaEjercicioLogic _re = new RutinaEjercicioLogic();
+        private AsistenciaLogic _as = new AsistenciaLogic();
 
         public List<Cliente> GetAll()
         {
@@ -47,6 +48,15 @@ namespace GymWare.Logic
                     {
                         usuarioLogeado.RutinasEjercicios.Add(re1);
                     }
+                }
+                List<Asistencia> asis = _as.GetAsistenciasByUser(cliente.ClienteId);
+                foreach (var a in asis)
+                {
+                    AsistenciaCalendar ac = new AsistenciaCalendar();
+                    ac.title = "Asistencia";
+                    ac.start = a.Fecha;
+                    ac.end = a.Fecha;
+                    usuarioLogeado.Asistencias.Add(ac);
                 }
                 usuarioLogeado.Cliente = cliente;
                 usuarioLogeado.Mensaje = "Cliente logueado correctamente";

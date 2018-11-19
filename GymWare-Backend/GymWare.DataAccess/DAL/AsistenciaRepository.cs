@@ -49,5 +49,10 @@ namespace GymWare.DataAccess.DAL
         {
             return _db.Asistencias.Where(x => x.Fecha == DateTime.Today).ToList();
         }
+
+        public List<Asistencia> GetAsistenciasByUser(int id)
+        {
+            return _db.Asistencias.Where(x => x.Cliente.ClienteId == id).ToList();
+        }
     }
 }

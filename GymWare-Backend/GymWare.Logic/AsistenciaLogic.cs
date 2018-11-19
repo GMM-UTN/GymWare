@@ -21,6 +21,11 @@ namespace GymWare.Logic
         public List<Asistencia> GetTodayAsistencias()
         {
             return _as.GetTodayAsistencias();
-        }        
+        }
+        
+        public List<Asistencia> GetAsistenciasByUser(int id)
+        {
+            return _as.GetAsistenciasByUser(id);
+        }
     }
 }

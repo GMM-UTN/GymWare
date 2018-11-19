@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asistencia.cs" />
+    <Compile Include="AsistenciaCalendar.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Comida.cs" />
     <Compile Include="Cuota.cs" />

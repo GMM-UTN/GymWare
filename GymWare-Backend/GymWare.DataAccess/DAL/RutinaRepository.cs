@@ -60,6 +60,19 @@ namespace GymWare.DataAccess.DAL
             EmpleadoClienteRutina ecr = _db.EmpleadoClienteRutina.Where(x => x.Empleado.EmpleadoId == empleado.EmpleadoId && x.Cliente.ClienteId == cliente.ClienteId && x.Rutina.RutinaId == rutina.RutinaId).FirstOrDefault();
             if (ecr == null)
             {
+                EmpleadoClienteRutina ecr2 = _db.EmpleadoClienteRutina.Where(x => x.Cliente.ClienteId == cliente.ClienteId).FirstOrDefault();
+                if(ecr2 != null)
+                {
+                    try
+                    {
+                        _db.EmpleadoClienteRutina.Remove(ecr2);
+                        _db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex.Message;
+                    }                    
+                }
                 empleadoClienteRutina.Empleado = empleado;
                 empleadoClienteRutina.Cliente = cliente;
                 empleadoClienteRutina.Rutina = rutina;                
