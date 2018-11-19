@@ -42,13 +42,11 @@ export class RutinaClienteComponent implements OnInit {
   }
 
   onSelectRutina(rutina: Rutina) {
-    console.log(rutina);
     this.selectedRutina = rutina;
     this.stepper.next();
   }
 
   onSelectCliente(cliente: Cliente) {
-    console.log(cliente);
     this.selectedCliente = cliente;
     this.stepper.next();
   }
@@ -66,9 +64,9 @@ export class RutinaClienteComponent implements OnInit {
   save() {
     this.editedObject.Rutina = this.selectedRutina;
     this.editedObject.Cliente = this.selectedCliente;
-    console.log(this.editedObject);
     var empleado = new Empleado();
-    empleado.EmpleadoId = 4;
+    var varSesion = JSON.parse(localStorage.currentUser);
+    empleado.EmpleadoId = varSesion.Empleado.EmpleadoId;
     this.editedObject.Empleado = empleado;
     console.log(this.editedObject.Empleado.EmpleadoId);
     this.rutinaService.saveRutinaCliente(this.editedObject as EmpleadoClienteRutina).subscribe( 

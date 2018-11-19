@@ -10,7 +10,7 @@ namespace GymWare.Entities
     public class AsistenciaCalendar
     {
         public string title { get; set; }
-        public DateTime start { get; set; }
-        public DateTime end { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
     }
 }

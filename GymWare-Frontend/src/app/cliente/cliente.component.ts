@@ -43,7 +43,7 @@ export class ClienteComponent implements OnInit {
     {
       this.dataSource2.data = this.rutina;
     }
-    console.log(this.dataSource)
+    console.log(this.datos.Asistencias);
     this.cliente.FechaNacimiento = formatDate(this.cliente.FechaNacimiento, "MM-dd-yyyy", "en-US");
     this.calendarOptions = {
       editable: true,
@@ -55,41 +55,7 @@ export class ClienteComponent implements OnInit {
         center: '',
         right: 'title'
       },
-      events: [{
-        title: 'Asistencia',
-        start: '2018-10-22',
-        end: '2018-10-22'
-      },
-      {
-        title: 'Asistencia',
-        start: '2018-10-24',
-        end: '2018-10-24'
-      },
-      {
-        title: 'Asistencia',
-        start: '2018-10-26',
-        end: '2018-10-26'
-      },
-      {
-        title: 'Asistencia',
-        start: '2018-10-29',
-        end: '2018-10-29'
-      },
-      {
-        title: 'Asistencia',
-        start: '2018-10-19',
-        end: '2018-10-19'
-      },
-      {
-        title: 'Asistencia',
-        start: '2018-10-17',
-        end: '2018-10-17'
-      },
-      {
-        title: 'Asistencia',
-        start: '2018-10-16',
-        end: '2018-10-16'
-      }]
+      events: this.datos.Asistencias
     };
   }
 

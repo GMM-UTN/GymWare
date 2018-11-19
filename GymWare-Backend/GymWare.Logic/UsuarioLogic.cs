@@ -54,8 +54,8 @@ namespace GymWare.Logic
                 {
                     AsistenciaCalendar ac = new AsistenciaCalendar();
                     ac.title = "Asistencia";
-                    ac.start = a.Fecha;
-                    ac.end = a.Fecha;
+                    ac.start = a.Fecha.ToString("yyyy-MM-dd");
+                    ac.end = a.Fecha.ToString("yyyy-MM-dd");
                     usuarioLogeado.Asistencias.Add(ac);
                 }
                 usuarioLogeado.Cliente = cliente;
