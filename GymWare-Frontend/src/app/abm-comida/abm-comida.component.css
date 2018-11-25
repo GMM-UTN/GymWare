@@ -17,3 +17,11 @@ h1 {
     text-align: center;
     margin-bottom: 2%;
 }
+
+.btn-add{
+    background-color: #f2b632;
+}
+
+.expanded {
+    width: 100%;
+}

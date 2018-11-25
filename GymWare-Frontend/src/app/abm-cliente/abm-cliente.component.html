@@ -1,5 +1,9 @@
 <h1>Listado de clientes</h1>
-<button class="pdf" (click)="print()">PDF</button>
+<div class="row">
+  <div class="col-1 offset-11">
+    <button class="pdf" (click)="print()">PDF</button>
+  </div>
+</div>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
 
   <ng-container matColumnDef="Nombre">
@@ -16,6 +20,12 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="column-title"> DNI </th>
     <td mat-cell *matCellDef="let element">
       {{element.Dni}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef class="column-title"></th>
+    <td mat-cell *matCellDef="let element">
       <ng-container *ngIf="check">
         <button class="ml-5" mat-mini-fab color="warn">
           <i class="material-icons" (click)="selectCliente(element)">check</i>

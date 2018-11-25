@@ -1,91 +1,68 @@
 <h1>
-        Bienvenido a GymWare
-    </h1>
+  Bienvenido a GymWare
+</h1>
 <section id="center" style="margin-bottom: 5%">
-   
-		<!-- <div class="container"> -->
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
-                    <div class="info-box bg-aqua">
-                        <span class="info-box-icon"><i class="fas fa-calendar"></i></span>
-                        <div class="info-box-content">
-                        <span class="info-box-text">Asistencias del día</span>
-                        <span class="info-box-number">{{cantidadAsistencias}}</span>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 70%"></div>
-                        </div>
-                        <span class="progress-description">
-                            70% Más que ayer
-                        </span>
-                        </div>
-                    </div>
-                </div>            
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="fas fa-users"></i></span>
-                        <div class="info-box-content">
-                        <span class="info-box-text">Cantidad de clientes</span>
-                        <span class="info-box-number">{{cantidadClientes}}</span>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 20%"></div>
-                        </div>
-                        <span class="progress-description">
-                            20% Más que el mes pasado
-                        </span>
-                        </div>
-                    </div>
-                </div> 
-            </div>           
-        <!-- </div> -->
-        <div style="margin-top:50px">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
-                    <div class="info-box bg-yellow">
-                        <span class="info-box-icon"><i class="fas fa-dumbbell"></i></span>
-                        <div class="info-box-content">
-                        <span class="info-box-text">Rutinas</span>
-                        <span class="info-box-number">{{cantidadRutinas}}</span>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 100%"></div>
-                        </div>
-                        <!-- <span class="progress-description">
-                            70% Increase in 30 Days
-                        </span> -->
-                        </div>
-                    </div>
-                </div>            
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box bg-red">
-                        <span class="info-box-icon"><i class="fas fa-utensils"></i></span>
-                        <div class="info-box-content">
-                        <span class="info-box-text">Dietas</span>
-                        <span class="info-box-number">{{cantidadDietas}}</span>
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 100%"></div>
-                        </div>
-                        <!-- <span class="progress-description">
-                            70% Increase in 30 Days
-                        </span> -->
-                        </div>
-                    </div>
-                </div>   
-            </div>   
+
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+      <div class="info-box bg-aqua">
+        <span class="info-box-icon"><i class="fas fa-calendar"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Asistencias del día</span>
+          <span class="info-box-number">{{cantidadAsistencias}}</span>
+          <div class="progress">
+            <div class="progress-asistencias"></div>
+          </div>
+          <span class="progress-description">
+            70% Más que ayer
+          </span>
         </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+      <div class="info-box bg-green">
+        <span class="info-box-icon"><i class="fas fa-users"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Cantidad de clientes</span>
+          <span class="info-box-number">{{cantidadClientes}}</span>
+          <div class="progress">
+            <div class="progress-clientes" style="width: 20%"></div>
+          </div>
+          <span class="progress-description">
+            20% Más que el mes pasado
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:50px">
+    <div class="row">
+      <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-2">
+        <div class="info-box bg-yellow">
+          <span class="info-box-icon"><i class="fas fa-dumbbell"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Rutinas</span>
+            <span class="info-box-number">{{cantidadRutinas}}</span>
+            <div class="progress">
+              <div class="progress-rutinas" style="width: 100%"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="info-box bg-red">
+          <span class="info-box-icon"><i class="fas fa-utensils"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Dietas</span>
+            <span class="info-box-number count">{{cantidadDietas}}</span>
+            <div class="progress">
+              <div class="progress-dietas" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
-
-
-<!-- Apply any bg-* class to to the info-box to color it -->
-            <!-- <div class="info-box bg-aqua">
-                <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-                <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
-                <div class="progress">
-                    <div class="progress-bar" style="width: 70%"></div>
-                </div>
-                <span class="progress-description">
-                    70% Increase in 30 Days
-                </span>
-                </div>
-            </div> -->

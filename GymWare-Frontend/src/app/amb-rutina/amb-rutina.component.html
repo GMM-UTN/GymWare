@@ -1,8 +1,15 @@
 <h1>Listado de rutinas</h1>
-<mat-form-field class="expanded filter-custom">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-</mat-form-field>
-<button class="pdf" (click)="print()">PDF</button>
+<div class="row">
+  <div class="col-3">
+    <mat-form-field class="filter-custom expanded">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+  </div>
+  <div class="col-1 offset-7">
+    <button class="pdf" (click)="print()">PDF</button>
+  </div>
+</div>
+
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
 
   <ng-container matColumnDef="Nombre">
