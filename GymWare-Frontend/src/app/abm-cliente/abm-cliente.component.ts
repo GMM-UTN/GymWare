@@ -17,7 +17,7 @@ export class AbmClienteComponent implements OnInit {
   @Input() check: boolean;
   @Output() cliente = new EventEmitter<Cliente>();
 
-  displayedColumns: string[] = ['Nombre', 'Apellido', 'Dni', 'add'];
+  displayedColumns: string[] = ['Nombre', 'Apellido', 'Dni', 'add', 'select'];
   dataSource: MatTableDataSource<Cliente>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

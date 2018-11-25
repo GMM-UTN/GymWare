@@ -1,8 +1,16 @@
 <h1>Listado de dietas</h1>
-<mat-form-field class="expanded filter-custom">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
-</mat-form-field>
-<button class="pdf" (click)="print()">PDF</button>
+
+<div class="row">
+  <div class="col-3">
+    <mat-form-field class="filter-custom expanded">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+    </mat-form-field>
+  </div>
+  <div class="col-1 offset-7">
+    <button class="pdf" (click)="print()">PDF</button>
+  </div>
+</div>
+
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table table-custom">
 
   <ng-container matColumnDef="Nombre">
@@ -24,14 +32,14 @@
         </button>
       </div>
       <ng-template #abm_actions>
-        <button mat-mini-fab class="mr-3 btn-add">
-          <i class="material-icons" (click)="openDialogModification(element,false)">visibility</i>
+        <button mat-mini-fab class="mr-3 btn-add" (click)="openDialogModification(element,false)">
+          <i class="material-icons">visibility</i>
         </button>
-        <button mat-mini-fab color="primary" class="mr-3">
-          <i class="material-icons" (click)="openDialogModification(element,true)">edit</i>
+        <button mat-mini-fab color="primary" class="mr-3" (click)="openDialogModification(element,true)">
+          <i class="material-icons">edit</i>
         </button>
-        <button mat-mini-fab color="warn">
-          <i class="material-icons" (click)="openDialogBaja(element.Dieta.DietaId)">delete</i>
+        <button mat-mini-fab color="warn" (click)="openDialogBaja(element.Dieta.DietaId)">
+          <i class="material-icons">delete</i>
         </button>
       </ng-template>
     </td>

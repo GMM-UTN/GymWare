@@ -4,10 +4,6 @@ table{
 
 .mat-column-select {
     overflow: initial;
-  }
-
-.expanded{
-    width: 50%;
 }
 
 .btn-add{
@@ -48,4 +44,8 @@ table{
 h1 {
     text-align: center;
     margin-bottom: 2%;
+}
+
+.expanded {
+    width: 100%;
 }

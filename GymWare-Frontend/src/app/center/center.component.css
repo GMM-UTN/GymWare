@@ -1,8 +1,98 @@
 #center {
-    background-color: white !important;
-    border-radius: 3px;
+  background-color: white !important;
+  border-radius: 3px;
 }
+
 h1 {
-    text-align: center;
-    margin-bottom: 2%;
+  text-align: center;
+  margin-bottom: 2%;
 }
+
+.progress-asistencias {
+  background-color: white;
+  animation: progress-1 3s ease-in-out forwards;
+  -webkit-animation: progress-1 3s ease-in-out forwards;
+}
+
+.progress-clientes {
+    background-color: white;
+    animation: progress-2 3s ease-in-out forwards;
+    -webkit-animation: progress-2 3s ease-in-out forwards;
+  }
+
+  .progress-rutinas {
+    background-color: white;
+    animation: progress-3 3s ease-in-out forwards;
+    -webkit-animation: progress-3 3s ease-in-out forwards;
+  }
+
+  .progress-dietas {
+    background-color: white;
+    animation: progress-3 3s ease-in-out forwards;
+    -webkit-animation: progress-3 3s ease-in-out forwards;
+  }
+
+  @keyframes progress-1 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 70%;
+    }
+  }
+   @-webkit-keyframes progress-1 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 70%;
+    }
+  }
+  @keyframes progress-2 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 20%;
+    }
+  }
+   @-webkit-keyframes progress-2 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 20%;
+    }
+  }
+  @keyframes progress-3 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+   @-webkit-keyframes progress-3 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+@keyframes progress-4 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 90%;
+    }
+  }
+   @-webkit-keyframes progress-4 {
+    from {
+      width: 0;
+    }
+    to {
+      width: 90%;
+    }
+  }
