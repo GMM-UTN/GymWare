@@ -115,7 +115,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
           </table>
-          <mat-paginator pageSize="2" showFirstLastButtons class="paginator-custom"></mat-paginator>
+          <mat-paginator #paginatorRutina pageSize="2" showFirstLastButtons class="paginator-custom"></mat-paginator>
         </div>
         <div class="col-lg-12 table-custom">
           <h3 class="text-center" style="margin-top:0;">
@@ -141,7 +141,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="paginator-custom"></mat-paginator>
+          <mat-paginator #paginatorDieta pageSize="2" showFirstLastButtons class="paginator-custom"></mat-paginator>
         </div>
       </div>
 

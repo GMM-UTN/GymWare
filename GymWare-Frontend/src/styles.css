@@ -1,7 +1,9 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
-    background-color: #677077;
+    /* background-color: #677077; */
+    background-image: url("assets/login.jpg");
+    background-size: cover;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
 }

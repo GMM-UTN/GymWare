@@ -22,8 +22,8 @@ export class ClienteComponent implements OnInit {
   displayedColumns: string[] = ['Nombre','Descripcion', 'Calorias'];
   dataSource2: MatTableDataSource<EjercicioRutinaDTO>;
   dataSource: MatTableDataSource<ComidaDietaDTO>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatPaginator) paginator2: MatPaginator;
+  @ViewChild('paginatorDieta') paginator: MatPaginator;
+  @ViewChild('paginatorRutina') paginator2: MatPaginator;
 
   datos = JSON.parse(localStorage.currentUser);
   cliente = this.datos.Cliente;
@@ -43,7 +43,7 @@ export class ClienteComponent implements OnInit {
     {
       this.dataSource2.data = this.rutina;
     }
-    console.log(this.datos.Asistencias);
+    console.log(this.cliente)
     this.cliente.FechaNacimiento = formatDate(this.cliente.FechaNacimiento, "MM-dd-yyyy", "en-US");
     this.calendarOptions = {
       editable: true,
@@ -60,9 +60,10 @@ export class ClienteComponent implements OnInit {
   }
 
 ngAfterViewInit() {
-  this.dataSource.paginator = this.paginator;
-  this.dataSource2.paginator = this.paginator2;
-  this.dataSource.paginator._intl.itemsPerPageLabel = "Items por página";
+  setTimeout(() => this.dataSource.paginator = this.paginator);
+  setTimeout(() => this.dataSource2.paginator = this.paginator2);
+  // this.dataSource.paginator._intl.itemsPerPageLabel = "Items por página";
+  // this.dataSource2.paginator._intl.itemsPerPageLabel = "Items por página";
 }
 
 }
